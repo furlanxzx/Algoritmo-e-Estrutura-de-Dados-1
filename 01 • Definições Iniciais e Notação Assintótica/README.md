@@ -1,15 +1,15 @@
 <h1 align="center">01 • Definições Iniciais e Notação Assintótica</h1>
 <p align="center">
   <a href="01%20•%20Definições%20Iniciais%20e%20Notação%20Assintótica/README.md">
-    <img src="https://img.shields.io/badge/⬅️_Voltar-Capítulo_01-8b5cf6?style=plastic" alt="Voltar">
+    <img src="https://img.shields.io/badge/⬅️_Voltar-Capitulo_01-8b5cf6?style=plastic" alt="Voltar">
   </a>
   &nbsp;&nbsp;&nbsp;&nbsp;
   <a href="README.md">
-    <img src="https://img.shields.io/badge/🏠_Início-Menu-06b6d4?style=plastic" alt="Menu">
+    <img src="https://img.shields.io/badge/🏠_Inicio-Menu-06b6d4?style=plastic" alt="Menu">
   </a>
   &nbsp;&nbsp;&nbsp;&nbsp;
   <a href="02%20•%20Manipulação%20de%20Arquivos/README.md">
-    <img src="https://img.shields.io/badge/Avançar-Arquivos➡️-8b5cf6?style=plastic" alt="Avançar">
+    <img src="https://img.shields.io/badge/Avancar-Arquivos_➡️-8b5cf6?style=plastic" alt="Avançar">
   </a>
 </p>
 
