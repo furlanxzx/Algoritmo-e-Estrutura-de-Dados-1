@@ -1,4 +1,17 @@
-# 01 • Definições Iniciais e Notação Assintótica
+<h1 align="center">01 • Definições Iniciais e Notação Assintótica</h1>
+<p align="center">
+  <a href="01%20•%20Definições%20Iniciais%20e%20Notação%20Assintótica/README.md">
+    <img src="https://img.shields.io/badge/⬅️_Voltar-Capítulo_01-8b5cf6?style=plastic" alt="Voltar">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="README.md">
+    <img src="https://img.shields.io/badge/🏠_Início-Menu-06b6d4?style=plastic" alt="Menu">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="02%20•%20Manipulação%20de%20Arquivos/README.md">
+    <img src="https://img.shields.io/badge/Avançar-Arquivos➡️-8b5cf6?style=plastic" alt="Avançar">
+  </a>
+</p>
 
 ## 📌 Introdução - Conceitos Iniciais
 * **Algoritmo:** Sequência finita de passos/instruções executáveis para resolver um problema (ex: receita de bolo ou a operação $a + b$).
@@ -421,20 +434,17 @@ $$O(1) < O(\log n) < O(n) < O(n \log n) < O(n^2) < O(n^3) < O(2^n) < O(n!)$$
 Quanto mais à esquerda da cadeia o seu código estiver, mais escalável e eficiente ele será na prática.
 
 ---
-
 <p align="center">
-  <a href="01 • Definições Iniciais e Notação Assintótica/README.md">
-    <img src="https://img.shields.io/badge/⬅️_Voltar-Aula_Anterior-3b82f6?style=for-the-badge" alt="Voltar">
+  <a href="01%20•%20Definições%20Iniciais%20e%20Notação%20Assintótica/README.md">
+    <img src="https://img.shields.io/badge/⬅️_Voltar-Capítulo_01-8b5cf6?style=plastic" alt="Voltar">
   </a>
-  &nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;
   <a href="README.md">
-    <img src="https://img.shields.io/badge/🏠_Início-Menu_Principal-10b981?style=for-the-badge" alt="Início">
+    <img src="https://img.shields.io/badge/🏠_Início-Menu-06b6d4?style=plastic" alt="Menu">
   </a>
-  &nbsp;&nbsp;
-  <a href="02 • Manipulação de Arquivos/README.md">
-    <img src="https://img.shields.io/badge/Próximo-Avançar_➡️-3b82f6?style=for-the-badge" alt="Avançar">
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="02%20•%20Manipulação%20de%20Arquivos/README.md">
+    <img src="https://img.shields.io/badge/Avançar-Arquivos➡️-8b5cf6?style=plastic" alt="Avançar">
   </a>
 </p>
-
----
 
