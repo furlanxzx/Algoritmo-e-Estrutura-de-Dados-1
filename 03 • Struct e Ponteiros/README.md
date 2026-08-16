@@ -265,7 +265,7 @@ int i, *p, j, v[10], *q; // 'i' e 'j' são inteiros; 'p' e 'q' são ponteiros pa
 
 ---
 
-## ⚡ Os Dois Operadores Fundamentais
+##  Os Dois Operadores Fundamentais
 
 | Operador | Nome | O que faz? | Exemplo |
 | :--- | :--- | :--- | :--- |
@@ -433,7 +433,7 @@ A **alocação dinâmica** permite reservar memória durante a execução do pro
 
 ---
 
-## 🛠️ Funções Principais (`<stdlib.h>`)
+## Funções Principais (`<stdlib.h>`)
 
 | Função | Assinatura | Descrição |
 | :--- | :--- | :--- |
@@ -506,7 +506,7 @@ int main(void)
 
 ---
 
-## 🎯 Exercício Resolvido
+## 📝 Exercício Resolvido - 3
 
 > **Proposta:** Escreva uma função que receba um caractere e o transforme em uma string de comprimento 1 contendo esse caractere. Faça a função `main` para testar, imprimindo a string criada e o seu tamanho.
 
@@ -581,7 +581,7 @@ Podemos declarar um ponteiro que aponta para uma estrutura de duas formas:
 
 ---
 
-## 🎯 O Operador Seta (`->`)
+## O Operador Seta (`->`)
 
 Para acessar os campos de uma estrutura através de um ponteiro, utilizamos o operador **`->`** (seta). Ele substitui de forma simplificada a combinação do operador de desreferência `*` com o ponto `.`.
 
@@ -648,3 +648,500 @@ int main(void)
 ---
 
 > 📌 **Lembrete Importante:** Esta sintaxe de **Ponteiro + Struct + `malloc` + `->`** é a fundação para a criação de **Pilhas, Filas e Listas Encadeadas**. Domine bem o uso da seta (`->`), pois ela será a sua principal ferramenta daqui em diante!
+
+---
+# Vetores e Vetores de Ponteiros para Estruturas
+
+Ao manipular conjuntos de dados complexos em C, podemos organizá-los em vetores de estruturas estáticas ou em vetores de ponteiros alocados dinamicamente.
+
+---
+
+## Vetores de Estruturas
+
+Quando precisamos armazenar múltiplos registros do mesmo tipo, podemos criar um vetor onde cada posição é uma estrutura completa.
+
+### Exemplo: Controle de Usuários do Servidor
+```c
+struct time_t {
+    int hora;
+    int min;
+    int seg;
+};
+
+struct info_usuario {
+    int id;
+    char nome[20];
+    long endereco_ip;
+    struct time_t hora_conexao; // Estrutura aninhada
+};
+
+// Declaração de um vetor para até 10 usuários
+struct info_usuario usuarios[10];
+```
+
+### Acessando Campos Aninhados
+Para acessar um campo de uma estrutura dentro de outra estrutura em um vetor, encadeamos o operador ponto (`.`):
+
+```c
+// Acessa a hora de conexão do 2º usuário (índice 1)
+usuarios[1].hora_conexao.hora = 14;
+```
+
+---
+
+## Vetores de Ponteiros para Estruturas
+
+Em vez de alocar um vetor com todas as estruturas prontas, é muito mais eficiente criar um **vetor de ponteiros**.
+
+### O Problema do Vetor Estático Tradicional
+Suponha uma estrutura de cadastro de alunos:
+```c
+struct aluno {
+    char nome[81];  // 81 bytes
+    int mat;        // 4 bytes
+    char end[121];  // 121 bytes
+    char tel[21];   // 21 bytes
+}; // Total: 227 bytes por aluno
+
+typedef struct aluno Aluno;
+Aluno tab[100]; // Aloca IMEDIATAMENTE 22.700 bytes (22,7 KB) na memória
+```
+* **Desvantagem:** Se o sistema tiver apenas 2 alunos cadastrados, os 22,7 KB continuam ocupados na RAM, gerando **desperdício significativo de memória**.
+
+---
+
+### A Solução com Vetor de Ponteiros
+Guardamos apenas os endereços de memória no vetor. Alocamos a estrutura do aluno individualmente com `malloc` **somente quando um novo aluno for cadastrado**.
+
+```c
+typedef struct aluno *PAluno; // PAluno é um ponteiro para a struct aluno
+
+PAluno tab[100]; // Reserva apenas espaço para 100 ponteiros (400 a 800 bytes)
+```
+
+| Abordagem | Memória Inicial | Alocação de Novos Elementos | Desperdício de Espaço |
+| :--- | :--- | :--- | :--- |
+| **Vetor Direto** (`Aluno tab[100]`) | ~22,7 KB reservados de cara | Automática (fixa) | **Alto** (se poucas posições forem usadas) |
+| **Vetor de Ponteiros** (`PAluno tab[100]`) | ~400 a 800 bytes | Dinâmica (`malloc` por item) | **Mínimo** (só gasta o que realmente usar) |
+
+---
+
+## Exemplo Prático: Alocando Itens em um Vetor de Ponteiros
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+struct aluno {
+    char nome[81];
+    int mat;
+    char end[121];
+    char tel[21];
+};
+
+typedef struct aluno Aluno;
+typedef struct aluno *PAluno;
+
+int main(void) 
+{
+    // Vetor contendo 100 ponteiros para Aluno
+    PAluno tab[100];
+
+    // Inicializa as posições como NULAS (sem nenhum aluno alocado)
+    for (int i = 0; i < 100; i++) {
+        tab[i] = NULL;
+    }
+
+    // Aloca memória APENAS para o aluno no índice 0
+    tab[0] = (PAluno) malloc(sizeof(Aluno));
+
+    if (tab[0] != NULL) {
+        // Usamos a seta (->) pois tab[0] é um ponteiro!
+        tab[0]->mat = 99122321; 
+        printf("Matrícula do aluno 0: %d\n", tab[0]->mat);
+    }
+
+    // Libera a memória do aluno alocado
+    free(tab[0]);
+
+    return 0;
+}
+```
+
+---
+##📝 Exercícios Práticos: Ponteiros, Structs e Alocação Dinâmica
+
+---
+
+### 🟡 Exercício 4 — Banda de Músicas com Alocação Dinâmica
+
+> **Enunciado:** Refaça o programa da banda de músicas utilizando ponteiro para estrutura e considerando que há dados de $n$ bandas a serem lidas ($n$ é informado pelo usuário).
+
+<details>
+<summary>🔍 Clique para ver a solução em C</summary>
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef struct {
+    char nome[50];
+    char genero[30];
+    int integrantes;
+    int ranking;
+} Banda;
+
+int main(void) 
+{
+    int n;
+
+    printf("Digite a quantidade de bandas: ");
+    scanf("%d", &n);
+    getchar(); // Limpa o buffer do teclado
+
+    // Alocação dinâmica para n estruturas do tipo Banda
+    Banda *bandas = (Banda *) malloc(n * sizeof(Banda));
+
+    if (bandas == NULL) {
+        printf("Erro ao alocar memória!\n");
+        return 1;
+    }
+
+    // Leitura dos dados das n bandas
+    for (int i = 0; i < n; i++) {
+        printf("\n--- Banda %d ---\n", i + 1);
+        
+        printf("Nome: ");
+        fgets((bandas + i)->nome, 50, stdin);
+        strtok((bandas + i)->nome, "\n"); // Remove a quebra de linha
+
+        printf("Gênero: ");
+        fgets((bandas + i)->genero, 30, stdin);
+        strtok((bandas + i)->genero, "\n");
+
+        printf("Número de integrantes: ");
+        scanf("%d", &(bandas + i)->integrantes);
+
+        printf("Ranking (1 a 5): ");
+        scanf("%d", &(bandas + i)->ranking);
+        getchar(); // Limpa o buffer
+    }
+
+    // Exibição dos dados
+    printf("\n========================================\n");
+    printf("         BANDAS CADASTRADAS             \n");
+    printf("========================================\n");
+    for (int i = 0; i < n; i++) {
+        printf("Banda %d: %s | Gênero: %s | Integrantes: %d | Rank: #%d\n",
+               i + 1,
+               (bandas + i)->nome,
+               (bandas + i)->genero,
+               (bandas + i)->integrantes,
+               (bandas + i)->ranking);
+    }
+
+    // Liberação da memória
+    free(bandas);
+
+    return 0;
+}
+```
+
+</details>
+
+---
+
+### 🟡 Exercício 5 — Tabela de Alunos com Vetor de Ponteiros
+
+> **Enunciado:** Considerando a estrutura `Aluno`, escreva um programa contendo:
+> 1. Função para inicializar a tabela de alunos (ponteiros como `NULL`).
+> 2. Função para armazenar os dados de um novo aluno em uma dada posição.
+> 3. Função para mostrar as informações de um aluno em uma dada posição (prevendo posições vazias).
+> 4. Programa principal (`main`) para testar.
+
+<details>
+<summary>🔍 Clique para ver a solução em C</summary>
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAX 10
+
+typedef struct {
+    char nome[81];
+    int mat;
+    char end[121];
+    char tel[21];
+} Aluno;
+
+typedef Aluno *PAluno;
+
+// 1. Inicializa todas as posições do vetor com NULL
+void inicializar_tabela(PAluno tab[], int tam) 
+{
+    for (int i = 0; i < tam; i++) {
+        tab[i] = NULL;
+    }
+}
+
+// 2. Aloca e armazena um novo aluno em uma posição específica
+void inserir_aluno(PAluno tab[], int pos, char *nome, int mat, char *end, char *tel) 
+{
+    if (pos < 0 || pos >= MAX) {
+        printf("Erro: Posição inválida!\n");
+        return;
+    }
+
+    // Se já existia um aluno na posição, libera primeiro
+    if (tab[pos] != NULL) {
+        free(tab[pos]);
+    }
+
+    tab[pos] = (PAluno) malloc(sizeof(Aluno));
+
+    if (tab[pos] == NULL) {
+        printf("Erro ao alocar memória!\n");
+        return;
+    }
+
+    strcpy(tab[pos]->nome, nome);
+    tab[pos]->mat = mat;
+    strcpy(tab[pos]->end, end);
+    strcpy(tab[pos]->tel, tel);
+
+    printf("Aluno inserido com sucesso na posição %d!\n", pos);
+}
+
+// 3. Exibe as informações prevendo posições sem dados
+void mostrar_aluno(PAluno tab[], int pos) 
+{
+    if (pos < 0 || pos >= MAX) {
+        printf("Erro: Posição inválida!\n");
+        return;
+    }
+
+    if (tab[pos] == NULL) {
+        printf(" AVISO: A posição %d está vazia (sem dados).\n", pos);
+    } else {
+        printf("\n--- Dados do Aluno na posição %d ---\n", pos);
+        printf("Nome: %s\n", tab[pos]->nome);
+        printf("Matrícula: %d\n", tab[pos]->mat);
+        printf("Endereço: %s\n", tab[pos]->end);
+        printf("Telefone: %s\n", tab[pos]->tel);
+    }
+}
+
+int main(void) 
+{
+    PAluno tabela[MAX];
+
+    inicializar_tabela(tabela, MAX);
+
+    // Teste de inserção
+    inserir_aluno(tabela, 0, "Maria Silva", 1001, "Rua A, 123", "9999-8888");
+    inserir_aluno(tabela, 3, "João Souza", 1002, "Av. B, 456", "8888-7777");
+
+    // Teste de exibição (posição com dados)
+    mostrar_aluno(tabela, 0);
+
+    // Teste de exibição (posição sem dados)
+    mostrar_aluno(tabela, 1);
+
+    // Liberação de memória ao encerrar
+    for (int i = 0; i < MAX; i++) {
+        if (tabela[i] != NULL) {
+            free(tabela[i]);
+        }
+    }
+
+    return 0;
+}
+```
+
+</details>
+
+---
+
+### 🔴 Exercício 6 — Gestão de Turmas (Média, Busca e Exclusão)
+
+> **Enunciado:** Escreva um programa em C para calcular a média de 4 notas bimestrais de cada aluno (usando registros) para 3 turmas de 5 alunos. O programa deve permitir:
+> * Buscar e exibir os dados de um aluno pelo nome.
+> * Excluir um aluno buscando pelo nome.
+
+<details>
+<summary>🔍 Clique para ver a solução em C</summary>
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define TURMAS 3
+#define ALUNOS 5
+
+typedef struct {
+    char nome[50];
+    float notas[4];
+    float media;
+    int ativo; // 1 = Cadastrado, 0 = Excluído/Vazio
+} Aluno;
+
+void calcular_media(Aluno *a) 
+{
+    float soma = 0;
+    for (int i = 0; i < 4; i++) {
+        soma += a->notas[i];
+    }
+    a->media = soma / 4.0;
+}
+
+void buscar_aluno(Aluno escola[TURMAS][ALUNOS], char *nome) 
+{
+    for (int t = 0; t < TURMAS; t++) {
+        for (int a = 0; a < ALUNOS; a++) {
+            if (escola[t][a].ativo && strcmp(escola[t][a].nome, nome) == 0) {
+                printf("\n Aluno encontrado!");
+                printf("\nTurma: %d | Posição: %d", t + 1, a + 1);
+                printf("\nNome: %s | Média: %.2f\n", escola[t][a].nome, escola[t][a].media);
+                return;
+            }
+        }
+    }
+    printf("\n Aluno \"%s\" não foi encontrado.\n", nome);
+}
+
+void excluir_aluno(Aluno escola[TURMAS][ALUNOS], char *nome) 
+{
+    for (int t = 0; t < TURMAS; t++) {
+        for (int a = 0; a < ALUNOS; a++) {
+            if (escola[t][a].ativo && strcmp(escola[t][a].nome, nome) == 0) {
+                escola[t][a].ativo = 0; // Desativa o registro
+                printf("\n Registro de \"%s\" excluído com sucesso!\n", nome);
+                return;
+            }
+        }
+    }
+    printf("\n Impossível excluir: Aluno \"%s\" não encontrado.\n", nome);
+}
+
+int main(void) 
+{
+    Aluno escola[TURMAS][ALUNOS];
+
+    // Inicialização genérica dos dados para teste
+    for (int t = 0; t < TURMAS; t++) {
+        for (int a = 0; a < ALUNOS; a++) {
+            sprintf(escola[t][a].nome, "Aluno_%d_%d", t + 1, a + 1);
+            escola[t][a].notas[0] = 7.0;
+            escola[t][a].notas[1] = 8.0;
+            escola[t][a].notas[2] = 6.5;
+            escola[t][a].notas[3] = 9.0;
+            escola[t][a].ativo = 1;
+            calcular_media(&escola[t][a]);
+        }
+    }
+
+    // Teste de Busca
+    buscar_aluno(escola, "Aluno_2_3");
+
+    // Teste de Exclusão
+    excluir_aluno(escola, "Aluno_2_3");
+
+    // Tentativa de buscar o aluno excluído
+    buscar_aluno(escola, "Aluno_2_3");
+
+    return 0;
+}
+```
+
+</details>
+
+---
+
+### 🔴 Exercício 7 — Cruzamento de Dados (Estudante × Funcionário)
+
+> **Enunciado:** Dados dois vetores ordenados (um de estudantes e outro de funcionários), conceda um aumento de 10% no salário de todo funcionário que também conste no vetor de estudantes com um índice de graduação (CR) maior que 3.0.
+
+<details>
+<summary>🔍 Clique para ver a solução em C</summary>
+
+```c
+#include <stdio.h>
+#include <string.h>
+
+typedef struct {
+    char ultimo_nome[30];
+    char primeiro_nome[30];
+    float cr; // Índice de pontos de graduação
+} Estudante;
+
+typedef struct {
+    char ultimo_nome[30];
+    char primeiro_nome[30];
+    float salario;
+} Funcionario;
+
+void aplicar_aumento(Estudante estudantes[], int n_est, Funcionario funcionarios[], int n_func) 
+{
+    for (int i = 0; i < n_func; i++) {
+        for (int j = 0; j < n_est; j++) {
+            // Verifica se o primeiro e último nome coincidem
+            if (strcmp(funcionarios[i].ultimo_nome, estudantes[j].ultimo_nome) == 0 &&
+                strcmp(funcionarios[i].primeiro_nome, estudantes[j].primeiro_nome) == 0) {
+                
+                // Regra de negócio: CR maior que 3.0
+                if (estudantes[j].cr > 3.0) {
+                    float salario_antigo = funcionarios[i].salario;
+                    funcionarios[i].salario *= 1.10; // Aumento de 10%
+                    
+                    printf(" Aumento concedido a %s %s!\n", 
+                           funcionarios[i].primeiro_nome, funcionarios[i].ultimo_nome);
+                    printf("   Salário antigo: R$ %.2f | Novo Salário: R$ %.2f\n\n", 
+                           salario_antigo, funcionarios[i].salario);
+                }
+            }
+        }
+    }
+}
+
+int main(void) 
+{
+    Estudante lista_estudantes[] = {
+        {"Almeida", "Carlos", 3.5},
+        {"Lima", "Beatriz", 2.8},
+        {"Silva", "Ana", 3.8}
+    };
+
+    Funcionario lista_funcionarios[] = {
+        {"Almeida", "Carlos", 3000.00},
+        {"Lima", "Beatriz", 2500.00},
+        {"Silva", "Ana", 4000.00}
+    };
+
+    int n_est = sizeof(lista_estudantes) / sizeof(Estudante);
+    int n_func = sizeof(lista_funcionarios) / sizeof(Funcionario);
+
+    printf("--- Processando Aumentos Salariais ---\n\n");
+    aplicar_aumento(lista_estudantes, n_est, lista_funcionarios, n_func);
+
+    return 0;
+}
+```
+</details>
+
+<p align="center">
+  <a href="../01%20•%20Definições%20Iniciais%20e%20Notação%20Assintótica/README.md">
+    <img src="https://img.shields.io/badge/⬅️_Voltar-Arquivos-8b5cf6?style=plastic" alt="Voltar">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="../README.md">
+    <img src="https://img.shields.io/badge/🏠_Inicio-Menu-06b6d4?style=plastic" alt="Menu">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/03%20%E2%80%A2%20Struct%20e%20Ponteiros/README.md">
+    <img src="https://img.shields.io/badge/Avancar-Array_e_Ponteiros_➡️-8b5cf6?style=plastic" alt="Avançar">
+  </a>
+</p>
