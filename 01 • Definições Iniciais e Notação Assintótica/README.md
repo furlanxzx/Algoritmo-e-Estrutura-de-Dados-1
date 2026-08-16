@@ -1,14 +1,14 @@
 <h1 align="center">01 • Definições Iniciais e Notação Assintótica</h1>
 <p align="center">
-  <a href="01%20•%20Definições%20Iniciais%20e%20Notação%20Assintótica/README.md">
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/tree/main/01%20%E2%80%A2%20Defini%C3%A7%C3%B5es%20Iniciais%20e%20Nota%C3%A7%C3%A3o%20Assint%C3%B3tica#readme">
     <img src="https://img.shields.io/badge/⬅️_Voltar-Capitulo_01-8b5cf6?style=plastic" alt="Voltar">
   </a>
   &nbsp;&nbsp;&nbsp;&nbsp;
-  <a href="README.md">
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/tree/main">
     <img src="https://img.shields.io/badge/🏠_Inicio-Menu-06b6d4?style=plastic" alt="Menu">
   </a>
   &nbsp;&nbsp;&nbsp;&nbsp;
-  <a href="02%20•%20Manipulação%20de%20Arquivos/README.md">
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/02%20%E2%80%A2%20Manipula%C3%A7%C3%A3o%20de%20Arquivos/README.md">
     <img src="https://img.shields.io/badge/Avancar-Arquivos_➡️-8b5cf6?style=plastic" alt="Avançar">
   </a>
 </p>
@@ -435,16 +435,15 @@ Quanto mais à esquerda da cadeia o seu código estiver, mais escalável e efici
 
 ---
 <p align="center">
-  <a href="01%20•%20Definições%20Iniciais%20e%20Notação%20Assintótica/README.md">
-    <img src="https://img.shields.io/badge/⬅️_Voltar-Capítulo_01-8b5cf6?style=plastic" alt="Voltar">
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/tree/main/01%20%E2%80%A2%20Defini%C3%A7%C3%B5es%20Iniciais%20e%20Nota%C3%A7%C3%A3o%20Assint%C3%B3tica#readme">
+    <img src="https://img.shields.io/badge/⬅️_Voltar-Capitulo_01-8b5cf6?style=plastic" alt="Voltar">
   </a>
   &nbsp;&nbsp;&nbsp;&nbsp;
-  <a href="README.md">
-    <img src="https://img.shields.io/badge/🏠_Início-Menu-06b6d4?style=plastic" alt="Menu">
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/tree/main">
+    <img src="https://img.shields.io/badge/🏠_Inicio-Menu-06b6d4?style=plastic" alt="Menu">
   </a>
   &nbsp;&nbsp;&nbsp;&nbsp;
-  <a href="02%20•%20Manipulação%20de%20Arquivos/README.md">
-    <img src="https://img.shields.io/badge/Avançar-Arquivos➡️-8b5cf6?style=plastic" alt="Avançar">
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/02%20%E2%80%A2%20Manipula%C3%A7%C3%A3o%20de%20Arquivos/README.md">
+    <img src="https://img.shields.io/badge/Avancar-Arquivos_➡️-8b5cf6?style=plastic" alt="Avançar">
   </a>
 </p>
-
