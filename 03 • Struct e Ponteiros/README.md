@@ -555,3 +555,96 @@ int main(void)
 > [!IMPORTANT]
 > **Atenção aos próximos tópicos!**
 > A alocação dinâmica (com foco no `malloc`) é a ferramenta fundamental para a construção de **Listas**, **Pilhas** e **Filas**. Certifique-se de praticar bastante este módulo antes de avançar!
+
+---
+<h1 align="center">Ponteiro para Estruturas</h1>
+
+Unir ponteiros e registros (`struct`) é o passo definitivo para construir estruturas de dados avançadas. Essa combinação permite manipular dados complexos na memória sem realizar cópias desnecessárias e viabiliza a criação de nós encadeados.
+
+---
+
+## 📌 Declaração e Sintaxe
+
+Podemos declarar um ponteiro que aponta para uma estrutura de duas formas:
+
+* **Sintaxe direta:**
+  ```c
+  struct ponto *pp; // pp é um ponteiro para uma struct ponto
+  ```
+* **Usando `typedef` para simplificar:**
+  ```c
+  typedef struct ponto *Ponto; // Cria o tipo 'Ponto', que já é um ponteiro
+  Ponto pp;
+
+  //*Eu pessoalmente prefiro dessa forma, como a professora também só usava dessa maneira, passei a usar também.
+  ```
+
+---
+
+## 🎯 O Operador Seta (`->`)
+
+Para acessar os campos de uma estrutura através de um ponteiro, utilizamos o operador **`->`** (seta). Ele substitui de forma simplificada a combinação do operador de desreferência `*` com o ponto `.`.
+
+| Forma Longa (com parênteses) | Forma Simplificada (Recomendada) | O que faz? |
+| :--- | :--- | :--- |
+| `(*pp).x = 12.0;` | `pp->x = 12.0;` | Acessa o campo `x` do ponto apontado por `pp` |
+| `(*pp).y = 5.5;` | `pp->y = 5.5;` | Acessa o campo `y` do ponto apontado por `pp` |
+
+> **Por que os parênteses na forma longa?** O operador ponto `.` tem prioridade sobre o asterisco `*`. Sem os parênteses, `*pp.x` causaria um erro de compilação, pois o C tentaria acessar o campo `.x` antes de desreferenciar o ponteiro.
+
+---
+
+##  Passagem de Structs para Funções
+
+| Tipo de Passagem | Como funciona | Vantagens / Desvantagens |
+| :--- | :--- | :--- |
+| **Por Valor** `(struct ponto p)` | Copia **todos** os campos da estrutura para a memória da função. | ❌ Ineficiente para structs grandes.<br>❌ Não permite alterar os valores originais. |
+| **Por Ponteiro / Referência** `(struct ponto *p)` | Passa apenas o **endereço de memória** (4 a 8 bytes). | ✅ Alta eficiência de desempenho e memória.<br>✅ Permite alterar os valores originais. |
+
+---
+
+##  Alocação Dinâmica de Structs
+
+Podemos alocar o espaço exato de uma estrutura em tempo de execução usando `malloc(sizeof(struct ...))`.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+// Definição da estrutura
+struct ponto {
+    double x;
+    double y;
+};
+
+int main(void) 
+{
+    // 1. Declaração do ponteiro para a estrutura
+    struct ponto *p;
+
+    // 2. Alocação dinâmica de memória
+    p = (struct ponto *) malloc(sizeof(struct ponto));
+
+    // 3. Verificação de segurança
+    if (p == NULL) {
+        printf("Erro ao alocar memória para a struct!\n");
+        exit(1);
+    }
+
+    // 4. Atribuição de valores usando a seta (->)
+    p->x = 12.0;
+    p->y = 3.5;
+
+    // 5. Exibição dos dados
+    printf("Ponto alocado em: (%f, %f)\n", p->x, p->y);
+
+    // 6. Liberação da memória
+    free(p);
+
+    return 0;
+}
+```
+
+---
+
+> 📌 **Lembrete Importante:** Esta sintaxe de **Ponteiro + Struct + `malloc` + `->`** é a fundação para a criação de **Pilhas, Filas e Listas Encadeadas**. Domine bem o uso da seta (`->`), pois ela será a sua principal ferramenta daqui em diante!
