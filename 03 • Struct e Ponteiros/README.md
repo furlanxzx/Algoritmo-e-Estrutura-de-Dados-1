@@ -239,7 +239,319 @@ int main() {
                           &colecao[i].data_contratacao.mes, 
                           &colecao[i].data_contratacao.ano);
 ```
+</details>
+
+---
+<h1 align="center">Ponteiros</h1>
+
+Um **ponteiro** é uma variável especial criada para **armazenar o endereço de memória** de outra variável, em vez de guardar um valor comum (como um número ou caractere).
 
 ---
 
+## 📌 Declarando um Ponteiro
 
+Para indicar que uma variável é um ponteiro, utilizamos o símbolo asterisco (`*`) na sua declaração.
+
+```c
+int *p; // 'p' é um ponteiro que guardará o endereço de uma variável do tipo int
+```
+
+> **Dica de Leitura:** Leia `int *p;` como: *"A partir do endereço `p`, existe um inteiro"*.
+
+É possível declarar ponteiros junto com variáveis comuns na mesma linha:
+```c
+int i, *p, j, v[10], *q; // 'i' e 'j' são inteiros; 'p' e 'q' são ponteiros para inteiro
+```
+
+---
+
+## ⚡ Os Dois Operadores Fundamentais
+
+| Operador | Nome | O que faz? | Exemplo |
+| :--- | :--- | :--- | :--- |
+| **`&`** | **Endereço de** | Retorna a posição de memória de uma variável. | `&x` (endereço onde `x` está guardado) |
+| **`*`** | **Indireção / Desreferenciação** | Acessa o **conteúdo** do endereço guardado pelo ponteiro. | `*p` (conteúdo presente no endereço `p`) |
+
+---
+
+##  Entendendo Ponteiros na Memória
+
+Ao declarar `int *p;`, o computador reserva um espaço para `p`, mas ele **ainda não aponta para lugar nenhum válido** (guarda lixo de memória).
+
+```text
++-------+
+|   ?   |   p (ponteiro não inicializado)
++-------+
+```
+
+Ao fazer `p = &i;`, o ponteiro `p` passa a guardar a localização de `i`:
+
+```text
++-------+          +-------+
+|   •---|--------> |   ?   |
++-------+          +-------+
+    p                  i
+```
+
+---
+
+## Manipulando Valores via Ponteiro
+
+Quando `p` aponta para `i`, dizemos que `*p` é um ***alias* (apelido)** para `i`. Qualquer alteração via `*p` modifica diretamente o valor contido em `i`.
+
+### Exemplo Passo a Passo:
+
+```c
+int i;
+int *p;
+
+p = &i; // p aponta para i
+```
+```text
++-------+          +-------+
+|   •---|--------> |   ?   |
++-------+          +-------+
+    p                  i
+```
+
+```c
+i = 1; // Atribui 1 à variável i diretamente
+```
+```text
++-------+          +-------+
+|   •---|--------> |   1   |
++-------+          +-------+
+    p                  i
+```
+
+```c
+*p = 2; // Altera o valor no endereço apontado por p (altera 'i')
+```
+```text
++-------+          +-------+
+|   •---|--------> |   2   |
++-------+          +-------+
+    p                  i
+```
+
+Ao executar `printf("%d", i);` ou `printf("%d", *p);`, a saída em ambos será **`2`**.
+
+---
+
+## Múltiplos Ponteiros para o Mesmo Endereço
+
+Vários ponteiros podem apontar simultaneamente para a mesma variável:
+
+```c
+int i, *p, *q;
+
+p = &i; // p recebe o endereço de i
+q = p;  // q recebe o endereço guardado em p (também aponta para i)
+```
+
+```text
++-------+
+|   •---|---+
++-------+   |      +-------+
+    p       +----> |   ?   |
+            |      +-------+
++-------+   |          i
+|   •---|---+
++-------+
+    q
+```
+
+* Tanto `*p = 1;` quanto `*q = 2;` mudarão o valor dentro da única variável **`i`**.
+
+---
+
+## ⚠️ Diferença entre `p = q` e `*q = *p`
+
+Esse é um dos pontos onde as pessoas mais se confundem. Observe a diferença:
+
+### 1. `p = q` (Cópia de Endereço)
+Faz com que o ponteiro `p` passe a apontar para o **mesmo lugar** que o ponteiro `q`.
+
+```text
+p = &i;  q = &j;
+p = q;   // p agora aponta para j
+
+  p ----+
+        |---> [   ] j
+  q ----+     [   ] i
+```
+
+---
+
+### 2. `*q = *p` (Cópia de Valor)
+Não muda os ponteiros! Copia o **conteúdo** da memória apontada por `p` para dentro do endereço apontado por `q`.
+
+```c
+int i = 1, j;
+int *p = &i, *q = &j;
+
+*q = *p; // Copia o valor de 'i' (1) para o espaço de 'j'
+```
+
+```text
++-------+        +-------+
+|   •---|------> |   1   |  (i)
++-------+        +-------+
+    p
+
++-------+        +-------+
+|   •---|------> |   1   |  (j recebeu o valor 1)
++-------+        +-------+
+    q
+```
+
+---
+
+## ⚠️ Boas Práticas e Cuidados Importantes
+
+1. **Nunca desreferencie um ponteiro não inicializado:**
+   ```c
+   int *p;
+   printf("%d\n", *p); // ❌ ERRO! Tenta ler uma memória aleatória. Pode travar o programa.
+   ```
+
+2. **Nunca atribua um número inteiro diretamente a um ponteiro:**
+   ```c
+   int *p;
+   p = 1000; // ❌ ERRO! Você está mandando o ponteiro apontar para o endereço 1000 da memória.
+   ```
+
+3. **Inicialize com `NULL` se não for usá-lo imediatamente:**
+   Se um ponteiro não tem para onde apontar no momento da criação, defina-o como `NULL` (requer `<stdlib.h>`).
+   ```c
+   int *p = NULL; // Indica que o ponteiro é explicitamente "vazio" no momento
+   ```
+   ---
+<h1 align="center">Alocação Dinâmica</h1>
+
+A **alocação dinâmica** permite reservar memória durante a execução do programa (*runtime*), ao contrário da alocação estática (como vetores com tamanho fixo). Todas as funções de alocação dinâmica pertencem à biblioteca `<stdlib.h>`.
+
+---
+
+## 🛠️ Funções Principais (`<stdlib.h>`)
+
+| Função | Assinatura | Descrição |
+| :--- | :--- | :--- |
+| **`malloc`** | `void *malloc(size_t size);` | Aloca um bloco contínuo de memória com o tamanho especificado em bytes. Conteúdo inicial indeterminado (lixo de memória). |
+| **`calloc`** | `void *calloc(size_t n_element, size_t size);` | Aloca memória para N elementos de determinado tamanho e **inicializa todos os bytes com zero**. |
+| **`realloc`** | `void *realloc(void *ptr, size_t size);` | Altera o tamanho de um bloco de memória previamente alocado. |
+| **`free`** | `void free(void *ptr);` | Libera o bloco de memória alocado dinamicamente de volta para o sistema operacional. |
+
+---
+
+##  Conceitos Fundamentais
+
+### 1. O Retorno `void *` e o Cast Tipo de Ponteiro
+A função `malloc` aloca bytes sem saber o tipo de dado que será gravado neles, retornando um ponteiro genérico (`void *`).
+Em C, fazemos um ***cast*** (conversão forçada de tipo) para o ponteiro correto:
+
+```c
+char *c = (char *) malloc(1); // Cast (char *) converte a saída de malloc
+```
+
+### 2. Verificação de Sucesso (`NULL`)
+Se o computador não tiver memória suficiente disponível, o `malloc` retorna o ponteiro nulo (`NULL`). **Sempre verifique esse retorno** antes de usar o ponteiro!
+
+```c
+if (c == NULL) { // Equivalente a: if (!c)
+    printf("Erro: Memória insuficiente!\n");
+    exit(1);
+}
+```
+
+### 3. Liberação de Memória (`free`)
+Memória alocada dinamicamente **não é liberada automaticamente** ao final da função. O uso da função `free()` é obrigatório para evitar vazamento de memória (*memory leak*).
+
+```c
+free(c); // Libera o espaço apontado por c
+```
+
+---
+
+## Exemplo Básico de Uso
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void) 
+{
+    // 1. Declarar o ponteiro
+    char *c; 
+
+    // 2. Alocar 1 byte na memória e fazer o cast
+    c = (char *) malloc(sizeof(char));
+
+    // 3. Testar se a alocação funcionou
+    if (c == NULL) {
+        printf("Não foi possível alocar a memória.\n");
+        exit(1);
+    }
+
+    // 4. Usar a memória alocada
+    *c = 'd';
+    printf("Valor armazenado: %c\n", *c);
+
+    // 5. Liberar a memória após o uso
+    free(c);
+
+    return 0;
+}
+```
+
+---
+
+## 🎯 Exercício Resolvido
+
+> **Proposta:** Escreva uma função que receba um caractere e o transforme em uma string de comprimento 1 contendo esse caractere. Faça a função `main` para testar, imprimindo a string criada e o seu tamanho.
+
+⚠️ **Atenção:** Em C, uma string precisa do caractere nulo `'\0'` no final para indicar seu término. Portanto, uma "string de comprimento 1" precisa de **2 bytes** alocados (1 para o caractere + 1 para o `'\0'`).
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+// Função que converte um char em uma string alocada dinamicamente
+char* char_para_string(char c) 
+{
+    // Aloca 2 bytes: 1 para o caractere e 1 para o delimitador '\0'
+    char *str = (char *) malloc(2 * sizeof(char));
+
+    if (str == NULL) {
+        printf("Erro ao alocar memória!\n");
+        exit(1);
+    }
+
+    str[0] = c;    // Define o caractere
+    str[1] = '\0'; // Finaliza a string
+
+    return str;
+}
+
+int main(void) 
+{
+    char caractere = 'A';
+
+    // Chama a função e recebe o ponteiro da string alocada
+    char *str_resultado = char_para_string(caractere);
+
+    // Imprime o conteúdo e o tamanho usando strlen
+    printf("String resultante: \"%s\"\n", str_resultado);
+    printf("Tamanho da string: %lu\n", strlen(str_resultado));
+
+    // Libera a memória alocada dinamicamente pela função
+    free(str_resultado);
+
+    return 0;
+}
+```
+---
+> [!IMPORTANT]
+> **Atenção aos próximos tópicos!**
+> A alocação dinâmica (com foco no `malloc`) é a ferramenta fundamental para a construção de **Listas**, **Pilhas** e **Filas**. Certifique-se de praticar bastante este módulo antes de avançar!
