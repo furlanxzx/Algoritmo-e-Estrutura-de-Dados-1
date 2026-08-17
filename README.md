@@ -42,25 +42,14 @@ Bem-vindo(a)! Este repositório foi criado com o objetivo de **descomplicar a ma
 ---
 
 ### 💻 Como utilizar este material?
+
 Sinta-se à vontade para navegar pelas pastas, consultar os códigos-fonte desenvolvidos em C, resolver as listas práticas e utilizar os materiais de revisão para se preparar para as avaliações.
 
+---
+Para facilitar sua navegação e aprendizado, todos os exercícios práticos estão catalogados por nível de dificuldade, identificados pelas cores ao lado do título:
 
+* 🟢 **Fácil:** Conceitos básicos e aplicação direta da sintaxe da linguagem.
+* 🟡 **Médio:** Exige manipulação de ponteiros, alocação dinâmica e estruturas compostas.
+* 🔴 **Avançado:** Desafios mais complexos envolvendo lógica de busca, remoção ou múltiplos conceitos integrados.
 
-..
-..
-..
-..
-..
-..
-..
-..
-..
-..
-..
-..
-..
-..
-..
-..
-..
-..
+Você pode expandir a caixa de cada exercício para consultar o enunciado e a resolução completa.
