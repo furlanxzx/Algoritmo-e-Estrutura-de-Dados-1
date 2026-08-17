@@ -53,3 +53,5 @@ Para facilitar sua navegação e aprendizado, todos os exercícios práticos est
 * 🔴 **Avançado:** Desafios mais complexos envolvendo lógica de busca, remoção ou múltiplos conceitos integrados.
 
 Você pode expandir a caixa de cada exercício para consultar o enunciado e a resolução completa.
+
+---
