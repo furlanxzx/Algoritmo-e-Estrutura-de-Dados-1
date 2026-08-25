@@ -1,4 +1,4 @@
-<h1 align="center">01 • Definições Iniciais e Notação Assintótica</h1>
+<h1 align="center">  Definições Iniciais e Notação Assintótica</h1>
 <p align="center">
   <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/tree/main/01%20%E2%80%A2%20Defini%C3%A7%C3%B5es%20Iniciais%20e%20Nota%C3%A7%C3%A3o%20Assint%C3%B3tica#readme">
     <img src="https://img.shields.io/badge/⬅️_Voltar-Capitulo_01-8b5cf6?style=plastic" alt="Voltar">
