@@ -1,4 +1,4 @@
-<h1 align="center">02 • Manipulação de Arquivos — Conceitos Fundamentais</h1>
+<h1 align="center"> Manipulação de Arquivos — Conceitos Fundamentais</h1>
 
 <p align="center">
   <a href="../01%20•%20Definições%20Iniciais%20e%20Notação%20Assintótica/README.md">
