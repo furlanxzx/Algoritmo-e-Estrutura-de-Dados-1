@@ -16,7 +16,7 @@
 
 ---
 
-### Definição
+### <mark> 1 - Definição </mark>
 *   Numa lista circular, o último elemento tem como próximo o primeiro elemento da lista, formando um ciclo.
 *   A rigor, neste caso, não faz sentido falarmos em primeiro ou último elemento.
 *   A lista pode ser representada por um ponteiro para um elemento inicial qualquer da lista.
@@ -31,7 +31,7 @@
 
 ---
 
-### 🖨️ Função para a Impressão
+### <mark> 2 - Função para a Impressão </mark>
 
 Pense em como poderia ser a impressão em uma lista circular. Como não há um fim marcado por `NULL`, iteramos até alcançar novamente o início.
 
@@ -51,15 +51,17 @@ void imprime_circular (PLista ultimo) {
 
 ---
 
-## 📝 Lista de Exercícios de Fixação
+## 📝 Exercícios Práticos
 
 **Nota:** Para todas as resoluções, assumimos a estrutura padrão `typedef struct lista { int info; struct lista* prox; } TLista; typedef TLista* PLista;`.
+
+---
 
 ### Operações Básicas
 > **A.** Faça a inserção em lista circular na primeira posição da lista (lembre-se que a inserção pode ser feita em qualquer lugar).
 
 <details>
-<summary><b>👀 Ver resposta</b></summary>
+<summary><b>💡 Clique aqui para ver a solução </b></summary>
 
 ```c
 PLista insere_inicio_circular(PLista ultimo, int v) {
@@ -83,7 +85,7 @@ PLista insere_inicio_circular(PLista ultimo, int v) {
 > **B.** Faça uma função para liberar todo o espaço alocado em uma lista circular.
 
 <details>
-<summary><b>👀 Ver resposta</b></summary>
+<summary><b>💡 Clique aqui para ver a solução </b></summary>
 
 ```c
 void libera_circular(PLista ultimo) {
@@ -107,7 +109,7 @@ void libera_circular(PLista ultimo) {
 > Faça a função para remover um nó com um dado valor em lista circular.
 
 <details>
-<summary><b>👀 Ver resposta</b></summary>
+<summary><b>💡 Clique aqui para ver a solução </b></summary>
 
 ```c
 PLista remove_valor_circular(PLista ultimo, int v) {
@@ -148,7 +150,7 @@ PLista remove_valor_circular(PLista ultimo, int v) {
 > Faça as funções Push() e Pop() utilizando listas circulares. Considere `ultimo` um ponteiro para o último nó da lista circular e considere que o primeiro nó seja o topo da pilha.
 
 <details>
-<summary><b>👀 Ver resposta</b></summary>
+<summary><b>💡 Clique aqui para ver a solução </b></summary>
 
 ```c
 /* Push: Inserir no topo da pilha (início da lista circular) */
@@ -187,7 +189,7 @@ PLista pop_circular(PLista ultimo, int *v_retornado) {
 > Faça as funções de inserção e remoção em Fila utilizando lista circular.
 
 <details>
-<summary><b>👀 Ver resposta</b></summary>
+<summary><b>💡 Clique aqui para ver a solução </b></summary>
 
 ```c
 /* Enqueue (Inserção na Fila): Insere no final da lista circular */
