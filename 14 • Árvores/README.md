@@ -1,6 +1,18 @@
-# Árvores — Introdução
+<h1 align="center">Árvores</h1>
 
-> 📚 Material baseado nas aulas da Prof.ª Regina — Algoritmos e Estrutura de Dados
+<p align="center">
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/13%20%E2%80%A2%20Grafos/README.md">
+    <img src="https://img.shields.io/badge/⬅️_Voltar-Grafos-8b5cf6?style=plastic" alt="Voltar">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="../README.md">
+    <img src="https://img.shields.io/badge/🏠_Inicio-Menu-06b6d4?style=plastic" alt="Menu">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/15%20%E2%80%A2%20%C3%81rvores%20Bin%C3%A1rias/README.md">
+    <img src="https://img.shields.io/badge/Avancar-Árvores_Binárias_➡️-8b5cf6?style=plastic" alt="Avançar">
+  </a>
+</p>
 
 ---
 
@@ -299,3 +311,20 @@ typedef struct SNo {
 | Floresta | Conjunto de árvores separadas — surge, por exemplo, ao remover a raiz de uma árvore |
 
 **Próximos passos:** com essa base teórica pronta, os próximos módulos (árvore genérica, árvore binária, árvore binária de busca...) vão sobre implementação de verdade — como representar os filhos no código, como percorrer a árvore (pré-ordem, em-ordem, pós-ordem, em largura), inserção, remoção, busca, etc. Pode mandar os prints quando estiver pronta!
+
+---
+
+<p align="center">
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/13%20%E2%80%A2%20Grafos/README.md">
+    <img src="https://img.shields.io/badge/⬅️_Voltar-Grafos-8b5cf6?style=plastic" alt="Voltar">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="../README.md">
+    <img src="https://img.shields.io/badge/🏠_Inicio-Menu-06b6d4?style=plastic" alt="Menu">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/15%20%E2%80%A2%20%C3%81rvores%20Bin%C3%A1rias/README.md">
+    <img src="https://img.shields.io/badge/Avancar-Árvores_Binárias_➡️-8b5cf6?style=plastic" alt="Avançar">
+  </a>
+</p>
+
