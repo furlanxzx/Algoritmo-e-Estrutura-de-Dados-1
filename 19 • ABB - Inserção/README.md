@@ -16,15 +16,15 @@
 
 ---
 
-## Definição
+## <mark> 1 - Definição </mark>
 
 Uma **árvore binária de busca**, além da relação hierárquica entre os nós, possui uma **ordem** entre os nós filhos.
 
 Uma árvore binária de busca, cuja raiz armazena o elemento **R**, é denominada **árvore binária de pesquisa (busca)** se:
 
-- ✔️ todo elemento armazenado na sub-árvore à **esquerda** é **menor ou igual** a **R**;
-- ✔️ todo elemento armazenado na sub-árvore à **direita** é **maior** do que **R**;
-- ✔️ a sub-árvore direita e esquerda também são **ABB**.
+-  todo elemento armazenado na sub-árvore à **esquerda** é **menor ou igual** a **R**;
+-  todo elemento armazenado na sub-árvore à **direita** é **maior** do que **R**;
+-  a sub-árvore direita e esquerda também são **ABB**.
 
 > Uma árvore binária de busca (ABB), visitada em ordem **infixa** (Esq, Raiz, Dir), resulta em uma **lista de dados em ordem crescente**.
 
@@ -32,7 +32,7 @@ Uma árvore binária de busca, cuja raiz armazena o elemento **R**, é denominad
 
 ---
 
-## Estrutura para ABB
+## <mark> 2 - Estrutura para ABB </mark>
 
 Diferente da árvore genérica (que usa lista de filhos com `prim`/`prox`), a ABB é uma árvore binária "de verdade": cada nó tem no máximo **dois** filhos, um à esquerda (`esq`) e um à direita (`dir`).
 
@@ -48,7 +48,7 @@ typedef TABB *PABB;
 
 ---
 
-## Inserção
+## <mark> 3 - Inserção </mark>
 
 Inserir um elemento **X** em uma ABB **vazia** é trivial.
 
@@ -116,13 +116,13 @@ Note como `99`, `100` e `400` formam uma "escada" só de filhos à direita — i
 
 ---
 
-## Pesquisa
+## <mark> 4 - Busca </mark>
 
 Se a árvore for nula, nada a fazer. Caso contrário, o processo de pesquisa é o **mesmo** utilizado para inserção.
 
 ### Exercício — Função Pesquisa 🟢
 
-> Faça a função de pesquisa em ABB.
+> Faça a função de busca em ABB.
 
 <details>
 <summary>Ver resposta</summary>
@@ -149,9 +149,9 @@ int pesquisa (PABB a, int x)
 
 ---
 
-## Exercícios
+## 📝 Exercícios Práticos
 
-### Exercício 1 🟢
+### 🟢 Exercício 1 
 
 Insira a seguinte sequência de números em uma ABB:
 
@@ -193,7 +193,7 @@ Inserindo um a um, seguindo a regra "menor → esquerda, maior ou igual → dire
 
 ---
 
-### Exercício 2 🟡
+### 🟡 Exercício 2 
 
 Construa uma ABB com o conjunto de números:
 
@@ -204,7 +204,7 @@ Construa uma ABB com o conjunto de números:
 <details>
 <summary>Ver resposta</summary>
 
-⚠️ Como um **conjunto** não tem ordem definida, vamos considerar a inserção na **mesma ordem em que os números aparecem** listados no enunciado — é assim que a árvore final é determinada de forma única.
+ Como um **conjunto** não tem ordem definida, vamos considerar a inserção na **mesma ordem em que os números aparecem** listados no enunciado — é assim que a árvore final é determinada de forma única.
 
 - **100** (raiz)
   - esq: **23**
@@ -230,7 +230,7 @@ Construa uma ABB com o conjunto de números:
 
 ---
 
-### Exercício 3 🔴
+### 🔴 Exercício 3 
 
 Considere uma ABB *A* de números inteiros contendo todos os números entre 1 e 1000. Dentre as sequências abaixo, indique qual(is) pode(m) corresponder a uma sequência de elementos de *A* visitados em ordem **prefixa** durante a operação de **pesquisa do elemento 363**. Para cada uma das sequências não válidas, indique o problema.
 
