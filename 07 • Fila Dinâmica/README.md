@@ -16,7 +16,7 @@
 
 ---
 
-## 🧠 Conceito: A Política FIFO
+## <mark> 1 - Conceito: A Política FIFO </mark>
 
 Diferente da pilha (que vimos anteriormente usando a lógica LIFO), as filas funcionam baseadas na política **FIFO** (*First-In First-Out*, ou "O Primeiro a Entrar é o Primeiro a Sair"). 
 *   **Dinâmica:** Em uma fila, nós sempre acrescentamos novos itens em uma extremidade (no final) e retiramos itens da extremidade oposta (do início).
@@ -24,7 +24,7 @@ Diferente da pilha (que vimos anteriormente usando a lógica LIFO), as filas fun
 
 ---
 
-## 🚀 Aplicações Práticas e Operações
+## <mark> 2 - Aplicações Práticas e Operações </mark>
 
 As filas são extremamente comuns no nosso dia a dia e fundamentais na computação. Veja algumas aplicações clássicas:
 *   Fila de processos gerenciados pelo Sistema Operacional.
@@ -38,7 +38,7 @@ Para manipularmos essa estrutura, precisamos garantir as seguintes operações b
 
 ---
 
-## 🏗️ Estruturando a Fila Dinâmica em C
+## <mark> 3 - Estruturando a Fila Dinâmica em C </mark>
 
 Para construir uma fila dinâmica eficientemente, precisamos de **duas estruturas (`structs`)**. A primeira define o nó (igual ao da lista encadeada), e a segunda é uma estrutura de controle que guarda os ponteiros para o início e o fim da fila, facilitando a inserção rápida no final.
 
@@ -60,7 +60,7 @@ typedef TFila *PFila;
 
 ---
 
-## 🎬 Inicializando a Fila
+## <mark> 4 - Inicializando a Fila </mark>
 
 A primeira função prática é a de criação. A função `cria()` serve para alocar dinamicamente apenas a estrutura de controle (`TFila`) e preparar o terreno, definindo que a fila começa vazia (com início e fim apontando para `NULL`).
 
@@ -82,13 +82,13 @@ PFila cria() {
 
 ---
 
-### Exercício 1: Operações Básicas
-**Nível de Dificuldade:** 🟢 Fácil
+### 🟢 Exercício 1  — Operações Básicas
+> **Enunciado:**
 > * Escreva as funções de inserção, remoção, impressão e liberação de uma fila encadeada. 
 > * Lembre que a inserção deve sempre ser no fim da fila e a remoção, no início.
 
 <details>
-<summary><b>👀 Ver resposta (Código em C das Operações)</b></summary>
+<summary><b>💡 Clique aqui para ver a solução</b></summary>
 
 Este código consolida os algoritmos apresentados nos slides da aula para manipular a fila perfeitamente:
 
@@ -151,14 +151,15 @@ void libera (PFila f) {
 
 ---
 
-### Exercício 2: Separação de Filas
-**Nível de Dificuldade:** 🟡 Médio
+### 🟡 Exercício 2  — Separação de Filas
+
+> **Enunciado:**
 > * Faça uma função que receba 3 filas (f, f_pares e f_impares) e separe todos os valores guardados em f de tal forma que os valores pares sejam movidos para f_pares e os ímpares, para f_impares. 
 > * No final, f deve estar vazia. 
 > * Considere que f_pares e f_impares ainda não existem.
 
 <details>
-<summary><b>👀 Ver resposta (Código em C)</b></summary>
+<summary><b>💡 Clique aqui para ver a solução</b></summary>
 
 ```c
 // Assumindo o uso da função cria(), insere() e retira() definidas anteriormente
@@ -184,8 +185,9 @@ void separa_filas(PFila f, PFila *f_pares, PFila *f_impares) {
 
 ---
 
-### Exercício 3: Fila de Atendimento com Tempo de Espera
-**Nível de Dificuldade:** 🔴 Difícil
+### 🔴 Exercício 3: Fila de Atendimento com Tempo de Espera
+
+> **Enunciado:**
 > * Em um centro de atendimento, os pacientes aguardam em uma fila única e são atendidos na ordem de chegada. 
 > * O sistema funciona em iterações discretas, que representam unidades de tempo. 
 > * A cada iteração, o usuário pode: inserir um novo paciente na fila, ou atender (remover) o paciente do início da fila.
@@ -195,7 +197,7 @@ void separa_filas(PFila f, PFila *f_pares, PFila *f_impares) {
 > * O programa deve apresentar o seguinte menu: 1 - Inserir paciente, 2 - Atender paciente, 3 - Exibir fila, 0 - Sair.
 
 <details>
-<summary><b>👀 Ver resposta (Lógica Estrutural em C)</b></summary>
+<summary><b>💡 Clique aqui para ver a solução</b></summary>
 
 Para resolver este problema, a estrutura do nó precisará ser adaptada para guardar duas informações: o ID do paciente e o tempo de espera.
 
@@ -238,8 +240,9 @@ void incrementa_tempo(PFila f) {
 
 ---
 
-### Exercícios Adicionais: Fila de Supermercado (Prioridade)
-**Nível de Dificuldade:** 🔴 Difícil
+### 🔴 Exercícios Adicionais: Fila de Supermercado (Prioridade)
+
+> **Enunciado:**
 > * Em um supermercado, há vários guichês, mas os clientes sempre esperam numa fila única e são atendidos conforme a disponibilidade. 
 > * Sendo assim, cada pessoa que chega entra no final desta fila. 
 > * No entanto, cada vez que chega uma pessoa com atendimento prioritário (por exemplo, um idoso), ela deverá ser atendida antes de qualquer outra pessoa não prioritária, respeitando, porém, a ordem de chegada das pessoas com atendimento prioritário na fila. 
@@ -252,7 +255,7 @@ void incrementa_tempo(PFila f) {
 > * O programa deverá terminar quando não houver mais pessoas na fila.
 
 <details>
-<summary><b>👀 Ver resposta (Dica de Resolução)</b></summary>
+<summary><b>💡 Clique aqui para ver a solução</b></summary>
 
 Para este exercício, a manipulação direta dos ponteiros será necessária para inserir um elemento "no meio" da fila (após o último 'P' e antes do primeiro 'O'). 
 
