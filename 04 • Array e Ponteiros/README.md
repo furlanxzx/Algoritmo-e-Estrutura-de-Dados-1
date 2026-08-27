@@ -16,7 +16,7 @@
 
 ---
 
-## Vetores como Ponteiro
+## <mark> 1 - Vetores como Ponteiro </mark>
 
 Ponteiros e vetores estão **fortemente relacionados** na linguagem C.
 
@@ -61,23 +61,23 @@ a: [5][ ][ ][ ][ ][ ][ ][ ][ ][ ]
     0  1  2  3  4  5  6  7  8  9
 ```
 
-### Aritmética de Ponteiros
+## <mark> 2 - Aritmética de Ponteiros </mark>
 
 Utilizando aritmética de ponteiros é possível acessar outros elementos do vetor.
 
 A linguagem C suporta **3 formas** de aritmética de ponteiros:
 
-- ✔️ adicionar um inteiro a um ponteiro;
-- ✔️ subtrair um inteiro de um ponteiro;
-- ✔️ subtrair um ponteiro de outro ponteiro.
+-  adicionar um inteiro a um ponteiro;
+-  subtrair um inteiro de um ponteiro;
+-  subtrair um ponteiro de outro ponteiro.
 
 ```c
 int a[10], *p, *q, i;
 ```
 
----
 
-## Processamento de Vetores
+
+## <mark> 2.1 - Processamento de Vetores </mark>
 
 Programa para somar elementos de um vetor, usando aritmética de ponteiros no lugar de indexação:
 
@@ -105,11 +105,11 @@ int main(){
     int i;
 
     for(i=0; i<TAM; i++)
-        printf("%d ",v[i]); /* indexação */
+        printf("%d ",v[i]); // indexação
     printf("\n");
 
     for(i=0; i<TAM; i++)
-        printf("%d ",*(v+i)); /*aritmética de ponteiros*/
+        printf("%d ",*(v+i)); // aritmética de ponteiros
     printf("\n");
 
     return 0;
@@ -122,7 +122,7 @@ Ou seja, `v[i]` e `*(v+i)` são **equivalentes** — só duas formas diferentes 
 
 ---
 
-## Combinando Operadores `*` e `++`
+## <mark> 2.2 - Combinando Operadores `*` e `++` </mark>
 
 Programa para somar elementos de um vetor, combinando os operadores `*` (desreferência) e `++` (incremento) numa única expressão:
 
@@ -141,7 +141,7 @@ while (p<&a[N])
 
 ---
 
-## Nome do Vetor como Ponteiro
+## <mark> 2.3 - Nome do Vetor como Ponteiro </mark>
 
 O nome de um vetor pode ser usado como ponteiro para o primeiro elemento do vetor:
 
@@ -155,7 +155,7 @@ Em geral, `a+i` é o mesmo que `&a[i]` (endereço de `a[i]`) e `*(a+i)` é o equ
 
 ---
 
-## Mais Exemplos
+## <mark> 2.4 - Mais Exemplos </mark>
 
 ### Invertendo uma série numérica com ponteiros
 
@@ -198,7 +198,7 @@ Observe como o ponteiro `p` recebe seu valor inicial (`p = v`, o próprio nome d
 
 ---
 
-## Vetor Declarado x Ponteiro: a Diferença Fundamental
+## <mark> 3 - Vetor Declarado x Ponteiro: a Diferença Fundamental </mark>
 
 Existe uma diferença fundamental entre declarar um conjunto de dados como um **vetor** ou usando um **ponteiro**.
 
@@ -209,7 +209,7 @@ Ou seja: `int *p;` cria só a "etiqueta" que vai guardar um endereço — ainda 
 
 ---
 
-## Operações Inválidas com Vetores
+## <mark> 4 - Operações Inválidas com Vetores </mark>
 
 ```c
 int vetor[10]; /*as operações de aritmética de ponteiro
@@ -229,7 +229,7 @@ p = vetor+2;   /* CERTO: p é variável */
 
 ---
 
-## Ponteiros e Matrizes
+## <mark> 5 - Ponteiros e Matrizes </mark>
 
 As propriedades e operações de ponteiros são as mesmas de um vetor unidimensional, pois em C **matrizes são armazenadas na memória como vetores** (todas as linhas emendadas, uma atrás da outra):
 
@@ -256,7 +256,7 @@ Para processar somente a linha `i` de uma matriz `a`:
 p = &a[i][0]   // é equivalente a   p = a[i]
 ```
 
-— em ambos os casos, `p` aponta para o primeiro elemento da linha `i`.
+em ambos os casos, `p` aponta para o primeiro elemento da linha `i`.
 
 Para zerar os elementos da linha `i`, basta fazer:
 
@@ -315,15 +315,15 @@ int main(){
 
 ---
 
-## Alocação Dinâmica de Vetores
+## <mark> 6 - Alocação Dinâmica de Vetores </mark>
 
 Suponha que queremos tirar a média de `n` notas. Pedimos o valor de `n` e então as `n` notas, certo? E como guardaríamos?
 
 Até agora tínhamos que declarar um vetor muito grande e torcer para que `n` não fosse maior que o vetor definido.
 
-✅ **Alocação dinâmica acaba com esse problema!**
+**Alocação dinâmica acaba com esse problema!**
 
-### Como fazer
+### Como fazer ?
 
 Primeiro é preciso declarar um **ponteiro** para o tipo desejado:
 
@@ -396,13 +396,12 @@ int main() {
 
 ---
 
-## Exercícios
+## 📝 Exercícios Práticos
 
-> ℹ️ O material recebido começa no **Exercício 2** — se você tiver o Exercício 1, é só mandar que eu encaixo aqui.
+### Exercício 1 🟡
 
-### Exercício 2 🟡
-
-O que fazem os seguintes programas?
+> **Enunciado:** 
+> O que fazem os seguintes programas?
 
 ```c
 #include <stdio.h>
@@ -429,7 +428,7 @@ int main(){
 ```
 
 <details>
-<summary>Ver resposta</summary>
+<summary>💡 Clique aqui para ver a solução</summary>
 
 A diferença entre os dois programas está toda na **precedência de operadores**.
 
@@ -461,12 +460,13 @@ Ou seja, a cada iteração estamos incrementando `vet[0]` e `ptr` continua parad
 
 ---
 
-### Exercício 3 🔴
+### Exercício 2 🔴
 
-Escreva uma função `int remove_dup(float v[], int *n)` que receba um vetor e verifique a existência de elementos duplicados. Caso não existam elementos duplicados retorne 0. Caso existam, remova estes elementos (deixando apenas um deles) e retorne o número de elementos removidos. O programa principal que chamará esta função deverá alocar o espaço necessário para este vetor, assim como ler o vetor inicial e imprimir o vetor resultante.
+> **Enunciado:** 
+> Escreva uma função `int remove_dup(float v[], int *n)` que receba um vetor e verifique a existência de elementos duplicados. Caso não existam elementos duplicados retorne 0. Caso existam, remova estes elementos (deixando apenas um deles) e retorne o número de elementos removidos. O programa principal que chamará esta função deverá alocar o espaço necessário para este vetor, assim como ler o vetor inicial e imprimir o vetor resultante.
 
 <details>
-<summary>Ver resposta</summary>
+<summary>💡 Clique aqui para ver a solução</summary>
 
 A ideia é comparar cada elemento com todos os que vêm depois dele; ao encontrar um duplicado, deslocamos os elementos seguintes uma posição para a esquerda (sobrescrevendo o duplicado) e diminuímos o tamanho lógico do vetor (por isso `n` é passado como **ponteiro**, já que o tamanho muda).
 
@@ -533,12 +533,13 @@ int main(void)
 
 ---
 
-### Exercício 4 🟡
+### Exercício 3 🟡
 
-Escreva uma função `void insert(float v[], int n, float valor, int pos)` que faça a inserção de `valor` na posição `pos` do vetor `v`, deslocando os demais elementos.
+> **Enunciado:** 
+> Escreva uma função `void insert(float v[], int n, float valor, int pos)` que faça a inserção de `valor` na posição `pos` do vetor `v`, deslocando os demais elementos.
 
 <details>
-<summary>Ver resposta</summary>
+<summary>💡 Clique aqui para ver a solução</summary>
 
 ⚠️ Assumimos que o vetor `v` já tem espaço alocado para `n+1` elementos (afinal, vamos inserir um a mais) — quem chama a função é responsável por garantir isso.
 
@@ -560,12 +561,13 @@ void insert (float v[], int n, float valor, int pos)
 
 ---
 
-### Exercício 5 🟢
+### Exercício 4 🟢
 
-Faça uma função `ordem(int v, int n)` que ordene crescentemente os elementos de um vetor `v` de `n` elementos inteiros.
+> **Enunciado:** 
+> Faça uma função `ordem(int v, int n)` que ordene crescentemente os elementos de um vetor `v` de `n` elementos inteiros.
 
 <details>
-<summary>Ver resposta</summary>
+<summary>💡 Clique aqui para ver a solução</summary>
 
 ⚠️ O protótipo do slide tem uma pequena imprecisão de digitação (`int v` ao invés de `int v[]`) — o correto, para receber um vetor, é `void ordem(int v[], int n)`.
 
@@ -594,14 +596,15 @@ A cada passagem pelo vetor, o maior elemento "borbulha" até sua posição final
 
 ---
 
-### Exercício 6 🔴
+### Exercício 5 🔴
 
-Escreva uma função `int merge(float r[], float s[], float v[], int n, int m)` que receba um vetor `r` de `n` elementos e outro vetor `s` de `m` elementos e construa um vetor `v` com os elementos de `r` e `s`, ordenado e não duplicado. A função deve retornar o tamanho do vetor `v` construído.
+> **Enunciado:** 
+> Escreva uma função `int merge(float r[], float s[], float v[], int n, int m)` que receba um vetor `r` de `n` elementos e outro vetor `s` de `m` elementos e construa um vetor `v` com os elementos de `r` e `s`, ordenado e não duplicado. A função deve retornar o tamanho do vetor `v` construído.
 
-> Sugestão: Utilize as funções dos exercícios 4 e 5.
+ Sugestão: Utilize as funções dos exercícios 3 e 4.
 
 <details>
-<summary>Ver resposta</summary>
+<summary>💡 Clique aqui para ver a solução</summary>
 
 Vamos reaproveitar a ideia da **inserção ordenada**: para cada elemento de `r` e `s`, achamos a posição correta dele no vetor `v` (já ordenado até o momento) e usamos a função `insert` do Exercício 4 para colocá-lo lá — mas só se ele ainda não estiver presente, o que garante que não haverá duplicados.
 
@@ -644,12 +647,13 @@ int merge (float r[], float s[], float v[], int n, int m)
 
 ---
 
-### Exercício 7 🔴
+### Exercício 6 🔴
 
-A função do exercício 6 pode ser entendida como uma função que retorna a **união** entre dois conjuntos. Escreva uma função `int intersec(float r[], float s[], float v[], int n, int m)` que construa um vetor `v` com a **interseção** entre `r` e `s`, ordenados. A função deve retornar o tamanho do vetor `v` construído.
+> **Enunciado:** 
+> A função do exercício 6 pode ser entendida como uma função que retorna a **união** entre dois conjuntos. Escreva uma função `int intersec(float r[], float s[], float v[], int n, int m)` que construa um vetor `v` com a **interseção** entre `r` e `s`, ordenados. A função deve retornar o tamanho do vetor `v` construído.
 
 <details>
-<summary>Ver resposta</summary>
+<summary>💡 Clique aqui para ver a solução</summary>
 
 A lógica muda: agora só entram em `v` os elementos que aparecem **em ambos** os vetores `r` e `s`. Continuamos usando `insert` (Exercício 4) para manter `v` ordenado e sem duplicados.
 
@@ -692,9 +696,10 @@ int intersec (float r[], float s[], float v[], int n, int m)
 
 ---
 
-### Exercício 8 🟢
+### Exercício 7 🟢
 
-Escreva uma função `void desordem(int v, int n)` que desordene os elementos de um vetor `v` (não necessariamente ordenado) de `n` elementos inteiros.
+> **Enunciado:** 
+>Escreva uma função `void desordem(int v, int n)` que desordene os elementos de um vetor `v` (não necessariamente ordenado) de `n` elementos inteiros.
 
 > Sugestão: use o seguinte algoritmo:
 > ```
@@ -708,7 +713,7 @@ Escreva uma função `void desordem(int v, int n)` que desordene os elementos de
 > b) Utilize a função `rand()` para obter um número aleatório.
 
 <details>
-<summary>Ver resposta</summary>
+<summary>💡 Clique aqui para ver a solução</summary>
 
 ⚠️ Assim como no Exercício 5, o protótipo correto é `void desordem(int v[], int n)`.
 
@@ -737,14 +742,15 @@ void desordem (int v[], int n)
 
 ---
 
-### Exercício 9 🟡
+### Exercício 8 🟡
 
-Escreva uma função `int find(char v[], char t[], int m, int n)` que receba um vetor `v` de `m` elementos e um vetor `t` de `n` elementos (`n < m`). Esta função deve verificar a ocorrência do padrão `t` em `v` ou não. Se houver, deve retornar a posição inicial da primeira ocorrência. Por exemplo: se `v = {As bananas do Panamá são bacanas}` e `p = {anas}` deve retornar `6`. Caso não haja ocorrência, retorne `-1`.
+> **Enunciado:** 
+> Escreva uma função `int find(char v[], char t[], int m, int n)` que receba um vetor `v` de `m` elementos e um vetor `t` de `n` elementos (`n < m`). Esta função deve verificar a ocorrência do padrão `t` em `v` ou não. Se houver, deve retornar a posição inicial da primeira ocorrência. Por exemplo: se `v = {As bananas do Panamá são bacanas}` e `p = {anas}` deve retornar `6`. Caso não haja ocorrência, retorne `-1`.
 
 > Observação: Algoritmos como esses são usados em editores de texto.
 
 <details>
-<summary>Ver resposta</summary>
+<summary>💡 Clique aqui para ver a solução</summary>
 
 Esse é o problema clássico de **busca de padrão em texto** (pattern matching). A versão mais simples (busca ingênua) tenta casar o padrão `t` a partir de cada posição possível de `v`:
 
@@ -772,9 +778,10 @@ Para cada posição inicial `i` em `v`, comparamos caractere a caractere com `t`
 
 ---
 
-### Exercício 10 🟢
+### Exercício 9 🟢
 
-Escreva uma função `void stat(float *vet, int N, float *med, float *dsvpd)` que receba um vetor de números reais `vet`, seu tamanho `N` e calcule a média aritmética `med` e o desvio padrão `dsvpd` destes valores.
+> **Enunciado:** 
+> Escreva uma função `void stat(float *vet, int N, float *med, float *dsvpd)` que receba um vetor de números reais `vet`, seu tamanho `N` e calcule a média aritmética `med` e o desvio padrão `dsvpd` destes valores.
 
 Cálculo do desvio padrão (μ = `med` e vᵢ = cada elemento de `vet`):
 
@@ -783,7 +790,7 @@ dsvpd = √( Σ(vᵢ - μ)² / N )
 ```
 
 <details>
-<summary>Ver resposta</summary>
+<summary>💡 Clique aqui para ver a solução</summary>
 
 Como a função precisa **devolver dois valores** (média e desvio padrão) e em C uma função só retorna um valor diretamente, usamos **ponteiros** para os parâmetros de saída — daí `float *med` e `float *dsvpd`: a função escreve o resultado no endereço que o chamador passou.
 
@@ -813,12 +820,13 @@ void stat (float *vet, int N, float *med, float *dsvpd)
 
 ---
 
-### Exercício 11 🔴
+### Exercício 10 🔴
 
-Escreva um programa que procure em uma matriz elementos que sejam, ao mesmo tempo, o **maior da linha** e o **menor da coluna**. As dimensões da matriz devem ser solicitadas ao usuário e você deve alocar o espaço necessário para armazenar esta matriz.
+> **Enunciado:** 
+> Escreva um programa que procure em uma matriz elementos que sejam, ao mesmo tempo, o **maior da linha** e o **menor da coluna**. As dimensões da matriz devem ser solicitadas ao usuário e você deve alocar o espaço necessário para armazenar esta matriz.
 
 <details>
-<summary>Ver resposta</summary>
+<summary>💡 Clique aqui para ver a solução</summary>
 
 Esse tipo de elemento é conhecido como **ponto de sela** (*saddle point*).
 
