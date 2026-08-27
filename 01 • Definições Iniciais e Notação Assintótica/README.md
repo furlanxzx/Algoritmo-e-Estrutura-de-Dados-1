@@ -299,11 +299,11 @@ Agora que vimos os três algoritmos, vamos comparar o número de comparações d
 
 ---
 
-## Comportamento Assintótico de Funções
+## <mark> 2.9 - Comportamento Assintótico de Funções </mark>
 
 Quando analisamos algoritmos, o tamanho da entrada $n$ (quantidade de dados) determina o nível de dificuldade do problema.
 
-### 💡 Por que focamos em valores GRANDES de $n$?
+### <mark> Por que focamos em valores GRANDES de $n$? </mark>
 * **Para $n$ pequeno (ex: $n = 5$ ou $n = 10$):** Qualquer algoritmo roda em frações de milissegundo, mesmo os mais ineficientes. A escolha do algoritmo não faz diferença prática.
 * **Para $n$ grande (ex: $n = 1.000.000$):** A diferença entre um algoritmo eficiente e um ineficiente pode ser a diferença entre rodar em **1 segundo** ou demorar **3 dias**.
 
@@ -311,18 +311,18 @@ Quando analisamos algoritmos, o tamanho da entrada $n$ (quantidade de dados) det
 
 ---
 
-## 📊 Dominação Assintótica e Notação $O$
+## <mark> 3 - Dominação Assintótica e Notação $O$ </mark>
 
 Para comparar algoritmos sem nos preocuparmos com detalhes irrelevantes de hardware, usamos a **Dominação Assintótica**.
 
-### 1. Definição Formal
+## <mark> 3.1 - Definição Formal </mark>
 Dizemos que uma função $f(n)$ **domina assintoticamente** $g(n)$ se, para valores grandes de $n$, a função $c \cdot f(n)$ fica sempre acima de $g(n)$.
 
 $$\text{Existe uma constante } c > 0 \text{ e um ponto inicial } m \text{ tais que: } |g(n)| \le c \cdot |f(n)| \quad \forall n \ge m$$
 
 ---
 
-### 2. A Notação Big-O: $g(n) = O(f(n))$
+## <mark> 3.2 - A Notação Big-O: $g(n) = O(f(n))$ </mark>
 Lê-se: *"g(n) é da ordem de no máximo f(n)"*.
 
 A Notação $O$ estabelece um **teto máximo** (limite superior) para o tempo de execução. Ela garante que o algoritmo **nunca será pior** do que aquela taxa de crescimento.
@@ -331,7 +331,7 @@ A Notação $O$ estabelece um **teto máximo** (limite superior) para o tempo de
 
 ---
 
-##  Regras Práticas para Simplificar a Notação $O$
+##  <mark> 3.3 - Regras Práticas para Simplificar a Notação $O$ </mark>
 
 Para quem está aprendendo, a regra de ouro para encontrar o Big-O de qualquer expressão matemática é:
 1. **Ignore constantes multiplicativas** (ex: $3n \rightarrow n$).
@@ -351,7 +351,7 @@ Para quem está aprendendo, a regra de ouro para encontrar o Big-O de qualquer e
 
 ---
 
-##  Logaritmos na Notação $O$
+##  <mark> 3.4 - Logaritmos na Notação $O$ </mark>
 
 Na Notação $O$, a base do logaritmo **não importa**: $\log_2 n$, $\log_5 n$ e $\log_{10} n$ pertencem todos à mesma classe $O(\log n)$.
 
@@ -365,7 +365,7 @@ Como $\log_b c$ é apenas um **número constante**, ele é ignorado na análise 
 
 ---
 
-## ➕ Operações Regras com a Notação $O$
+## <mark> 3.5 - Operações Regras com a Notação $O$ </mark>
 
 Quando um programa possui vários blocos de código executados em sequência, o tempo total é a soma do tempo de cada bloco.
 
@@ -395,7 +395,7 @@ $$T(n) = O(\max(n, n^2, n \log n)) = O(n^2)$$
 
 ---
 
-##  <mark> 3 - Comportamento Assintótico e Constantes </mark>
+##  <mark> 3.6 - Comportamento Assintótico e Constantes </mark>
 
 O **comportamento assintótico** analisa o desempenho e o crescimento de um algoritmo conforme o volume de dados tende ao infinito ($n \to \infty$), desconsiderando constantes de proporcionalidade.
 
@@ -406,7 +406,7 @@ O **comportamento assintótico** analisa o desempenho e o crescimento de um algo
 
 ---
 
-##  Ponto de Virada Prático: $100n$ vs $2n^2$
+## <mark> 3.7 - Ponto de Virada Prático: $100n$ vs $2n^2$ </mark>
 
 Nem sempre o algoritmo de menor Big-O é o mais rápido para **qualquer** cenário. As constantes de proporcionalidade podem inverter o resultado quando a entrada de dados é reduzida.
 
@@ -415,7 +415,7 @@ Nem sempre o algoritmo de menor Big-O é o mais rápido para **qualquer** cenár
 
 ---
 
-## 📊 Classes de Complexidade
+## <mark> 3.8 - Classes de Complexidade </mark>
 
 | Classe | Nome | Comportamento ao Dobrar $n$ | Aplicação Típica |
 | :--- | :--- | :--- | :--- |
@@ -430,7 +430,7 @@ Nem sempre o algoritmo de menor Big-O é o mais rápido para **qualquer** cenár
 
 ---
 
-##  Hierarquia Definitiva de Eficiência
+##  <mark> 3.9 - Hierarquia Definitiva de Eficiência </mark>
 
 A regra para classificar o desempenho da melhor (mais rápida) para a pior (mais lenta) classe é:
 
