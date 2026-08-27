@@ -1,12 +1,18 @@
-# Árvore Binária de Busca (ABB) — Remoção
+<h1 align="center">ABB - Remoção</h1>
 
-> Material de estudos de Algoritmos e Estruturas de Dados I, baseado nas aulas da Prof. Regina Célia Coelho.
-
-## Índice
-
-- [Remoção](#remoção)
-- [Os Quatro Casos de Remoção](#os-quatro-casos-de-remoção)
-- [Exercícios](#exercícios)
+<p align="center">
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/19%20%E2%80%A2%20ABB%20-%20Inser%C3%A7%C3%A3o/README.md">
+    <img src="https://img.shields.io/badge/⬅️_Voltar-ABB_Inserção-8b5cf6?style=plastic" alt="Voltar">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="../README.md">
+    <img src="https://img.shields.io/badge/🏠_Inicio-Menu-06b6d4?style=plastic" alt="Menu">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/01%20%E2%80%A2%20Defini%C3%A7%C3%B5es%20Iniciais%20e%20Nota%C3%A7%C3%A3o%20Assint%C3%B3tica/README.md">
+    <img src="https://img.shields.io/badge/Avancar-Definições_Iniciais_➡️-8b5cf6?style=plastic" alt="Avançar">
+  </a>
+</p>
 
 ---
 
@@ -265,3 +271,19 @@ PABB removeSubArvore (PABB a, int x)
 ```
 
 </details>
+
+---
+
+<p align="center">
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/19%20%E2%80%A2%20ABB%20-%20Inser%C3%A7%C3%A3o/README.md">
+    <img src="https://img.shields.io/badge/⬅️_Voltar-ABB_Inserção-8b5cf6?style=plastic" alt="Voltar">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="../README.md">
+    <img src="https://img.shields.io/badge/🏠_Inicio-Menu-06b6d4?style=plastic" alt="Menu">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/01%20%E2%80%A2%20Defini%C3%A7%C3%B5es%20Iniciais%20e%20Nota%C3%A7%C3%A3o%20Assint%C3%B3tica/README.md">
+    <img src="https://img.shields.io/badge/Avancar-Definições_Iniciais_➡️-8b5cf6?style=plastic" alt="Avançar">
+  </a>
+</p>
