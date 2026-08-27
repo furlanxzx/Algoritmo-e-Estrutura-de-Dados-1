@@ -16,7 +16,7 @@
 
 ---
 
-## Definição de Grafo
+## <mark> 1 - Definição de Grafo </mark>
 
 Um **grafo** é uma estrutura de dados definida por um par:
 
@@ -33,7 +33,7 @@ Grafos são usados para modelar **relações** entre objetos: cidades e estradas
 
 ---
 
-## Grafo Não Direcionado
+## <mark> 2 - Grafo Não Direcionado </mark>
 
 Em um grafo **não direcionado**, as arestas **não têm sentido** — uma aresta entre os vértices `u` e `v` representa uma conexão "de mão dupla".
 
@@ -51,7 +51,7 @@ Aqui, `E = {(A,B), (A,C), (B,D), (C,D)}`. Dizer que existe a aresta `(A,B)` é o
 
 ---
 
-## Grafo Direcionado (Dígrafo)
+## <mark> 3 - Grafo Direcionado (Dígrafo) </mark>
 
 Em um grafo **direcionado** (ou **dígrafo**), cada aresta tem um **sentido** — ela sai de um vértice de **origem** e chega em um vértice de **destino**.
 
@@ -70,7 +70,7 @@ Aqui, `E = {(A,B), (D,C), (C,A), (B,D)}`. A existência da aresta `(A,B)` **não
 
 ---
 
-## Vértices Adjacentes
+## <mark> 4 - Vértices Adjacentes
 
 Dois vértices são **adjacentes** (ou **vizinhos**) quando existe uma aresta que os conecta diretamente.
 
@@ -81,7 +81,7 @@ No exemplo do grafo não direcionado acima, `A` e `B` são adjacentes, mas `A` e
 
 ---
 
-## Grau de um Vértice
+## <mark> 5 - Grau de um Vértice </mark>
 
 O **grau** de um vértice é o número de arestas que **incidem** sobre ele (ou seja, o número de conexões que ele possui).
 
@@ -91,7 +91,7 @@ O grau de um vértice `v`, denotado `grau(v)` ou `d(v)`, é simplesmente a quant
 
 No exemplo do grafo não direcionado acima: `grau(A) = 2`, `grau(B) = 2`, `grau(C) = 2`, `grau(D) = 2`.
 
-> 📌 **Propriedade importante:** a soma dos graus de todos os vértices de um grafo é sempre **igual ao dobro do número de arestas** (`Σ grau(v) = 2|E|`), já que cada aresta contribui com `+1` de grau para **dois** vértices.
+>  **Propriedade importante:** a soma dos graus de todos os vértices de um grafo é sempre **igual ao dobro do número de arestas** (`Σ grau(v) = 2|E|`), já que cada aresta contribui com `+1` de grau para **dois** vértices.
 
 ### Em grafos direcionados
 
@@ -106,17 +106,17 @@ No exemplo do dígrafo acima: `grau⁺(A) = 1` (só a aresta `A→B`), `grau⁻(
 
 ---
 
-## Ordem de um Grafo
+## <mark> 6 - Ordem de um Grafo </mark>
 
 A **ordem** de um grafo é o número de **vértices** que ele possui, ou seja, `|V|`.
 
-> 📌 Não confunda com o **tamanho** do grafo, que é o número de **arestas** (`|E|`). No exemplo do grafo não direcionado acima, a ordem é `4` (vértices `A, B, C, D`) e o tamanho é `4` (arestas).
+>  Não confunda com o **tamanho** do grafo, que é o número de **arestas** (`|E|`). No exemplo do grafo não direcionado acima, a ordem é `4` (vértices `A, B, C, D`) e o tamanho é `4` (arestas).
 
 ---
 
-## Passeio
+## <mark> 7 - Passeio
 
-Um **passeio** (*walk*, em inglês) é uma sequência **alternada** de vértices e arestas:
+Um **passeio** é uma sequência **alternada** de vértices e arestas:
 
 ```
 v₀, e₁, v₁, e₂, v₂, ..., eₙ, vₙ
@@ -130,7 +130,7 @@ Num passeio, **tanto vértices quanto arestas podem se repetir** — não há ne
 
 ---
 
-## Comprimento de um Passeio
+## <mark> 8 - Comprimento de um Passeio </mark>
 
 O **comprimento** de um passeio é o **número de arestas** percorridas nele (não o número de vértices!).
 
@@ -138,7 +138,7 @@ No exemplo acima, o passeio `A, B, D, C, A, B` tem comprimento **5** (são 5 are
 
 ---
 
-## Caminho
+## <mark> 9 - Caminho </mark>
 
 Um **caminho** (*path*, em inglês) é um **passeio em que nenhum vértice se repete** (e, como consequência, nenhuma aresta se repete também).
 
@@ -148,7 +148,7 @@ Ou seja, todo caminho é um passeio, mas nem todo passeio é um caminho — o ca
 
 ---
 
-## Ciclo
+## <mark> 10 - Ciclo </mark>
 
 Um **ciclo** é um **caminho fechado**: um passeio onde o vértice inicial é igual ao vértice final (`v₀ = vₙ`), e nenhum outro vértice se repete ao longo do percurso (nem nenhuma aresta).
 
@@ -158,14 +158,14 @@ Um grafo que **não** contém nenhum ciclo é chamado de **acíclico** — conce
 
 ---
 
-## Árvore
+## <mark> 11 - Árvore </mark>
 
 Uma **árvore**, no contexto de grafos, é um grafo não direcionado que é, ao mesmo tempo:
 
-- ✔️ **conexo** (existe um caminho entre qualquer par de vértices); e
-- ✔️ **acíclico** (não contém nenhum ciclo).
+-  **conexo** (existe um caminho entre qualquer par de vértices); e
+-  **acíclico** (não contém nenhum ciclo).
 
-> 📌 **Propriedade importante:** uma árvore com `n` vértices possui **exatamente `n - 1` arestas** — nem mais, nem menos. Se tivesse menos arestas, não seria possível conectar todos os vértices; se tivesse mais, obrigatoriamente haveria um ciclo.
+>  **Propriedade importante:** uma árvore com `n` vértices possui **exatamente `n - 1` arestas** — nem mais, nem menos. Se tivesse menos arestas, não seria possível conectar todos os vértices; se tivesse mais, obrigatoriamente haveria um ciclo.
 
 **Exemplo:**
 
@@ -181,14 +181,14 @@ Este é um exemplo de árvore: 4 vértices, 3 arestas, conexo e sem ciclos. Esse
 
 ---
 
-## Floresta
+## <mark> 12 - Floresta </mark> 
 
 Uma **floresta** é um grafo **acíclico**, mas **não necessariamente conexo** — ou seja, é um conjunto de uma ou mais **árvores disjuntas** (sem nenhuma aresta conectando uma árvore à outra).
 
 Em outras palavras:
 
-- ✔️ toda **árvore** é uma floresta (uma floresta com um único componente conexo);
-- ✔️ mas nem toda **floresta** é uma árvore (só é árvore se tiver exatamente um componente conexo).
+-  toda **árvore** é uma floresta (uma floresta com um único componente conexo);
+-  mas nem toda **floresta** é uma árvore (só é árvore se tiver exatamente um componente conexo).
 
 **Exemplo:**
 
@@ -202,7 +202,7 @@ Em outras palavras:
 
 Esse é um exemplo de floresta com **3 componentes** (3 árvores disjuntas): a árvore `{A,B,C}`, a árvore `{E,F}` e a árvore `{G,H}`. Como não há nenhuma aresta conectando esses grupos entre si, o grafo inteiro não é conexo — logo, não é uma árvore, mas é uma floresta.
 
-### Relação entre Árvore e Floresta
+### <mark> 13 - Relação entre Árvore e Floresta </mark>
 
 Uma forma bem intuitiva de enxergar essa relação: se pegarmos uma **árvore** e **removermos qualquer uma de suas arestas**, ela deixa de ser conexa e se **divide em duas árvores menores** — ou seja, o resultado é uma **floresta com 2 componentes**.
 
@@ -210,7 +210,7 @@ De modo geral, remover `k` arestas de uma árvore resulta em uma floresta com `k
 
 ---
 
-## Matriz de Adjacência
+## <mark> 14 - Matriz de Adjacência </mark>
 
 A **matriz de adjacência** é uma das duas formas mais comuns de representar um grafo em um programa.
 
@@ -246,7 +246,7 @@ int matrizAdj[N_VERTICES][N_VERTICES];
 
 ---
 
-## Lista de Adjacência
+## <mark> 15 - Lista de Adjacência </mark>
 
 A **lista de adjacência** é a outra forma clássica de representar um grafo: para cada vértice, mantemos uma **lista** (geralmente uma lista encadeada) com todos os vértices que são adjacentes a ele.
 
