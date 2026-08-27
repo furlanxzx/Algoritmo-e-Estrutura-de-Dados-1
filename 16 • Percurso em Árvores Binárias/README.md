@@ -16,7 +16,7 @@
 
 ---
 
-## 1. Introdução
+## <mark> 1 - Introdução </mark>
 
 No módulo anterior, implementamos a função `imprime` para uma árvore binária:
 
@@ -30,26 +30,26 @@ void imprime(PArv a) {
 }
 ```
 
-> ➤ A programação da operação `imprime`, vista anteriormente, seguiu a ordem empregada na definição de árvore binária para decidir a ordem em que as três ações seriam executadas.
+> -> A programação da operação `imprime`, vista anteriormente, seguiu a ordem empregada na definição de árvore binária para decidir a ordem em que as três ações seriam executadas.
 >
-> ➤ Entretanto, dependendo da aplicação em vista, esta ordem poderia não ser a preferível, podendo ser utilizada uma ordem diferente desta.
+> -> Entretanto, dependendo da aplicação em vista, esta ordem poderia não ser a preferível, podendo ser utilizada uma ordem diferente desta.
 
 Ou seja: não existe só **um jeito certo** de percorrer uma árvore. A ordem que escolhemos (tratar a raiz primeiro? por último? no meio?) muda dependendo do que queremos fazer com a árvore.
 
-> ➤ Donald E. Knuth popularizou três ordens de percurso em árvores binárias:
-> - ✓ **pré-ordem** ou prefixa,
-> - ✓ **simétrica** ou infixa ou em-ordem e
-> - ✓ **pós-ordem** ou posfixa.
+> -> Donald E. Knuth popularizou três ordens de percurso em árvores binárias:
+> -  **pré-ordem** ou prefixa,
+> -  **simétrica** ou infixa ou em-ordem e
+> -  **pós-ordem** ou posfixa.
 
 ---
 
-## 2. As três ordens de percurso
+## <mark> 2 - As três ordens de percurso </mark>
 
-> ➤ Muitas operações em árvores binárias envolvem o percurso de todas as sub-árvores, executando alguma ação de tratamento em cada nó, de forma que é comum percorrer uma árvore em uma das seguintes ordens:
+> -> Muitas operações em árvores binárias envolvem o percurso de todas as sub-árvores, executando alguma ação de tratamento em cada nó, de forma que é comum percorrer uma árvore em uma das seguintes ordens:
 >
-> - ✓ **pré-ordem ou prefixa**: trata *raiz*, percorre *sae*, percorre *sad*;
-> - ✓ **em-ordem, ordem simétrica ou infixa**: percorre *sae*, trata *raiz*, percorre *sad*;
-> - ✓ **pós-ordem ou posfixa**: percorre *sae*, percorre *sad*, trata *raiz*.
+> -  **pré-ordem ou prefixa**: trata *raiz*, percorre *sae*, percorre *sad*;
+> -  **em-ordem, ordem simétrica ou infixa**: percorre *sae*, trata *raiz*, percorre *sad*;
+> -  **pós-ordem ou posfixa**: percorre *sae*, percorre *sad*, trata *raiz*.
 
 (*sae* = sub-árvore esquerda, *sad* = sub-árvore direita)
 
@@ -96,11 +96,11 @@ void posordem(PArv a) {
 }
 ```
 
-> 🧠 Repare que as três funções são **idênticas em estrutura** — a única diferença é a posição da linha `printf(...)` em relação às duas chamadas recursivas. Isso mostra bem como a ordem de percurso é só uma questão de "quando" tratar o nó atual, não uma lógica totalmente diferente.
+>  Repare que as três funções são **idênticas em estrutura** — a única diferença é a posição da linha `printf(...)` em relação às duas chamadas recursivas. Isso mostra bem como a ordem de percurso é só uma questão de "quando" tratar o nó atual, não uma lógica totalmente diferente.
 
 ---
 
-## 3. Exemplo comentado
+## <mark> 3 - Exemplo comentado </mark>
 
 Vamos percorrer a árvore abaixo nas três ordens, para fixar bem o raciocínio:
 
@@ -142,7 +142,7 @@ Aqui, a raiz só é tratada **depois** de esgotarmos completamente as duas sub-�
 
 ---
 
-## 4. Outro exemplo rápido
+## <mark> 4. Outro exemplo rápido </mark>
 
 Considerando a árvore abaixo:
 
@@ -164,13 +164,13 @@ Esse exemplo é mais direto porque **todos os nós internos têm exatamente 2 fi
 
 ---
 
-## 5. Exercício
+## 📝 Exercícios Práticos
 
 > Dada as seguintes árvores, faça para cada uma delas a visitação dos nós utilizando a ordem prefixa, infixa e posfixa.
 
 <br>
 
-### Árvore (a) 🟢 (fácil)
+### Árvore (a) 🟢 
 
 ```
               A
@@ -207,7 +207,7 @@ Esgota H, I → trata D → trata E → trata C → esgota F, G → trata B → 
 
 <br>
 
-### Árvore (b) 🟡 (médio)
+### Árvore (b) 🟡 
 
 Essa árvore tem alguns nós com **apenas um filho** (E tem só um filho, K, e K também tem só um filho, M) — preste atenção redobrada nesses casos, já que aqui não tem "o outro lado" pra percorrer:
 
@@ -226,7 +226,7 @@ Essa árvore tem alguns nós com **apenas um filho** (E tem só um filho, K, e K
 <details>
 <summary>💡 Ver resolução</summary>
 
-> ⚠️ Nesta árvore, assumimos que os filhos únicos (o `K` de `E`, e o `M` de `K`) estão posicionados à **esquerda**. Se no seu slide original a posição for diferente, o raciocínio abaixo continua o mesmo — só muda a ordem local desses nós específicos.
+> ⚠️ Nesta árvore, assumimos que os filhos únicos (o `K` de `E`, e o `M` de `K`) estão posicionados à **esquerda**. 
 
 **Prefixa (raiz, esquerda, direita):**
 
@@ -250,9 +250,7 @@ Esgota H, I → trata D → esgota (M, então) K → trata E → trata C → esg
 
 <br>
 
-### Árvore (c) 🔴 (difícil)
-
-Essa é a mais desafiadora: tem mais níveis, e também nós com um único filho (`F` é o único filho de `B`, e `K` é o único filho de `J`):
+### Árvore (c) 🔴 
 
 ```
               A
@@ -271,7 +269,7 @@ Essa é a mais desafiadora: tem mais níveis, e também nós com um único filho
 <details>
 <summary>💡 Ver resolução</summary>
 
-> ⚠️ Assumimos que `F` é o filho **esquerdo** de `B` (único filho) e que `K` é o filho **esquerdo** de `J` (único filho). Se a posição no seu slide original for diferente, aplique o mesmo raciocínio a partir da estrutura correta.
+> ⚠️ Assumimos que `F` é o filho **esquerdo** de `B` (único filho) e que `K` é o filho **esquerdo** de `J` (único filho). 
 
 **Prefixa (raiz, esquerda, direita):**
 
@@ -283,7 +281,7 @@ Trata A → entra em C → trata C → trata D, H, I → trata E → volta pra A
 
 Esgota esquerda de D (H) → trata D → trata I → trata C → trata E → trata A → esgota esquerda de B (toda a subárvore de F) → dentro de F: esgota esquerda (G) → trata F → esgota direita (subárvore de J: esgota esquerda que é a subárvore de K: esgota L, trata K, trata M, depois trata J) → trata B (B não tem filho direito).
 
-Vamos com calma nessa parte mais funda: dentro da subárvore de **K**, K tem filhos L (esquerda) e M (direita), então a ordem infixa de K é: `L, K, M`. Como K é filho único (esquerdo) de J, e J não tem filho direito, a ordem infixa de J é: `L, K, M, J`. Como J é filho direito de F, e F já tratou sua esquerda (G) e a si mesmo, a ordem infixa de F é: `G, F, L, K, M, J`.
+dentro da subárvore de **K**, K tem filhos L (esquerda) e M (direita), então a ordem infixa de K é: `L, K, M`. Como K é filho único (esquerdo) de J, e J não tem filho direito, a ordem infixa de J é: `L, K, M, J`. Como J é filho direito de F, e F já tratou sua esquerda (G) e a si mesmo, a ordem infixa de F é: `G, F, L, K, M, J`.
 
 > **Infixa: H, D, I, C, E, A, G, F, L, K, M, J, B**
 
@@ -297,7 +295,7 @@ Esgota H, I → trata D → trata E → trata C → dentro de B: esgota toda a s
 
 ---
 
-## 6. Resumo rápido
+## <mark> 6 - Resumo rápido </mark>
 
 | Ordem | Regra | Quando é mais útil |
 |---|---|---|
@@ -305,7 +303,7 @@ Esgota H, I → trata D → trata E → trata C → dentro de B: esgota toda a s
 | Em-ordem (infixa) | esquerda → raiz → direita | Em árvores binárias de busca, produz os elementos **em ordem crescente** |
 | Pós-ordem (posfixa) | esquerda → direita → raiz | Liberar memória da árvore (como fizemos na função `libera`); avaliar expressões matemáticas |
 
-> 🧭 **Dica de prova:** para não errar a ordem na hora de resolver um exercício desses, sempre desenhe a árvore primeiro (se ainda não estiver desenhada) e vá "contornando" o desenho com o dedo, seguindo a regrinha da ordem escolhida — é exatamente assim que a Regina desenha aquelas linhas pontilhadas vermelhas contornando a árvore nos slides. Isso evita esquecer algum nó ou trocar a ordem por engano.
+>  **Dica de prova:** para não errar a ordem na hora de resolver um exercício desses, sempre desenhe a árvore primeiro (se ainda não estiver desenhada) e vá "contornando" o desenho com o dedo, seguindo a regra da ordem escolhida. Isso evita esquecer algum nó ou trocar a ordem por engano.
 
 ---
 
