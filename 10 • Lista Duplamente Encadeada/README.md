@@ -1,4 +1,20 @@
-## ↔️ Listas Duplamente Encadeadas
+<h1 align="center">Lista Duplamente Encadeada</h1>
+
+<p align="center">
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/09%20%E2%80%A2%20Lista%20Circular/README.md">
+    <img src="https://img.shields.io/badge/⬅️_Voltar-Lista_Circular-8b5cf6?style=plastic" alt="Voltar">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="../README.md">
+    <img src="https://img.shields.io/badge/🏠_Inicio-Menu-06b6d4?style=plastic" alt="Menu">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/11%20%E2%80%A2%20Lista%20Duplamente%20Circular/README.md">
+    <img src="https://img.shields.io/badge/Avancar-Lista_Duplamente_Circular_➡️-8b5cf6?style=plastic" alt="Avançar">
+  </a>
+</p>
+
+---
 
 ### Introdução e Motivação
 *   **A limitação da lista simples:** A estrutura vista anteriormente forma um encadeamento simples. Como cada elemento armazena apenas um ponteiro para o próximo, não conseguimos percorrer a lista eficientemente de trás para frente (do final para o início).
@@ -129,3 +145,19 @@ PLista2 remove_todos_y(PLista2 l, int y) {
 }
 ```
 </details>
+
+---
+
+<p align="center">
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/09%20%E2%80%A2%20Lista%20Circular/README.md">
+    <img src="https://img.shields.io/badge/⬅️_Voltar-Lista_Circular-8b5cf6?style=plastic" alt="Voltar">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="../README.md">
+    <img src="https://img.shields.io/badge/🏠_Inicio-Menu-06b6d4?style=plastic" alt="Menu">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/11%20%E2%80%A2%20Lista%20Duplamente%20Circular/README.md">
+    <img src="https://img.shields.io/badge/Avancar-Lista_Duplamente_Circular_➡️-8b5cf6?style=plastic" alt="Avançar">
+  </a>
+</p>
