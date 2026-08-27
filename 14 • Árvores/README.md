@@ -46,17 +46,16 @@ De um modo mais formal, uma árvore é um **conjunto finito de um ou mais nós (
 
 >  Repare que essa definição é **recursiva**: uma árvore é feita de nós que, por sua vez, são raízes de outras árvores menores (sub-árvores). É exatamente por isso que muitos algoritmos sobre árvores são naturalmente escritos de forma recursiva — a própria estrutura de dados "pede" esse tipo de solução.
 
-Vamos usar esta árvore como exemplo ao longo de todo o material:
+Vamos usar esta árvore como exemplo ao longo de todo o material. Ela tem a seguinte estrutura:
 
-```
-                    A
-          ┌─────────┼─────────┐
-          B          C          D
-       ┌──┴──┐       │       ┌──┼──┐
-       E     F        G       H  I   J
-       │                      │
-       K                      L
-```
+- `A` é a raiz, e é pai de `B`, `C` e `D`;
+- `B` é pai de `E` e `F`;
+- `C` é pai de `G`;
+- `D` é pai de `H`, `I` e `J`;
+- `E` é pai de `K`;
+- `H` é pai de `L`.
+
+Você vai ver essa mesma árvore reaparecer nas próximas seções, escrita de outras formas.
 
 ---
 
@@ -66,17 +65,7 @@ A mesma árvore pode ser desenhada/escrita de formas diferentes. Isso é útil p
 
 ### <mark> 3.1 Grafo (a forma mais visual) </mark>
 
-```
-        A
-      ╱ │ ╲
-     B  C   D
-    ╱╲  │  ╱│╲
-   E  F G  H I J
-   │        │
-   K        L
-```
-
-Essa é a representação mais intuitiva: círculos são os nós, e setas/linhas indicam a relação de "pai para filho".
+Essa é a representação mais intuitiva, e provavelmente a primeira que vem à cabeça quando você pensa em "árvore": círculos representando os nós, ligados por linhas que indicam a relação de "pai para filho", com a raiz desenhada no topo e os galhos se abrindo para baixo.
 
 ### <mark> 3.2 Parênteses aninhados </mark>
 
@@ -123,7 +112,7 @@ A
 
 ### <mark> Aresta </mark>
 
-> ➤ Dada uma árvore qualquer, a linha que liga dois nós da árvore denomina-se **aresta**.
+> -> Dada uma árvore qualquer, a linha que liga dois nós da árvore denomina-se **aresta**.
 
 ### <mark> Caminho </mark>
 
@@ -139,18 +128,7 @@ A
 >
 >  Dois nós que são nós filhos do mesmo nó pai são denominados **nós irmãos**.
 
-Usando nossa árvore de exemplo:
-
-```
-      A
-      │
-      D   ◄── D é filho de A (e A é pai de D)
-    ╱ │ ╲
-   H  I  J   ◄── H, I e J são irmãos entre si (todos filhos de D)
-   │
-   L        ◄── L é descendente de A (o caminho A→D→H→L tem mais de uma aresta,
-                então A é ancestral de L, mas não é seu "pai" diretamente)
-```
+Usando nossa árvore de exemplo: `D` é filho de `A` (e, portanto, `A` é pai de `D`). Já `H`, `I` e `J` são irmãos entre si, pois todos são filhos de `D`. E `L` é descendente de `A`, mas não é seu filho direto — o caminho entre eles (`A → D → H → L`) passa por mais de uma aresta, então `A` é apenas ancestral de `L`, não seu pai.
 
 > ⚠️ **Cuidado com a diferença:** "pai/filho" é uma relação **direta** (uma única aresta de distância). "Ancestral/descendente" é uma relação **mais ampla**, que vale para qualquer distância no caminho — todo pai é ancestral, mas nem todo ancestral é pai.
 
@@ -168,20 +146,7 @@ A raiz é o único nó que **não tem pai** — é o topo da hierarquia. No noss
 >
 > -> Consequentemente, nó com descendentes (filhos) é denominado nó **não-folha** ou nó **não-terminal** da árvore (nós com grau maior que zero).
 
-No nosso exemplo, os nós em amarelo são as **folhas**: `K, F, G, L, I, J`. Os nós que sobraram (`A, B, C, D, E, H`) são **não-folha**, porque todos têm pelo menos um filho.
-
-```
-                    A
-          ┌─────────┼─────────┐
-          B          C          D
-       ┌──┴──┐       │       ┌──┼──┐
-       E    (F)      (G)      H (I)(J)
-       │
-      (K)
-                                │
-                               (L)
-```
-*(nós entre parênteses = folhas)*
+No nosso exemplo, os nós `K, F, G, L, I, J` são as **folhas**. Os nós que sobraram (`A, B, C, D, E, H`) são **não-folha**, porque todos têm pelo menos um filho.
 
 ### <mark> Grau de um nó </mark>
 
@@ -200,21 +165,18 @@ No nosso exemplo, os nós em amarelo são as **folhas**: `K, F, G, L, I, J`. Os 
 
 > -> **Nível** de um nó é o número de nós existentes no caminho entre a raiz e o próprio nó.
 >
-> ✓ Por definição, dizemos que a raiz de uma árvore encontra-se no **nível 0** (alguns autores assumem a raiz como nível 1).
+>  Por definição, dizemos que a raiz de uma árvore encontra-se no **nível 0** (alguns autores assumem a raiz como nível 1).
 >
-> ✓ Os filhos da raiz estão no nível 1, os filhos dos filhos da raiz estão no nível 2, e assim sucessivamente.
+>  Os filhos da raiz estão no nível 1, os filhos dos filhos da raiz estão no nível 2, e assim sucessivamente.
 >
-> ✓ Estando um nó no nível `n`, seus filhos estarão no nível `n + 1`.
+>  Estando um nó no nível `n`, seus filhos estarão no nível `n + 1`.
 
-```
-Nível 0:              A
-                 ┌─────┼─────┐
-Nível 1:         B     C     D
-              ┌──┴──┐  │  ┌──┼──┐
-Nível 2:      E     F  G  H  I  J
-              │              │
-Nível 3:      K              L
-```
+Aplicando isso à nossa árvore de exemplo:
+
+- **Nível 0:** `A`
+- **Nível 1:** `B`, `C`, `D`
+- **Nível 2:** `E`, `F`, `G`, `H`, `I`, `J`
+- **Nível 3:** `K`, `L`
 
 > ⚠️ **Atenção:** essa definição (raiz no nível 0) é a convenção usada pela Regina neste material, mas fique de olho, porque **alguns livros/professores começam do nível 1**. O importante é entender a lógica: "quantas arestas eu percorro da raiz até aqui" (nível 0) ou "quantos nós existem no caminho, contando a raiz" (nível 1) — são a mesma ideia, só a contagem inicial muda.
 
@@ -224,7 +186,7 @@ Nível 3:      K              L
 
 No nosso exemplo: `A` e `D` têm grau 3, que é o maior de todos — então a **árvore tem grau 3**.
 
-### Árvore completa
+### <mark> Árvore completa </mark>
 
 > -> Uma árvore de grau **d** é **completa** se:
 >
@@ -251,14 +213,6 @@ No nosso exemplo, o nó mais "fundo" é `K` ou `L`, que estão no nível 3 — p
 >  Se retirarmos a raiz de uma árvore obteremos uma floresta.
 
 Faz sentido: se tirarmos o nó `A` (a raiz) do nosso exemplo, sobram três "pedaços" separados — a sub-árvore com raiz `B`, a sub-árvore com raiz `C` e a sub-árvore com raiz `D`. Como nenhuma delas está mais ligada a um nó em comum, o conjunto das três forma uma **floresta**.
-
-```
-   B         C      D
- ┌─┴─┐       │    ┌─┼─┐
- E   F       G    H I J
- │                │
- K                L
-```
 
 ---
 
@@ -290,7 +244,7 @@ typedef struct SNo {
 
 ---
 
-## </mark> 6 - Resumo rápido </mark>
+## <mark> 6 - Resumo rápido </mark>
 
 | Termo | Significado |
 |---|---|
@@ -310,8 +264,6 @@ typedef struct SNo {
 | Árvore completa | Todo nó tem exatamente `d` filhos (exceto folhas), e todas as folhas estão no mesmo nível |
 | Floresta | Conjunto de árvores separadas — surge, por exemplo, ao remover a raiz de uma árvore |
 
-**Próximos passos:** com essa base teórica pronta, os próximos módulos (árvore genérica, árvore binária, árvore binária de busca...) vão sobre implementação de verdade — como representar os filhos no código, como percorrer a árvore (pré-ordem, em-ordem, pós-ordem, em largura), inserção, remoção, busca, etc. Pode mandar os prints quando estiver pronta!
-
 ---
 
 <p align="center">
@@ -327,4 +279,3 @@ typedef struct SNo {
     <img src="https://img.shields.io/badge/Avancar-Árvores_Binárias_➡️-8b5cf6?style=plastic" alt="Avançar">
   </a>
 </p>
-
