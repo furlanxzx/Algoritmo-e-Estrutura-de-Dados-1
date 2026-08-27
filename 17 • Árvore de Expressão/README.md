@@ -1,6 +1,18 @@
-# Árvores Genéricas
+<h1 align="center">Árvore de Expressão</h1>
 
-> 📚 Material baseado nas aulas da Prof.ª Regina — Algoritmos e Estrutura de Dados
+<p align="center">
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/16%20%E2%80%A2%20Percurso%20em%20%C3%81rvores%20Bin%C3%A1rias/README.md">
+    <img src="https://img.shields.io/badge/⬅️_Voltar-Percurso_em_Árvores_Binárias-8b5cf6?style=plastic" alt="Voltar">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="../README.md">
+    <img src="https://img.shields.io/badge/🏠_Inicio-Menu-06b6d4?style=plastic" alt="Menu">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/18%20%E2%80%A2%20%C3%81rvores%20Gen%C3%A9ricas/README.md">
+    <img src="https://img.shields.io/badge/Avancar-Árvores_Genéricas_➡️-8b5cf6?style=plastic" alt="Avançar">
+  </a>
+</p>
 
 ---
 
@@ -620,3 +632,19 @@ int main() {
 | Padrão recursivo típico | `trata(a); percorre(a->prim); percorre(a->prox);` |
 | Percursos possíveis | Só pré-ordem ou pós-ordem fazem sentido (não existe "em-ordem" com grau variável) |
 | Uso prático | Árvore de diretórios, estrutura organizacional, hierarquias de qualquer tipo (como no Exercício 7) |
+
+---
+
+<p align="center">
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/16%20%E2%80%A2%20Percurso%20em%20%C3%81rvores%20Bin%C3%A1rias/README.md">
+    <img src="https://img.shields.io/badge/⬅️_Voltar-Percurso_em_Árvores_Binárias-8b5cf6?style=plastic" alt="Voltar">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="../README.md">
+    <img src="https://img.shields.io/badge/🏠_Inicio-Menu-06b6d4?style=plastic" alt="Menu">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/18%20%E2%80%A2%20%C3%81rvores%20Gen%C3%A9ricas/README.md">
+    <img src="https://img.shields.io/badge/Avancar-Árvores_Genéricas_➡️-8b5cf6?style=plastic" alt="Avançar">
+  </a>
+</p>
