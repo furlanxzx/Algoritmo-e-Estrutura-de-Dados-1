@@ -24,7 +24,7 @@ Para manipularmos uma lista encadeada, precisamos fazer as funções de: **Inser
 
 ---
 
-### 1. Declaração da Struct
+### <mark> 1 - Declaração da Struct </mark>
 
 Para criarmos a lista, primeiro definimos a estrutura do nó, que conterá a informação (um inteiro, neste caso) e o ponteiro para o próximo elemento.
 
@@ -39,7 +39,7 @@ typedef TLista *PLista;
 
 ---
 
-### 2. Procurando um elemento na lista (Busca)
+### <mark> 2 - Procurando um elemento na lista (Busca) </mark>
 
 Vamos começar pela função de busca. Ela percorre a lista através de um laço `for` até encontrar o valor desejado ou chegar ao final da lista (`NULL`).
 
@@ -54,7 +54,7 @@ PLista busca (PLista l, int v)
 
 ---
 
-### 3. Inserindo na Lista Encadeada (Ordenada)
+### <mark> 3 - Inserindo na Lista Encadeada (Ordenada) </mark>
 
 A função de inserção depende de como se quer inserir cada elemento (no início, fim ou no meio, dependendo da necessidade). Por exemplo, se quisermos montar uma lista ordenada, temos que procurar a posição em que o elemento deve ser inserido.
 
@@ -89,7 +89,7 @@ PLista Insere_ord (PLista l, int dado){
 
 ---
 
-### 4. Retirando da Lista
+### <mark> 4 - Retirando da Lista </mark>
 
 Para retirar, precisamos procurar o elemento e manter um ponteiro para o elemento anterior, pois precisaremos "pular" o nó removido na hora de refazer o encadeamento.
 
@@ -120,13 +120,17 @@ PLista retira (PLista l, int v){
 
 ---
 
-### 📝 Exercício Prático
+## 📝 Exercício Prático
 
-**Nível de Dificuldade:** 🟢 Fácil
+---
+
+## 🟢 **Exercício 1**
+
+> **Enunciado:**
 > Faça a função que imprima toda a lista e a função que libera os espaços alocados.
 
 <details>
-<summary><b>👀 Ver resposta (Código em C)</b></summary>
+<summary><b>💡 Clique aqui para ver a solução</b></summary>
 
 ```c
 /* Função para imprimir toda a lista do início ao fim */
@@ -155,7 +159,7 @@ void libera_lista(PLista l) {
 
 ---
 
-## 🔄 Implementações Recursivas em Listas Encadeadas
+## <mark> 5 - Implementações Recursivas em Listas Encadeadas </mark>
 
 Uma lista encadeada é representada por:
 *   uma lista vazia; ou
@@ -165,7 +169,7 @@ Neste caso, o segundo elemento da lista representa o primeiro elemento da sub-li
 
 ---
 
-### 1. Função Imprimir (Recursiva)
+### <mark> 5.1 - Função Imprimir (Recursiva) </mark>
 
 Na abordagem recursiva, processamos o nó atual e fazemos a chamada da função passando o próximo nó como parâmetro.
 
@@ -184,7 +188,7 @@ void imprime_rec (PLista l)
 
 ---
 
-### 2. Função Retirar (Recursiva)
+### <mark> 5.2 - Função Remover (Recursiva) </mark>
 
 Para remover recursivamente, o caso base é a lista vazia. Se o elemento for encontrado, ele é liberado; caso contrário, a função avança para a sub-lista.
 
@@ -213,15 +217,18 @@ PLista retira_rec (PLista l, int v)
 
 ---
 
-## 📝 Lista de Exercícios de Fixação
+## 📝 Exercícios Práticos
+
+---
 
 **Nível de Dificuldade:** 🟡 Médio a 🔴 Difícil
 
-### Exercício 1
+### 🟢 Exercício 1
+> **Enunciado:**
 > Faça uma função recursiva que libera a lista e uma que busca um elemento na lista.
 
 <details>
-<summary><b>👀 Ver resposta</b></summary>
+<summary><b>💡 Clique aqui para ver a solução</b></summary>
 
 ```c
 /* Função recursiva para liberar a lista */
@@ -244,11 +251,14 @@ PLista busca_rec(PLista l, int v) {
 ```
 </details>
 
-### Exercício 2
+---
+
+### 🟡 Exercício 2
+> **Enunciado:**
 > Implemente uma função que verifique se duas listas encadeadas são iguais (faça na forma recursiva e não recursiva). Duas listas são consideradas iguais se têm a mesma sequência de elementos.
 
 <details>
-<summary><b>👀 Ver resposta</b></summary>
+<summary><b>💡 Clique aqui para ver a solução</b></summary>
 
 ```c
 /* Versão Iterativa (Não Recursiva) */
@@ -277,11 +287,14 @@ int iguais_rec(PLista l1, PLista l2) {
 ```
 </details>
 
-### Exercício 3
+---
+
+### 🔴 Exercício 3
+> **Enunciado:**
 > Construa um algoritmo que retira um elemento da posição `pos1` e coloca na posição `pos2` em uma lista dinâmica. *(Assumindo posições baseadas em índice a partir de 1)*
 
 <details>
-<summary><b>👀 Ver resposta</b></summary>
+<summary><b>💡 Clique aqui para ver a solução</b></summary>
 
 ```c
 PLista move_elemento(PLista l, int pos1, int pos2) {
@@ -329,12 +342,15 @@ PLista move_elemento(PLista l, int pos1, int pos2) {
 ```
 </details>
 
-### Exercício 4
+---
+
+### 🟡 Exercício 4
+> **Enunciado:**
 > Considere uma lista encadeada `L1` representando uma sequência de caracteres. Construa uma função para imprimir a sequência de caracteres da lista `L1` na ordem inversa (não é permitido o uso de listas auxiliares).
 > *Ex:* Para a lista L1={A,E,I,O,U}, a função deve imprimir “UOIEA”.
 
 <details>
-<summary><b>👀 Ver resposta</b></summary>
+<summary><b>💡 Clique aqui para ver a solução</b></summary>
 
 ```c
 /* Considerando uma struct modificada para char: typedef struct listaC { char info; struct listaC* prox; } TListaC; */
