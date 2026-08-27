@@ -228,11 +228,15 @@ PLista dequeue_circular(PLista ultimo, int *v_retornado) {
 
 ---
 
-## 📝 Exercícios de Fixação: Listas Circulares (Avançado)
+## 📝 Exercícios Práticos
 
 **Nota:** As resoluções utilizam a convenção de que a lista circular é manipulada através de um ponteiro para o **último** nó.
 
-### Exercício 3: Múltiplas Operações
+---
+
+### Exercício 1: Múltiplas Operações 
+
+> **Enunciado:**
 > Escreva funções para efetuar cada uma das operações a seguir para listas circulares: 
 > * Incluir um elemento no meio de uma lista 
 > * Concatenar duas listas 
@@ -244,9 +248,8 @@ PLista dequeue_circular(PLista ultimo, int *v_retornado) {
 > * Retornar o número de elementos da lista
 
 <details>
-<summary><b>👀 Ver resposta (Principais Operações)</b></summary>
+<summary><b>💡 Clique aqui para ver a solução</b></summary>
 
-Como o exercício pede muitas funções, aqui estão as implementações mais cruciais para a estrutura circular (Contagem, Concatenação e Remoção do último).
 
 ```c
 /* 1. Retornar o número de elementos */
@@ -303,13 +306,15 @@ PLista remove_ultimo(PLista ultimo) {
 
 ---
 
-### Exercício 4: Problema de Josephus (Simulação de Fuga)
+### Exercício 2: Problema de Josephus (Simulação de Fuga)
+
+> **Enunciado:**
 > Um grupo de soldados está rodeado por forças inimigas... Eles formam um círculo e sorteiam num chapéu um número $n$ e um nome. Começando pelo soldado cujo nome foi sorteado, é começada a contagem no sentido horário e quando atingir o número $n$, este soldado é retirado. A contagem reinicia... até que só reste um. 
 > 
 > Faça um programa que simule a formação dos soldados neste círculo e a saída na forma explicada até restar apenas um.
 
 <details>
-<summary><b>👀 Ver resposta</b></summary>
+<summary><b>💡 Clique aqui para ver a solução</b></summary>
 
 ```c
 #include <stdio.h>
@@ -351,7 +356,7 @@ void simula_fuga(TSoldado *ultimo, char *nome_inicio, int n) {
         free(temp);
     }
 
-    printf("\n>>> O soldado que vai buscar ajuda a cavalo é: %s <<<\n", p->nome);
+    printf("\n O soldado que vai buscar ajuda a cavalo é: %s \n", p->nome);
     free(p); /* Libera o último sobrevivente no final da simulação */
 }
 ```
@@ -359,170 +364,15 @@ void simula_fuga(TSoldado *ultimo, char *nome_inicio, int n) {
 
 ---
 
-### Exercício 5: Rotação de Conjuntos
+### Exercício 3: Rotação de Conjuntos
+
+> **Enunciado:**
 > Considere um problema em que precisamos rotacionar um determinado conjunto de dados. Por exemplo, rotacionar "a b c d e" 2 vezes resulta em "c d e a b". Considerando que não é permitido apenas trocar o valor de um nó para outro (é necessário realmente trocar as posições dos nós), escreva uma função para realizar essas operações.
 
 <details>
-<summary><b>👀 Ver resposta</b></summary>
+<summary><b>💡 Clique aqui para ver a solução</b></summary>
 
-Neste exercício, usar uma lista circular simplifica o problema drasticamente! Rotacionar fisicamente os nós para a esquerda "k" vezes significa simplesmente avançar o ponteiro que marca o último elemento.
-
-```c
-/* Considerando a estrutura: typedef struct no { char info; struct no* prox; } TNo; */
-
-TNo* rotaciona_lista(TNo* ultimo, int k) {
-    if (ultimo == NULL || k <= 0) {
-        return ultimo;
-    }
-    
-    /* Na lista circular, basta avançar o ponteiro "ultimo" k posições. 
-       O encadeamento do anel se mantém intacto! */
-       
-    for (int i = 0; i < k; i++) {
-        ultimo = ultimo->prox;
-    }
-    
-    return ultimo; /* Retorna o novo ponteiro que marca o final da lista rotacionada */
-}
-```
-</details>## 📝 Exercícios de Fixação: Listas Circulares (Avançado)
-
-**Nota:** As resoluções utilizam a convenção de que a lista circular é manipulada através de um ponteiro para o **último** nó.
-
-### Exercício 3: Múltiplas Operações
-> Escreva funções para efetuar cada uma das operações a seguir para listas circulares: 
-> * Incluir um elemento no meio de uma lista 
-> * Concatenar duas listas 
-> * Inverter uma lista 
-> * Eliminar o último elemento da lista 
-> * Eliminar o enésimo elemento da lista 
-> * Combinar duas listas ordenadas numa única lista ordenada 
-> * Colocar os elementos de uma lista em ordem crescente 
-> * Retornar o número de elementos da lista
-
-<details>
-<summary><b>👀 Ver resposta (Principais Operações)</b></summary>
-
-Como o exercício pede muitas funções, aqui estão as implementações mais cruciais para a estrutura circular (Contagem, Concatenação e Remoção do último).
-
-```c
-/* 1. Retornar o número de elementos */
-int conta_nos(PLista ultimo) {
-    if (ultimo == NULL) return 0;
-    int cont = 0;
-    PLista p = ultimo->prox;
-    do {
-        cont++;
-        p = p->prox;
-    } while (p != ultimo->prox);
-    return cont;
-}
-
-/* 2. Concatenar duas listas circulares */
-PLista concatena_circulares(PLista u1, PLista u2) {
-    if (u1 == NULL) return u2;
-    if (u2 == NULL) return u1;
-    
-    /* O último da u1 aponta para o primeiro da u2 */
-    /* E o último da u2 aponta para o primeiro da u1 */
-    PLista primeiro_u1 = u1->prox;
-    u1->prox = u2->prox;
-    u2->prox = primeiro_u1;
-    
-    return u2; /* O novo último geral passa a ser o último da segunda lista */
-}
-
-/* 3. Eliminar o último elemento */
-PLista remove_ultimo(PLista ultimo) {
-    if (ultimo == NULL) return NULL;
-    
-    PLista p = ultimo->prox;
-    
-    /* Se tiver apenas um elemento */
-    if (p == ultimo) {
-        free(ultimo);
-        return NULL;
-    }
-    
-    /* Percorre até achar o penúltimo */
-    while (p->prox != ultimo) {
-        p = p->prox;
-    }
-    
-    /* O penúltimo passa a apontar para o primeiro */
-    p->prox = ultimo->prox;
-    free(ultimo);
-    
-    return p; /* O penúltimo passa a ser o novo último */
-}
-```
-</details>
-
----
-
-### Exercício 4: Problema de Josephus (Simulação de Fuga)
-> Um grupo de soldados está rodeado por forças inimigas... Eles formam um círculo e sorteiam num chapéu um número $n$ e um nome. Começando pelo soldado cujo nome foi sorteado, é começada a contagem no sentido horário e quando atingir o número $n$, este soldado é retirado. A contagem reinicia... até que só reste um. 
-> 
-> Faça um programa que simule a formação dos soldados neste círculo e a saída na forma explicada até restar apenas um.
-
-<details>
-<summary><b>👀 Ver resposta</b></summary>
-
-```c
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-typedef struct soldado {
-    char nome[50];
-    struct soldado *prox;
-} TSoldado;
-
-/* Função para resolver o problema de Josephus */
-void simula_fuga(TSoldado *ultimo, char *nome_inicio, int n) {
-    if (ultimo == NULL) return;
-
-    TSoldado *p = ultimo->prox;
-    TSoldado *ant = ultimo;
-
-    /* 1. Encontra o soldado inicial */
-    while (strcmp(p->nome, nome_inicio) != 0) {
-        ant = p;
-        p = p->prox;
-    }
-
-    /* 2. Roda a eliminação até sobrar 1 */
-    while (p->prox != p) {
-        /* Pula (n-1) soldados para parar no enésimo */
-        for (int i = 1; i < n; i++) {
-            ant = p;
-            p = p->prox;
-        }
-
-        /* p agora é o soldado a ser removido */
-        printf("Soldado retirado: %s\n", p->nome);
-        ant->prox = p->prox;
-        
-        TSoldado *temp = p;
-        p = p->prox; /* O próximo a iniciar a contagem */
-        free(temp);
-    }
-
-    printf("\n>>> O soldado que vai buscar ajuda a cavalo é: %s <<<\n", p->nome);
-    free(p); /* Libera o último sobrevivente no final da simulação */
-}
-```
-</details>
-
----
-
-### Exercício 5: Rotação de Conjuntos
-> Considere um problema em que precisamos rotacionar um determinado conjunto de dados. Por exemplo, rotacionar "a b c d e" 2 vezes resulta em "c d e a b". Considerando que não é permitido apenas trocar o valor de um nó para outro (é necessário realmente trocar as posições dos nós), escreva uma função para realizar essas operações.
-
-<details>
-<summary><b>👀 Ver resposta</b></summary>
-
-Neste exercício, usar uma lista circular simplifica o problema drasticamente! Rotacionar fisicamente os nós para a esquerda "k" vezes significa simplesmente avançar o ponteiro que marca o último elemento.
+Neste exercício, usar uma lista circular simplifica o problema drasticamente.
 
 ```c
 /* Considerando a estrutura: typedef struct no { char info; struct no* prox; } TNo; */
