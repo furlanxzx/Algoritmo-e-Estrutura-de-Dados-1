@@ -1,4 +1,20 @@
-## 🔗 Lista Encadeada Simples
+<h1 align="center">Lista Encadeada Simples</h1>
+
+<p align="center">
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/07%20%E2%80%A2%20Fila%20Din%C3%A2mica/README.md">
+    <img src="https://img.shields.io/badge/⬅️_Voltar-Fila_Dinâmica-8b5cf6?style=plastic" alt="Voltar">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="../README.md">
+    <img src="https://img.shields.io/badge/🏠_Inicio-Menu-06b6d4?style=plastic" alt="Menu">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/09%20%E2%80%A2%20Lista%20Circular/README.md">
+    <img src="https://img.shields.io/badge/Avancar-Lista_Circular_➡️-8b5cf6?style=plastic" alt="Avançar">
+  </a>
+</p>
+
+---
 
 Uma lista encadeada é uma sequência de nós ligados entre si por ponteiros (cada nó guarda o endereço do próximo nó).
 *   Cada nó pode ser inserido ou retirado de qualquer posição da lista.
@@ -336,3 +352,19 @@ void imprime_inversa(TListaC *l) {
 }
 ```
 </details>
+
+---
+
+<p align="center">
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/07%20%E2%80%A2%20Fila%20Din%C3%A2mica/README.md">
+    <img src="https://img.shields.io/badge/⬅️_Voltar-Fila_Dinâmica-8b5cf6?style=plastic" alt="Voltar">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="../README.md">
+    <img src="https://img.shields.io/badge/🏠_Inicio-Menu-06b6d4?style=plastic" alt="Menu">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/09%20%E2%80%A2%20Lista%20Circular/README.md">
+    <img src="https://img.shields.io/badge/Avancar-Lista_Circular_➡️-8b5cf6?style=plastic" alt="Avançar">
+  </a>
+</p>
