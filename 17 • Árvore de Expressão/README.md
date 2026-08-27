@@ -16,622 +16,352 @@
 
 ---
 
-## 1. Introdução
+## <mark> 1 - O que é uma Árvore de Expressão </mark>
 
-> ➤ Como vimos, numa árvore binária o número de filhos dos nós é limitado em no máximo dois.
->
-> ➤ No caso da árvore genérica, esta restrição não existe.
-> - ✓ Cada nó pode ter um número arbitrário de filhos.
->
-> ➤ Essa estrutura pode ser usada, por exemplo, para representar uma **árvore de diretórios**.
+> Uma expressão aritmética pode ser armazenada sob a forma de uma **árvore binária**, em que as raízes armazenam as operações a serem efetuadas, e as sub-árvores à esquerda e à direita armazenam os operandos a serem usados.
 
-Faz todo sentido: uma pasta no seu computador pode ter 0, 1, 5, 50 subpastas — não existe limite de 2. É exatamente esse tipo de situação que a árvore genérica resolve.
+Por exemplo, a expressão `a + b` é representada assim:
 
-> ➤ Como veremos, as funções para manipular uma árvore genérica também serão implementadas de forma **recursiva**, e são baseadas na seguinte definição:
-> - ✓ uma árvore genérica é composta por:
->   - um **nó raiz**;
->   - **zero ou mais sub-árvores**.
->
-> ➤ Em qualquer definição recursiva deve haver uma **"condição de contorno"**, que permita a definição de estruturas finitas, e, no nosso caso, a definição de uma árvore se encerra nas **folhas**, que são identificadas como sendo nós com **zero sub-árvores**.
+```mermaid
+graph TD
+    n1(("+"))
+    n2(("A"))
+    n3(("B"))
+    n1 --> n2
+    n1 --> n3
+```
+
+O operador vira a **raiz**, e cada operando vira um **filho** — bem direto ao ponto, quando a expressão só tem uma operação.
 
 ---
 
-## 2. Estrutura para Árvore Genérica
+## <mark> 2 - Prioridade dos Operadores </mark>
 
-Aqui está o ponto mais interessante desse conteúdo. Se cada nó pode ter uma quantidade **qualquer** de filhos, como representamos isso com uma struct de tamanho fixo?
+As coisas ficam mais interessantes quando a expressão tem **mais de um operador**. No caso de `A + B * C`, a **prioridade dos operadores** e a **ordem de ocorrência** precisam ser respeitadas ao montar a árvore:
 
-> ➤ Árvore genérica utiliza uma **"lista de filhos"**: um nó aponta apenas para seu **primeiro filho** (`prim`), e cada um de seus filhos, exceto o último, aponta para o **próximo irmão** (`prox`). A declaração de um nó pode ser:
-
-```c
-typedef struct arvGen {
-   char info;
-   struct arvgen *prim;  //lista de filhos
-   struct arvgen *prox;  //lista de irmãos
-} TArvGen;
-
-typedef TArvGen *PArvGen;
+```mermaid
+graph TD
+    n1(("+"))
+    n2(("A"))
+    n3(("*"))
+    n4(("B"))
+    n5(("C"))
+    n1 --> n2
+    n1 --> n3
+    n3 --> n4
+    n3 --> n5
 ```
 
-Essa técnica é conhecida como **"primeiro filho / próximo irmão"** (*first child, next sibling*), e é a forma mais elegante de representar uma árvore com número variável de filhos usando apenas **dois ponteiros por nó** — a mesma quantidade que usamos na árvore binária!
+Como `*` tem prioridade maior que `+`, ele "fica mais fundo" na árvore — é resolvido primeiro. Percorrendo essa árvore em **pré-ordem** (Raiz, Esquerda, Direita) e em **pós-ordem** (Esquerda, Direita, Raiz), obtemos as formas prefixa e posfixa da expressão, respectivamente:
 
-**A ideia central:** em vez de um nó apontar diretamente para *todos* os seus filhos, ele aponta só para o **primeiro** filho. Os demais filhos formam uma **lista encadeada entre si**, ligados pelo campo `prox` (que, nesse contexto, significa "próximo irmão", não "próximo nó da árvore").
+- **Prefixa:** `+ A * B C`
+- **Posfixa:** `A B C * +`
 
-Visualmente, uma árvore onde A tem 3 filhos (B, C, D) fica assim:
+> 📌 Isso não é coincidência — é justamente **para isso** que a árvore de expressão serve. Ela é o passo intermediário que um compilador usa para converter uma expressão comum (infixa, como a gente escreve) em prefixa ou posfixa (formas muito mais fáceis de avaliar por uma máquina, sem precisar se preocupar com parênteses ou prioridade de operadores).
 
+### A ordem importa
+
+A expressão `A + B * C` é **diferente** de `B * C + A`, mesmo os dois resultando (matematicamente) na mesma coisa — a **árvore** de cada uma é diferente, porque a operação que fica na raiz é sempre a **última a ser aplicada**:
+
+```mermaid
+graph TD
+    n1(("+"))
+    n2(("*"))
+    n3(("A"))
+    n4(("B"))
+    n5(("C"))
+    n1 --> n2
+    n1 --> n3
+    n2 --> n4
+    n2 --> n5
 ```
-                    A
-                    │ prim
-                    ▼
-                    B ──prox──▶ C ──prox──▶ D ──prox──▶ NULL
-                    │ prim      │ prim      │ prim
-                    ▼           ▼           ▼
-                   NULL        NULL        NULL
-```
 
-Ou seja: `A->prim` aponta para B. `B->prox` aponta para C (o irmão seguinte). `C->prox` aponta para D. E `D->prox` é `NULL`, porque D é o último filho. Nenhum desses três (B, C, D) tem filho próprio, então o `prim` de cada um é `NULL`.
-
-> 💡 **Por que isso é tão engenhoso?** Porque transforma um problema de "grau variável" (um nó pode ter qualquer quantidade de filhos) em um problema que já sabemos resolver muito bem: uma **lista encadeada** de irmãos, e uma árvore **binária-like** de "desce" (`prim`) e "lado" (`prox`). Isso vai ficar ainda mais claro na seção 6, onde mostramos que essa estrutura é, na prática, **idêntica** a uma árvore binária.
+Repare que, embora os dois casos tenham exatamente as mesmas três letras e os mesmos dois operadores, a **posição de `A`** muda completamente — na primeira árvore ele é filho esquerdo da raiz `+`, aqui ele é filho **direito**. Isso reflete que, na expressão original, `A` aparece **antes** de `B*C` no primeiro caso, e **depois** no segundo.
 
 ---
 
-## 3. Função Cria
+## <mark> 3 - Montando a Árvore de uma Expressão Complexa: Passo a Passo </mark>
 
-> ➤ A função para criar uma folha deve alocar o nó e inicializar seus campos, atribuindo `NULL` para os campos `prim` e `prox`, pois trata-se de um nó folha.
+Como fica a representação da expressão `((A+B)/C)*(D-E)` usando árvore binária?
 
-```c
-PArvGen cria (char c)
-{
-   PArvGen a =(PArvGen) malloc(sizeof(TArvGen));
-   a->info = c;
-   a->prim = NULL;
-   a->prox = NULL;
-   return a;
-}
+> 💡 **Dica:** resolva sempre **do centro para fora** — comece pelas operações mais "internas" (dentro dos parênteses mais aninhados) e vá subindo.
+
+**Passo 1 — resolva `A + B`:**
+
+```mermaid
+graph TD
+    n1(("+"))
+    n2(("A"))
+    n3(("B"))
+    n1 --> n2
+    n1 --> n3
 ```
 
-Repare que `cria` sempre gera um nó **isolado** (sem filhos e sem irmãos) — é depois, usando a função `insere`, que vamos conectando esses nós entre si para montar a árvore completa.
+**Passo 2 — agora resolva `(A+B) / C`:** a árvore do passo 1 inteira vira a sub-árvore **esquerda** da nova raiz `/`, e `C` vira a sub-árvore direita.
+
+```mermaid
+graph TD
+    n1(("/"))
+    n2(("+"))
+    n3(("C"))
+    n4(("A"))
+    n5(("B"))
+    n1 --> n2
+    n1 --> n3
+    n2 --> n4
+    n2 --> n5
+```
+
+**Passo 3 — em paralelo, resolva `D - E`:**
+
+```mermaid
+graph TD
+    n1(("-"))
+    n2(("D"))
+    n3(("E"))
+    n1 --> n2
+    n1 --> n3
+```
+
+**Passo 4 — finalmente, junte tudo com `*`:** a árvore do passo 2 vira a sub-árvore esquerda, e a árvore do passo 3 vira a sub-árvore direita.
+
+```mermaid
+graph TD
+    n1(("*"))
+    n2(("/"))
+    n3(("-"))
+    n4(("+"))
+    n5(("C"))
+    n6(("D"))
+    n7(("E"))
+    n8(("A"))
+    n9(("B"))
+    n1 --> n2
+    n1 --> n3
+    n2 --> n4
+    n2 --> n5
+    n3 --> n6
+    n3 --> n7
+    n4 --> n8
+    n4 --> n9
+```
+
+E essa é a árvore final de `((A+B)/C)*(D-E)`. Note como cada par de parênteses da expressão original virou um "nível" a mais de profundidade na árvore.
 
 ---
 
-## 4. Função Insere
+## <mark> 4 - Verificando a Árvore: a Ordem Infixa </mark>
 
-> ➤ Como não vamos atribuir nenhum significado especial para a posição de um nó filho, a operação de inserção pode inserir a sub-árvore em **qualquer posição**.
->
-> ➤ Neste caso, vamos optar por inserir sempre no **início da lista** que, como já vimos, é a maneira mais simples de inserir um novo elemento numa lista encadeada.
+Uma propriedade muito útil: se você percorrer **qualquer** árvore de expressão em **ordem infixa** (Esquerda, Raiz, Direita), os **operandos sempre aparecem na mesma ordem** em que estavam na expressão original — isso vale sempre, independente de como a árvore foi construída.
 
-> ➤ Vamos inserir a subárvore `sa` na árvore `a`, ou seja, `sa` é o início da lista de filhos de `a`, portanto será inserido à esquerda de `a`, já que à direita deve estar a lista de irmãos de `a`.
-
-```c
-void insere (PArvGen a, PArvGen sa) {
-   sa->prox = a->prim;
-   a->prim = sa;
-}
-```
-
-**Explicando:** antes de inserir, `a->prim` apontava para o antigo primeiro filho de `a` (ou `NULL`, se `a` não tinha filhos ainda). A função faz `sa` "assumir o lugar" desse primeiro filho: primeiro liga o `prox` de `sa` para quem *era* o primeiro filho (`sa->prox = a->prim`), e só depois atualiza `a->prim` para apontar para `sa`. É exatamente o mesmo padrão de "inserção no início" que já vimos em listas encadeadas simples!
-
-```
-Antes:      a ──prim──▶ B ──prox──▶ C
-
-insere(a, sa):
-
-Depois:     a ──prim──▶ sa ──prox──▶ B ──prox──▶ C
-```
+> 📌 Isso é uma ótima forma de **conferir** se a árvore que você montou está certa: se ao percorrer em ordem infixa você não recupera a expressão original (com os operandos na mesma ordem), alguma coisa foi montada errada.
 
 ---
 
-## 5. Função Imprime
+## 📝 Exercícios Práticos
 
-> ➤ Para imprimir as informações associadas aos nós da árvore, temos duas opções para percorrer a árvore:
-> - ✓ **pré-ordem**, primeiro a raiz e depois as sub-árvores, ou
-> - ✓ **pós-ordem**, primeiro as sub-árvores e depois a raiz.
->
-> ➤ Note que neste caso **não faz sentido a ordem infixa**, uma vez que o número de sub-árvores é variável. Para essa função, vamos optar por imprimir o conteúdo dos nós em pré-ordem.
+> Transforme as seguintes expressões para posfixa, utilizando árvores binárias para fazer a transformação. A árvore gerada deve resultar exatamente a mesma expressão quando percorrida na ordem infixa (inclusive com os operandos na mesma ordem).
 
-```c
-void imprime (PArvGen a)
-{
-   PArvGen p;
-   printf("%c ", a->info);
-   imprime (a->prim);
-   imprime(a->prox);
-}
-```
-
-> ⚠️ **Atenção — esse código como está no slide tem um problema:** ele não verifica se `a` é `NULL` antes de acessar `a->info`. Como toda folha e todo último irmão têm `prim`/`prox` valendo `NULL`, essa função vai tentar fazer `a->info` com `a = NULL` assim que chegar numa dessas pontas — e isso trava o programa (erro de segmentação). A versão correta, com o **caso base** tratado, é:
-
-```c
-void imprime (PArvGen a)
-{
-   if (a != NULL) {
-      printf("%c ", a->info);
-      imprime(a->prim);
-      imprime(a->prox);
-   }
-}
-```
-
-> 🧠 **Por que essa função consegue imprimir a árvore inteira, mesmo só "descendo" e "andando pro lado"?** Porque, ao imprimir `a`, ela primeiro imprime **toda a sub-árvore de `a->prim`** (que, por sua vez, imprime a si mesma, seus próprios filhos, e depois — através do `prox` — todos os seus irmãos e as sub-árvores deles). É uma recursão dupla que cobre "desce" e "vai pro lado" ao mesmo tempo. Esse padrão (`trata(a); percorre(a->prim); percorre(a->prox);`) vai se repetir em praticamente **todas** as funções que faremos daqui pra frente.
-
----
-
-## 6. Conversão em Árvore Binária
-
-Essa é uma observação muito bonita da estrutura que acabamos de montar:
-
-> ➤ Note que as raízes das árvores binárias resultantes não possuem filhos à direita.
->
-> ➤ Isto deve-se ao fato da raiz da árvore transformada não possuir nenhum irmão.
->
-> ➤ Este fato pode ser utilizado para transformar **florestas** numa única árvore binária.
->
-> ➤ Para isto, transforma-se inicialmente cada árvore da floresta em árvore binária e, depois, une-se estas árvores binárias por meio dos ponteiros direitos dos nós-raízes.
-
-Repare que a struct que criamos (`prim`, `prox`) é **estruturalmente idêntica** à struct de árvore binária que vimos no módulo anterior (`esq`, `dir`) — só trocamos os nomes dos campos! Isso significa que **toda árvore genérica pode ser enxergada como uma árvore binária**, bastando reinterpretar:
-
-- `prim` (primeiro filho) ↔ `esq` (filho esquerdo)
-- `prox` (próximo irmão) ↔ `dir` (filho direito)
-
-```
-Árvore genérica (A tem filhos B, C, D):
-
-        A
-      ┌─┼─┐
-      B C D
-
-Reinterpretada como árvore binária (via prim/prox):
-
-        A
-       /
-      B
-       \
-        C
-         \
-          D
-```
-
-Como a **raiz** de uma árvore não tem irmãos (não existe "irmão da raiz"), o campo `prox` da raiz é sempre `NULL` — e é exatamente por isso que, na representação binária, **a raiz nunca tem filho à direita**.
-
-> 💡 **Aplicação prática:** e se tivermos uma **floresta** (várias árvores separadas, sem uma raiz em comum)? Como cada raiz convertida "sobra" com o ponteiro direito livre (`NULL`), podemos usar exatamente esse espaço livre para **encadear as raízes entre si**! Ou seja: a raiz da primeira árvore aponta, pelo seu `dir`, para a raiz da segunda árvore, que aponta para a raiz da terceira, e assim por diante — transformando várias árvores separadas em **uma única estrutura binária**, sem perder nenhuma informação.
-
----
-
-## 7. Exercícios
-
-<br>
-
-### Exercício 1 🟢 (fácil)
-
-> Faça uma função que verifica a ocorrência de uma dada informação na árvore (se existe uma dada informação na árvore).
+### 🟢 Exercício 1 — `(a+b) * (c-d)` 
 
 <details>
-<summary>💡 Ver resolução</summary>
+<summary>💡 Clique aqui para ver a solução</summary>
 
-Seguindo o mesmo padrão da `imprime`: tratamos o caso base (`NULL` → não encontrado), depois checamos o nó atual, e se não for ele, buscamos recursivamente tanto nos filhos (`prim`) quanto nos irmãos (`prox`).
+Mesma lógica do exemplo `((A+B)/C)*(D-E)` visto acima, só que mais curta: cada parte entre parênteses vira uma sub-árvore, e o `*` (fora dos parênteses) vira a raiz.
 
-```c
-int busca(PArvGen a, char c) {
-    if (a == NULL) return 0; // não encontrado
-
-    if (a->info == c) return 1; // achou
-
-    return busca(a->prim, c) || busca(a->prox, c);
-}
+```mermaid
+graph TD
+    n1(("*"))
+    n2(("+"))
+    n3(("-"))
+    n4(("a"))
+    n5(("b"))
+    n6(("c"))
+    n7(("d"))
+    n1 --> n2
+    n1 --> n3
+    n2 --> n4
+    n2 --> n5
+    n3 --> n6
+    n3 --> n7
 ```
 
-> 🧠 Por que buscar em `a->prim` **e** em `a->prox`? Porque, para não deixar nenhum nó da árvore de fora, a busca precisa "descer" (olhar os filhos de `a`, começando por `a->prim`) **e** "andar pro lado" (olhar os próximos irmãos de `a`, via `a->prox`). O operador `||` garante que a busca para assim que encontrar o valor em qualquer um dos dois lados.
-
-</details>
-
-<br>
-
-### Exercício 2 🟡 (médio)
-
-> Faça uma função com o protótipo a seguir para testar se duas árvores são iguais.
->
-> ```c
-> int igual(PArvGen a, PArvGen b);
-> ```
-
-<details>
-<summary>💡 Ver resolução</summary>
-
-Duas árvores são iguais quando: **ambas são vazias**, ou **ambas têm a mesma informação na raiz, a mesma sub-árvore de filhos (`prim`), e a mesma lista de irmãos (`prox`)**.
-
-```c
-int igual(PArvGen a, PArvGen b) {
-    if (a == NULL && b == NULL) return 1;   // ambas vazias -> iguais
-    if (a == NULL || b == NULL) return 0;   // só uma é vazia -> diferentes
-
-    if (a->info != b->info) return 0;       // conteúdo diferente
-
-    return igual(a->prim, b->prim) && igual(a->prox, b->prox);
-}
-```
-
-> 🧠 Repare que comparar `a->prox` com `b->prox` não é "só" comparar o próximo irmão — como a comparação é recursiva, isso acaba verificando **toda a lista de irmãos restante** dos dois lados, de uma vez só. O mesmo vale para `a->prim`: comparamos não só o primeiro filho, mas (recursivamente) **toda a sub-árvore de filhos**.
-
-</details>
-
-<br>
-
-### Exercício 3 🟡 (médio)
-
-> Faça uma função com o protótipo a seguir para criar dinamicamente uma cópia da árvore.
->
-> ```c
-> PArvGen copia(PArvGen a);
-> ```
-
-<details>
-<summary>💡 Ver resolução</summary>
-
-A ideia é criar um novo nó com o mesmo conteúdo do nó atual, e então **copiar recursivamente** tanto a sub-árvore de filhos quanto a lista de irmãos, conectando as cópias entre si.
-
-```c
-PArvGen copia(PArvGen a) {
-    if (a == NULL) return NULL;
-
-    PArvGen novo = cria(a->info);
-    novo->prim = copia(a->prim);
-    novo->prox = copia(a->prox);
-
-    return novo;
-}
-```
-
-> 🧠 Essa função reaproveita a `cria` que já tínhamos pronta — só que, em vez de deixar `prim` e `prox` como `NULL` (que é o que `cria` faz por padrão), sobrescrevemos os dois logo em seguida com as cópias das respectivas sub-árvores. É um padrão muito comum: usar uma função "base" já existente, e complementar o que ela não faz.
-
-</details>
-
-<br>
-
-### Exercício 4 🔴 (difícil)
-
-> Faça uma função que insira um valor em uma árvore genérica. Este valor deverá ser passado como parâmetro da função, assim como o valor de seu pai.
-
-<details>
-<summary>💡 Ver resolução</summary>
-
-Esse exercício tem duas partes escondidas: primeiro precisamos **encontrar o nó pai** (dado seu valor), e só depois **inserir o novo nó** como filho dele — reaproveitando a função `insere` que já temos pronta.
-
-**Passo 1 — função auxiliar para localizar um nó pelo valor** (parecida com a `busca` do Exercício 1, mas retornando o **ponteiro** para o nó, em vez de só dizer se existe):
-
-```c
-PArvGen busca_no(PArvGen a, char valor) {
-    if (a == NULL) return NULL;
-
-    if (a->info == valor) return a;
-
-    PArvGen achou = busca_no(a->prim, valor);
-    if (achou != NULL) return achou;
-
-    return busca_no(a->prox, valor);
-}
-```
-
-**Passo 2 — função que insere o novo valor como filho do nó pai encontrado:**
-
-```c
-void insere_valor(PArvGen raiz, char valorPai, char novoValor) {
-    PArvGen pai = busca_no(raiz, valorPai);
-
-    if (pai == NULL) {
-        printf("Erro: no pai '%c' nao encontrado na arvore.\n", valorPai);
-        return;
-    }
-
-    PArvGen novo = cria(novoValor);
-    insere(pai, novo); // reaproveita a funcao insere que ja tinhamos
-}
-```
-
-> 🧠 Esse é um ótimo exemplo de **composição de funções**: em vez de reescrever tudo do zero, quebramos o problema em "achar o pai" (`busca_no`) + "inserir nele" (`insere`, que já existia). Isso deixa o código mais curto, mais fácil de entender e de testar cada parte separadamente.
-
-</details>
-
-<br>
-
-### Exercício 5 🟡 (médio)
-
-> Escrevas as funções pedidas em cada item (obedeça os protótipos):
-> - calcule a soma do conteúdo de todos os nós: `int soma(PArvGen a)`
-> - calcule a quantidade total de nós na árvore: `int num_nos(PArvGen a)`
-> - retorna o primeiro filho de a: `PArvGen retornaPrim (PArvGen a)`
-> - retorna o irmão de a: `PArvGen retornaProx (PArvGen a)`
-> - retorna o conteúdo de a: `int retornaConteudo (PArvGen a)`
-> - insere sa como filho de a: `void insere (PArvGen a, PArvGen sa);`
-
-<details>
-<summary>💡 Ver resolução</summary>
-
-As duas últimas (`retornaConteudo` e `insere`) são só "encapsulamentos" simples de algo que já vimos. Já `soma` e `num_nos` seguem o mesmo padrão recursivo da `imprime` (percorre `prim` e `prox`, combinando os resultados):
-
-```c
-int soma(PArvGen a) {
-    if (a == NULL) return 0;
-    return a->info + soma(a->prim) + soma(a->prox);
-}
-```
-
-> 💡 Como `info` é do tipo `char`, essa soma na verdade soma os **códigos ASCII** dos caracteres armazenados. Se a ideia for somar valores numéricos "de verdade", basta trocar o tipo do campo `info` para `int` na struct — a lógica da função continua exatamente a mesma.
-
-```c
-int num_nos(PArvGen a) {
-    if (a == NULL) return 0;
-    return 1 + num_nos(a->prim) + num_nos(a->prox);
-}
-```
-
-```c
-PArvGen retornaPrim(PArvGen a) {
-    return a->prim;
-}
-
-PArvGen retornaProx(PArvGen a) {
-    return a->prox;
-}
-
-int retornaConteudo(PArvGen a) {
-    return a->info;
-}
-
-// a função insere já foi implementada na seção 4:
-void insere(PArvGen a, PArvGen sa) {
-    sa->prox = a->prim;
-    a->prim = sa;
-}
-```
-
-> 🧠 Funções como `retornaPrim`, `retornaProx` e `retornaConteudo` parecem "bobas" à primeira vista, mas cumprem um papel importante em um TAD (tipo abstrato de dados): elas **escondem** os detalhes internos da struct de quem usa a árvore. Se um dia a struct mudar (por exemplo, o campo `info` virar `dado`), só essas funções precisam ser ajustadas — quem usa a árvore, chamando `retornaConteudo(a)`, nem percebe a diferença.
-
-</details>
-
-<br>
-
-### Exercício 6 🔴 (difícil)
-
-> Faça um programa para a manipulação de árvores genéricas que leia um arquivo texto contendo uma sequência de nomes e coloque os nomes em diferentes níveis da árvore de acordo com a inicial do nome. Exibir na tela a lista de nomes, agrupados de acordo com a letra inicial do nome.
-
-<details>
-<summary>💡 Ver resolução</summary>
-
-Esse exercício pede para guardar **nomes completos** (strings), não só um caractere — então, só para esse programa, vamos adaptar a struct para guardar uma `string` em vez de um único `char`:
-
-```c
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
-
-typedef struct arvGen {
-   char info[50];
-   struct arvGen *prim;
-   struct arvGen *prox;
-} TArvGen;
-
-typedef TArvGen *PArvGen;
-
-PArvGen cria(char *s) {
-    PArvGen a = (PArvGen) malloc(sizeof(TArvGen));
-    strcpy(a->info, s);
-    a->prim = NULL;
-    a->prox = NULL;
-    return a;
-}
-
-void insere(PArvGen a, PArvGen sa) {
-    sa->prox = a->prim;
-    a->prim = sa;
-}
-```
-
-**A estrutura da árvore que vamos montar:**
-
-```
-        (raiz, "vazia")
-       /      |       \
-      A       C         M
-    / | \    / | \     / | \
- Abel Ana Anibal ...  ...
-```
-
-A raiz não representa nada (é só um "ponto de partida"); o **nível 1** guarda as letras iniciais encontradas (A, C, M, P...); o **nível 2** guarda os nomes que começam com aquela letra.
-
-**Função para localizar (ou criar) o nó de uma letra, entre os filhos da raiz:**
-
-```c
-PArvGen busca_irmao(PArvGen lista, char *chave) {
-    while (lista != NULL) {
-        if (strcmp(lista->info, chave) == 0) return lista;
-        lista = lista->prox;
-    }
-    return NULL; // não achou entre os irmãos
-}
-```
-
-**Programa principal:**
-
-```c
-int main() {
-    FILE *arq = fopen("nomes.txt", "r");
-    if (arq == NULL) {
-        printf("Erro ao abrir o arquivo.\n");
-        return 1;
-    }
-
-    PArvGen raiz = cria(""); // raiz "vazia", só para servir de ponto de partida
-    char nome[50];
-
-    while (fscanf(arq, "%s", nome) == 1) {
-        char letra[2];
-        letra[0] = toupper(nome[0]);
-        letra[1] = '\0';
-
-        // procura se já existe um "grupo" para essa letra
-        PArvGen noLetra = busca_irmao(raiz->prim, letra);
-
-        if (noLetra == NULL) {
-            noLetra = cria(letra);
-            insere(raiz, noLetra); // cria o grupo da letra, filho da raiz
-        }
-
-        PArvGen noNome = cria(nome);
-        insere(noLetra, noNome); // insere o nome dentro do grupo da letra
-    }
-
-    fclose(arq);
-
-    // Exibe agrupado
-    PArvGen letra = raiz->prim;
-    while (letra != NULL) {
-        printf("%s\n", letra->info);
-        PArvGen nome = letra->prim;
-        while (nome != NULL) {
-            printf("   %s", nome->info);
-            nome = nome->prox;
-        }
-        printf("\n");
-        letra = letra->prox;
-    }
-
-    return 0;
-}
-```
-
-> 🧠 **Por que usar `busca_irmao` em vez do `busca_no` do Exercício 4?** Porque aqui só precisamos procurar entre os **filhos diretos da raiz** (as letras já criadas) — não faz sentido procurar "descendo" na árvore, já que as letras estão sempre no mesmo nível. Por isso a função só anda pelo `prox`, sem tocar no `prim`.
->
-> ⚠️ Como a função `insere` sempre insere no **início** da lista, tanto as letras quanto os nomes dentro de cada letra vão aparecer na ordem **inversa** de leitura do arquivo. Se a ordem alfabética/cronológica for importante, uma alternativa é criar uma função `insere_fim` (que insere no final da lista de filhos, como fizemos com listas encadeadas simples lá no início do material) e usá-la aqui no lugar da `insere`.
-
-</details>
-
-<br>
-
-### Exercício 7 🔴 (difícil)
-
-> Faça um programa para a manipulação de árvores genéricas que leia um arquivo texto com uma sequência de linhas compostas de um identificador e um dado (ex: `1.3.2- Estado`), e gere uma árvore genérica em que o identificador de cada linha serve para indicar onde esta linha será inserida na hierarquia da árvore. A seguir, gere um arquivo texto, percorrendo a árvore do modo prefixo.
-
-<details>
-<summary>💡 Ver resolução</summary>
-
-A ideia-chave aqui: o **identificador** (`1`, `1.1`, `1.3.2`...) descreve o **caminho** do nó dentro da árvore — cada ponto (`.`) representa "descer mais um nível". Por exemplo, `1.3.2` é o 2º dado dentro do 3º item dentro do item `1`.
-
-Vamos assumir que o arquivo já vem **em ordem** (os pais sempre aparecem antes dos filhos — como no exemplo dos slides). Com isso, conseguimos montar a árvore usando um **vetor de "últimos nós inseridos em cada nível"**: sempre que lemos uma linha de profundidade `d`, o pai dela é o último nó que inserimos no nível `d - 1`.
-
-```c
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-typedef struct arvGen {
-   char info[100];
-   struct arvGen *prim;
-   struct arvGen *prox;
-} TArvGen;
-
-typedef TArvGen *PArvGen;
-
-PArvGen cria(char *s) {
-    PArvGen a = (PArvGen) malloc(sizeof(TArvGen));
-    strcpy(a->info, s);
-    a->prim = NULL;
-    a->prox = NULL;
-    return a;
-}
-
-// insere sa como o ULTIMO filho de a (preserva a ordem de leitura do arquivo)
-void insere_fim(PArvGen a, PArvGen sa) {
-    if (a->prim == NULL) {
-        a->prim = sa;
-    } else {
-        PArvGen p = a->prim;
-        while (p->prox != NULL) p = p->prox;
-        p->prox = sa;
-    }
-}
-
-// conta quantos niveis tem o identificador, contando os pontos
-int calcula_profundidade(char *identificador) {
-    int prof = 1;
-    for (int i = 0; identificador[i] != '\0'; i++)
-        if (identificador[i] == '.') prof++;
-    return prof;
-}
-```
-
-**Montando a árvore a partir do arquivo:**
-
-```c
-#define MAX_NIVEL 10
-
-int main() {
-    FILE *entrada = fopen("dados.txt", "r");
-    FILE *saida = fopen("saida.txt", "w");
-    if (entrada == NULL || saida == NULL) {
-        printf("Erro ao abrir arquivos.\n");
-        return 1;
-    }
-
-    PArvGen raiz = cria("RAIZ"); // no artificial, so para dar um ponto de partida
-    PArvGen ultimoNoNivel[MAX_NIVEL];
-    ultimoNoNivel[0] = raiz;
-
-    char linha[150];
-    while (fgets(linha, sizeof(linha), entrada) != NULL) {
-        char identificador[30], dado[100];
-
-        // separa "1.3.2- Estado" em identificador="1.3.2" e dado="Estado"
-        sscanf(linha, "%[^-]- %[^\n]", identificador, dado);
-
-        int prof = calcula_profundidade(identificador);
-
-        PArvGen pai = ultimoNoNivel[prof - 1];
-        PArvGen novo = cria(dado);
-
-        insere_fim(pai, novo);
-        ultimoNoNivel[prof] = novo; // este e o novo "ultimo no" desse nivel
-    }
-
-    fclose(entrada);
-```
-
-**Gerando o arquivo de saída em pré-ordem:**
-
-```c
-    // percorre em pre-ordem e escreve no arquivo de saida
-    void imprime_prefixo(PArvGen a, FILE *saida) {
-        if (a != NULL) {
-            fprintf(saida, "%s\n", a->info);
-            imprime_prefixo(a->prim, saida);
-            imprime_prefixo(a->prox, saida);
-        }
-    }
-
-    imprime_prefixo(raiz->prim, saida); // pula a raiz artificial
-
-    fclose(saida);
-    return 0;
-}
-```
-
-> 🧠 **Por que usamos um vetor `ultimoNoNivel[]` em vez de fazer uma busca a cada linha?** Porque, como o arquivo já vem em ordem hierárquica (o pai sempre aparece antes do filho), o pai de qualquer linha é **sempre** o último nó que vimos naquele nível anterior — não precisamos procurar pela árvore inteira, só consultar uma posição do vetor. Isso torna o programa bem mais rápido (O(1) por linha) do que fazer uma busca recursiva a cada inserção.
->
-> ⚠️ Essa solução assume que o arquivo de entrada é bem-formado (identificadores em ordem, sem "pular" níveis) — é uma simplificação razoável dado que o enunciado já garante isso ("os dígitos de cada subitem variam apenas de 1 a 9").
+**Forma posfixa (pós-ordem):** `a b + c d - *`
 
 </details>
 
 ---
 
-## 8. Resumo rápido
+### 🟡 Exercício 2 — `(a+b*c)*a + (c-d)*3` 
 
-| Conceito | Explicação |
-|---|---|
-| Árvore genérica | Árvore em que cada nó pode ter **qualquer número de filhos** |
-| Representação | "Primeiro filho / próximo irmão" — cada nó só guarda `prim` (1º filho) e `prox` (próximo irmão) |
-| Isomorfismo com árvore binária | `prim` ↔ `esq`, `prox` ↔ `dir` — a raiz nunca tem filho à direita, pois não tem irmãos |
-| Padrão recursivo típico | `trata(a); percorre(a->prim); percorre(a->prox);` |
-| Percursos possíveis | Só pré-ordem ou pós-ordem fazem sentido (não existe "em-ordem" com grau variável) |
-| Uso prático | Árvore de diretórios, estrutura organizacional, hierarquias de qualquer tipo (como no Exercício 7) |
+<details>
+<summary>💡 Clique aqui para ver a solução</summary>
+
+O `+` mais externo é a **última** operação aplicada (é ele que "junta" os dois grandes pedaços da expressão), então ele vira a raiz. Cada lado dele é resolvido separadamente, de dentro para fora — o lado esquerdo tem mais um nível de aninhamento por causa do `b*c` dentro do primeiro parêntese.
+
+```mermaid
+graph TD
+    n1(("+"))
+    n2(("*"))
+    n3(("*"))
+    n4(("+"))
+    n5(("a"))
+    n6(("a"))
+    n7(("*"))
+    n8(("b"))
+    n9(("c"))
+    n10(("-"))
+    n11(("3"))
+    n12(("c"))
+    n13(("d"))
+    n1 --> n2
+    n1 --> n3
+    n2 --> n4
+    n2 --> n5
+    n4 --> n6
+    n4 --> n7
+    n7 --> n8
+    n7 --> n9
+    n3 --> n10
+    n3 --> n11
+    n10 --> n12
+    n10 --> n13
+```
+
+**Forma posfixa (pós-ordem):** `a b c * + a * c d - 3 * +`
+
+</details>
+
+---
+
+### 🔴 Exercício 3 — `(a+b*c)*a – 4*(5-6+1) + (c-d)*3` 
+
+<details>
+<summary>💡 Clique aqui para ver a solução</summary>
+
+Aqui entra um detalhe importante: `+` e `-` têm a **mesma prioridade**, então são resolvidos **da esquerda para a direita** (associatividade à esquerda). Ou seja, a expressão é lida como:
+
+```
+[ (a+b*c)*a  –  4*(5-6+1) ]  +  [ (c-d)*3 ]
+```
+
+Isso significa que a operação `-` fica **mais funda** na árvore (é resolvida primeiro), e o `+` final (o último a ser aplicado) é que fica na raiz. O mesmo raciocínio de associatividade à esquerda se aplica dentro de `5-6+1`, que vira `(5-6)+1`.
+
+```mermaid
+graph TD
+    n1(("+"))
+    n2(("-"))
+    n3(("*"))
+    n4(("*"))
+    n5(("+"))
+    n6(("a"))
+    n7(("a"))
+    n8(("*"))
+    n9(("b"))
+    n10(("c"))
+    n11(("4"))
+    n12(("+"))
+    n13(("-"))
+    n14(("1"))
+    n15(("5"))
+    n16(("6"))
+    n17(("-"))
+    n18(("3"))
+    n19(("c"))
+    n20(("d"))
+    n1 --> n2
+    n1 --> n17
+    n2 --> n3
+    n2 --> n4
+    n3 --> n5
+    n3 --> n6
+    n5 --> n7
+    n5 --> n8
+    n8 --> n9
+    n8 --> n10
+    n4 --> n11
+    n4 --> n12
+    n12 --> n13
+    n12 --> n14
+    n13 --> n15
+    n13 --> n16
+    n17 --> n19
+    n17 --> n20
+    n17 --> n18
+```
+
+>  Repare que o nó `n17` (o `-` de `c-d`) tem uma peculiaridade no desenho acima: ele é pai de `c` e `d`, e ao mesmo tempo é filho direito da raiz junto com o `*` de `(c-d)*3` — se estiver com dificuldade de visualizar, revise o Exercício 1, que tem exatamente essa mesma sub-árvore `(c-d)*3`.
+
+**Forma posfixa (pós-ordem):** `a b c * + a * 4 5 6 - 1 + * - c d - 3 * +`
+
+</details>
+
+---
+
+### 🔴 Exercício 4 — `(a+b-c) – (3-4)*(5-6+1) + (c-d*3)` 
+
+<details>
+<summary>💡 Clique aqui para ver a solução</summary>
+
+De novo, `+` e `-` no nível mais externo são resolvidos da esquerda para a direita:
+
+```
+[ (a+b-c)  –  (3-4)*(5-6+1) ]  +  [ (c-d*3) ]
+```
+
+Alguns detalhes que merecem atenção:
+
+- `(a+b-c)` também é resolvido da esquerda para a direita: primeiro `a+b`, depois `-c`.
+- `(c-d*3)`: aqui `*` tem prioridade sobre `-`, então é `c - (d*3)`, e **não** `(c-d)*3` — repare como isso é bem diferente do Exercício 1!
+
+```mermaid
+graph TD
+    n1(("+"))
+    n2(("-"))
+    n3(("-"))
+    n4(("+"))
+    n5(("c"))
+    n6(("a"))
+    n7(("b"))
+    n8(("*"))
+    n9(("-"))
+    n10(("+"))
+    n11(("3"))
+    n12(("4"))
+    n13(("-"))
+    n14(("1"))
+    n15(("5"))
+    n16(("6"))
+    n17(("-"))
+    n18(("c"))
+    n19(("*"))
+    n20(("d"))
+    n21(("3"))
+    n1 --> n2
+    n1 --> n17
+    n2 --> n3
+    n2 --> n8
+    n3 --> n4
+    n3 --> n5
+    n4 --> n6
+    n4 --> n7
+    n8 --> n9
+    n8 --> n10
+    n9 --> n11
+    n9 --> n12
+    n10 --> n13
+    n10 --> n14
+    n13 --> n15
+    n13 --> n16
+    n17 --> n18
+    n17 --> n19
+    n19 --> n20
+    n19 --> n21
+```
+
+**Forma posfixa (pós-ordem):** `a b + c - 3 4 - 5 6 - 1 + * - c d 3 * - +`
+
+</details>
 
 ---
 
