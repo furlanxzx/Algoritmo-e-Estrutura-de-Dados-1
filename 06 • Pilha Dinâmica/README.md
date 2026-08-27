@@ -16,16 +16,16 @@
 
 ---
 
-## 📚 Introdução às Pilhas de Alocação Dinâmica
+## <mark> 1 - Introdução às Pilhas de Alocação Dinâmica </mark>
 
 Uma pilha dinâmica é formada por uma sequência de estruturas (comumente chamadas de **nós da pilha**) que são interligadas entre si através de ponteiros. Diferente do modelo estático (vetores), esta estrutura é criada dinamicamente na memória, utilizando funções como `malloc()` e `free()`. Isso torna o processo de incluir ou retirar nós muito mais simples e eficiente.
 
-### 🧠 Como funciona na Memória?
+### <mark> 1.1 - Como funciona na Memória?
 * **Alocação sob demanda:** Numa pilha com nós encadeados, para cada novo elemento inserido, alocamos um espaço de memória específico para armazená-lo.
 * **Tamanho flexível:** O espaço total de memória gasto pela estrutura é proporcional ao número de elementos armazenados nela no momento.
 * ⚠️ **Atenção:** Não podemos garantir que os elementos armazenados ocuparão um espaço de memória sequencial. Portanto, **não temos acesso direto** aos elementos da pilha como tínhamos nos índices de um vetor.
 
-### 🔗 Entendendo o Encadeamento
+### <mark> 1.2 - Entendendo o Encadeamento
 * Para que seja possível percorrer todos os elementos da pilha, devemos explicitamente guardar o encadeamento dos elementos.
 * Cada nó contém a informação e um ponteiro para a estrutura que é a sua sucessora na pilha.
 * Toda a sequência é acessada por um único ponteiro que aponta para o primeiro nó (o topo da pilha).
@@ -33,7 +33,7 @@ Uma pilha dinâmica é formada por uma sequência de estruturas (comumente chama
 
 ---
 
-## 💻 Declaração em Linguagem C
+## <mark> 1.3 - Declaração em Linguagem C
 
 Para representar isso no código, criamos uma estrutura (`struct`) contendo o campo de informação (`info`) e o ponteiro para o próximo nó (`prox`).
 
@@ -50,7 +50,7 @@ typedef TPilha *PPilha;
 
 ---
 
-## 🏁 Inicialização e Manipulação
+## <mark> 1.4 - Inicialização e Manipulação </mark>
 
 Antes de utilizarmos a pilha, ela precisa ser inicializada. Como ela começa vazia, o topo não aponta para lugar nenhum.
 
@@ -65,7 +65,9 @@ PPilha inicializa_pilha() {
 * Para cada novo elemento, deve-se alocar dinamicamente a memória necessária e encadeá-lo na pilha existente.
 * Na pilha encadeada, é mais fácil inserir os elementos sempre no **início** do encadeamento.
 * O ponteiro principal que representa a pilha deve ter seu valor atualizado constantemente, pois a pilha deve passar a ser representada pelo ponteiro para o **novo primeiro elemento**.
-## 🛠️ Manipulação de Pilha Encadeada
+
+---
+## <mark> 1.5 - Manipulação de Pilha Encadeada </mark>
 
 Para manipularmos adequadamente uma pilha encadeada (dinâmica), precisamos implementar quatro funções fundamentais:
 * Inserção de um novo elemento (Push).
@@ -75,7 +77,7 @@ Para manipularmos adequadamente uma pilha encadeada (dinâmica), precisamos impl
 
 ---
 
-## 📥 Inserindo na Pilha Encadeada (Função `push`)
+## <mark> 2 - Inserindo na Pilha Encadeada (Função `push`) </mark>
 
 A função de inserção recebe o ponteiro do topo atual da pilha e o valor (neste caso, um número inteiro) a ser armazenado. O processo completo ocorre em quatro passos simples:
 1. Alocamos um espaço de memória dinamicamente para o **novo** nó.
@@ -83,7 +85,7 @@ A função de inserção recebe o ponteiro do topo atual da pilha e o valor (nes
 3. O encadeamento é feito apontando o campo `prox` do novo nó para o que era o topo atual da `pilha`.
 4. Retornamos o ponteiro do `novo` nó, atualizando a referência principal da pilha no programa.
 
-**Código Consolidado:**
+**Código:**
 
 ```c
 PPilha push(PPilha pilha, int i)
@@ -99,11 +101,11 @@ PPilha push(PPilha pilha, int i)
 > Ao utilizar a função acima para armazenar sequencialmente o conjunto de dados `{9, 10, 19, 15}`, a estrutura resultante na memória terá o número `15` no topo. O encadeamento seguirá a ordem: `15 -> 19 -> 10 -> 9 -> NULL` (aterramento).
 
 ---
-## 📤 Retirando da Pilha Encadeada (Função `pop`)
+## <mark> 3 - Retirando da Pilha Encadeada (Função `pop`) </mark>
 
 A função de remoção (`pop`) tem o objetivo de retirar o elemento que está no topo da pilha, retornando o seu valor e liberando o espaço de memória que ele ocupava.
 
-**Código Consolidado:**
+**Código:**
 
 ```c
 PPilha pop (PPilha pilha, int *v){
@@ -129,18 +131,19 @@ PPilha pop (PPilha pilha, int *v){
 
 ---
 
-## 📝 Resolução dos Exercícios Propostos
+## 📝 Exercícios Práticos
 
-Tente resolver os exercícios no seu ambiente de desenvolvimento antes de consultar as respostas!
+> Recomendação: Tentar resolver os exercícios antes de consultar as respostas me ajudou a melhorar o compreendimento da matéria. 
 
 ---
 
-### Exercício 1 
-**Nível de Dificuldade:** 🟢 Fácil / Médio
+### 🟢 Exercício 1 
+
+> **Enunciado:**
 > Faça a função que imprima toda a pilha e a função que libera os espaços alocados (de forma iterativa).
 
 <details>
-<summary><b> Ver resposta (Código em C)</b></summary>
+<summary><b>💡 Clique aqui para ver a solução</b></summary>
 
 ```c
 // Função para imprimir os elementos da pilha
@@ -168,12 +171,13 @@ PPilha libera_pilha(PPilha pilha) {
 
 ---
 
-### Exercício 2
-**Nível de Dificuldade:** 🟡 Médio
+### 🟡 Exercício 2
+
+> **Enunciado:**
 > Faça uma função **recursiva** que libera a pilha e outra que imprime.
 
 <details>
-<summary><b> Ver resposta (Código em C)</b></summary>
+<summary><b>💡 Clique aqui para ver a solução</b></summary>
 
 ```c
 // Função recursiva para imprimir a pilha
@@ -197,14 +201,15 @@ PPilha libera_pilha_rec(PPilha pilha) {
 
 ---
 
-### Exercício 3
-**Nível de Dificuldade:** 🔴 Difícil
+### 🔴 Exercício 3
+
+> **Enunciado:**
 > Utilizando as funções de manipulação de pilha vistas em aula (`push` e `pop`), escreva uma função que remova um item com valor `v` da pilha. Se não encontrar o elemento `v`, retorne a pilha sem modificação.
 
 *(Dica: Lembre-se que em uma pilha nós só temos acesso ao topo. Para tirar alguém do meio, você precisará de uma estrutura auxiliar para guardar os elementos que estão acima dele).*
 
 <details>
-<summary><b> Ver resposta (Código em C)</b></summary>
+<summary><b>💡 Clique aqui para ver a solução</b></summary>
 
 ```c
 PPilha remove_item(PPilha pilha, int v) {
