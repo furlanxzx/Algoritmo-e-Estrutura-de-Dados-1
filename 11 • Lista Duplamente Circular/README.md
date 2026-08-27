@@ -1,6 +1,18 @@
-# Listas Duplamente Encadeadas e Circulares
+<h1 align="center">Lista Duplamente Circular</h1>
 
-> 📚 Material baseado nas aulas da Prof.ª Regina — Algoritmos e Estrutura de Dados
+<p align="center">
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/10%20%E2%80%A2%20Lista%20Duplamente%20Encadeada/README.md">
+    <img src="https://img.shields.io/badge/⬅️_Voltar-Lista_Duplamente_Encadeada-8b5cf6?style=plastic" alt="Voltar">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="../README.md">
+    <img src="https://img.shields.io/badge/🏠_Inicio-Menu-06b6d4?style=plastic" alt="Menu">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/12%20%E2%80%A2%20Matrizes%20Esparsas/README.md">
+    <img src="https://img.shields.io/badge/Avancar-Matrizes_Esparsas_➡️-8b5cf6?style=plastic" alt="Avançar">
+  </a>
+</p>
 
 ---
 
@@ -489,3 +501,19 @@ int main() {
 | Acesso ao primeiro elemento | O(1) | O(1) (`l->prox`) |
 
 **Próximos passos sugeridos:** depois de dominar bem esses exercícios, vale a pena tentar implementar uma **pilha** ou **fila circular** usando essa mesma estrutura, só para fixar a lógica dos ponteiros `ant`/`prox` andando nos dois sentidos.
+
+---
+
+<p align="center">
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/10%20%E2%80%A2%20Lista%20Duplamente%20Encadeada/README.md">
+    <img src="https://img.shields.io/badge/⬅️_Voltar-Lista_Duplamente_Encadeada-8b5cf6?style=plastic" alt="Voltar">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="../README.md">
+    <img src="https://img.shields.io/badge/🏠_Inicio-Menu-06b6d4?style=plastic" alt="Menu">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/12%20%E2%80%A2%20Matrizes%20Esparsas/README.md">
+    <img src="https://img.shields.io/badge/Avancar-Matrizes_Esparsas_➡️-8b5cf6?style=plastic" alt="Avançar">
+  </a>
+</p>
