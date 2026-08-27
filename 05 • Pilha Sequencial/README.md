@@ -16,7 +16,7 @@
 
 ---
 
-### <mark>01. O Conceito Fundamental</mark>
+## <mark>1 - O Conceito Fundamental</mark>
 
 Imagine uma pilha de pratos ou de livros:
 * Você **sempre adiciona** um novo item no **topo**.
@@ -29,7 +29,7 @@ Essa regra de funcionamento é chamada de **LIFO** (*Last In, First Out*).
 
 ---
 
-### <mark>02. Propriedades e Regras de Acesso</mark>
+## <mark> 2 - Propriedades e Regras de Acesso</mark>
 
 | Propriedade | Funcionamento |
 | :--- | :--- |
@@ -41,7 +41,7 @@ Essa regra de funcionamento é chamada de **LIFO** (*Last In, First Out*).
 
 ---
 
-### <mark>03. Representação Gráfica na Memória</mark>
+## <mark> 3 - Representação Gráfica na Memória</mark>
 
 ```text
                +-----------------------+  <-- MAX_PILHA (Capacidade Máxima)
@@ -60,7 +60,7 @@ Essa regra de funcionamento é chamada de **LIFO** (*Last In, First Out*).
 
 ---
 
-### <mark>04. Aplicações no Mundo Real e na Computação</mark>
+## <mark> 4 - Aplicações no Mundo Real e na Computação</mark>
 
 * **Validação de Sintaxe:** Verificação de parênteses `()`, colchetes `[]` e chaves `{}` em códigos fonte.
 * **Parsers Aritméticos:** Avaliação e conversão de expressões matemáticas.
@@ -70,7 +70,7 @@ Essa regra de funcionamento é chamada de **LIFO** (*Last In, First Out*).
 
 ---
 
-### <mark>05. Operações Básicas</mark>
+## <mark> 5 - Operações Básicas</mark>
 
 1. **Criar / Inicializar:** Prepara a estrutura na memória e ajusta os ponteiros/índices.
 2. **Empilhar (`Push`):** Adiciona um elemento no topo (exige verificar se a pilha não está cheia -> *Overflow*).
@@ -80,7 +80,7 @@ Essa regra de funcionamento é chamada de **LIFO** (*Last In, First Out*).
 
 ---
 
-### <mark>06. Formas de Implementação</mark>
+## <mark> 6 - Formas de Implementação</mark>
 
 Existem duas formas principais de construir uma pilha em linguagem C:
 
@@ -89,7 +89,7 @@ Existem duas formas principais de construir uma pilha em linguagem C:
 
 ---
 
-### <mark>07. Estrutura e Inicialização em C (Estática)</mark>
+## <mark> 7 - Estrutura e Inicialização em C (Estática)</mark>
 
 Definição da `struct` e função para criar a pilha na memória:
 
@@ -118,7 +118,7 @@ TPilha* nova() {
 
 ---
 
-##  Empilhando dados na pilha (Push)
+## <mark> 8 - Empilhando dados na pilha (Push) </mark>
 
 Para empilhar um elemento, é **necessário verificar a possibilidade de estouro de pilha** (*Stack Overflow*), uma vez que estamos trabalhando com um vetor de tamanho fixo.
 
@@ -140,7 +140,7 @@ int push (TPilha* p, int val){
 
 ---
 
-## Desempilhando dados na Pilha (Pop)
+## <mark> 9 - Desempilhando dados na Pilha (Pop) </mark>
 
 Para desempilhar, é necessário **considerar a possibilidade de *underflow*** (tentar remover de uma pilha que já está vazia).
 
@@ -162,7 +162,7 @@ int pop (TPilha* p, int* val){
 
 ---
 
-##  Liberando espaços alocados
+## <mark> 10 - Liberando espaços alocados </mark>
 
 Para liberar os espaços alocados na memória, basta utilizar a função `free` na estrutura criada. Faça a função `libera` (ou `remover`).
 
@@ -175,15 +175,16 @@ TPilha *remover (TPilha* p){
 
 ---
 
-## 🎯 Seção de Exercícios Práticos
+## 📝 Exercícios Práticos
 
 ---
 
-### 🟢 Exercício 1: Listar Elementos da Pilha
-**Enunciado:** Faça uma função para listar todos os elementos da pilha.
+### 🟢 Exercício 1 — Listar Elementos da Pilha
+> **Enunciado:** 
+> Faça uma função para listar todos os elementos da pilha.
 
 <details>
-<summary><b>🔍 Clique aqui para ver a Solução e Explicação</b></summary>
+<summary><b>💡 Clique aqui para ver a solução</b></summary>
 
 <br>
 
@@ -196,27 +197,27 @@ Para listar os elementos do topo até a base sem destruir a estrutura da pilha, 
 // Função para exibir os elementos do topo até a base
 void listar(TPilha* p) {
     if (p->topo < 0) {
-        printf("\n[ A Pilha esta Vazia! ]\n");
+        printf("A Pilha esta Vazia!\n");
         return;
     }
 
-    printf("\n--- Conteudo da Pilha (Topo -> Base) ---\n");
+    printf("Conteudo da Pilha (Topo -> Base)");
     for (int i = p->topo; i >= 0; i--) {
         printf("| %4d |\n", p->vet[i]);
     }
-    printf("----------------------------------------\n");
 }
 ```
 </details>
 
 ---
 
-### 🟡 Exercício 2: Inversão Total de Frase
+### 🟡 Exercício 2 — Inversão Total de Frase
 
-**Enunciado:** Faça um programa que use uma pilha para inverter a ordem das letras da frase. Por exemplo, dado o texto "ESTE EXERCICIO E MUITO FACIL" a saida deve ser "LICAF OTIUM E OICICREXE ETSE". Use as funções `push` e `pop`.
+> **Enunciado:** 
+> Faça um programa que use uma pilha para inverter a ordem das letras da frase. Por exemplo, dado o texto "ESTE EXERCICIO E MUITO FACIL" a saida deve ser "LICAF OTIUM E OICICREXE ETSE". Use as funções `push` e `pop`.
 
 <details>
-<summary><b>🔍 Clique aqui para ver a Solução e Explicação</b></summary>
+<summary><b>💡 Clique aqui para ver a solução</b></summary>
 
 <br>
 
@@ -272,11 +273,12 @@ int main() {
 
 ---
 
-### 🟡 Exercício 3: Inversão de Letras Conservando as Palavras
-**Enunciado:** Refaça o programa anterior de forma que agora seja invertido a ordem das letras de cada palavra de uma cadeia de caracteres, preservando a ordem das palavras. Por exemplo, dado o texto "ESTE EXERCICIO E MUITO FACIL" a saída deve ser "ETSE OICICREXE E OTIUM LICAF". Use as funções `push` e `pop`.
+### 🟡 Exercício 3 — Inversão de Letras Conservando as Palavras
+> **Enunciado:** 
+> Refaça o programa anterior de forma que agora seja invertido a ordem das letras de cada palavra de uma cadeia de caracteres, preservando a ordem das palavras. Por exemplo, dado o texto "ESTE EXERCICIO E MUITO FACIL" a saída deve ser "ETSE OICICREXE E OTIUM LICAF". Use as funções `push` e `pop`.
 
 <details>
-<summary><b>🔍 Clique aqui para ver a Solução e Explicação</b></summary>
+<summary><b>💡 Clique aqui para ver a solução</b></summary>
 
 <br>
 #### **Lógica da Solução:**
@@ -340,12 +342,12 @@ int main() {
 
 ---
 
-### 🔴 Exercício 4: Reconhecedor da Linguagem WcM
-**Nível de Dificuldade:** 🔴 *Difícil*  
-**Enunciado:** Digamos que nosso alfabeto seja formado pelas letras `a`, `b` e `c`. Considere o seguinte conjunto de cadeias de caracteres sobre nosso alfabeto: `c`, `aca`, `bcb`, `abcba`, `bacab`, `aacaa`, `bbcbb`, . . . Qualquer cadeia deste conjunto tem a forma **WcM**, sendo que **W** é uma sequência de letras que só contém `a` e `b` e **M** é o inverso de W, ou seja, M é W lido de trás para frente. Escreva um programa que determina se uma cadeia `X` pertence ou não ao nosso conjunto, ou seja, determina se `X` é da forma WcM.
+### 🔴 Exercício 4 — Reconhecedor da Linguagem WcM 
+> **Enunciado:**
+> Digamos que nosso alfabeto seja formado pelas letras `a`, `b` e `c`. Considere o seguinte conjunto de cadeias de caracteres sobre nosso alfabeto: `c`, `aca`, `bcb`, `abcba`, `bacab`, `aacaa`, `bbcbb`, . . . Qualquer cadeia deste conjunto tem a forma **WcM**, sendo que **W** é uma sequência de letras que só contém `a` e `b` e **M** é o inverso de W, ou seja, M é W lido de trás para frente. Escreva um programa que determina se uma cadeia `X` pertence ou não ao nosso conjunto, ou seja, determina se `X` é da forma WcM.
 
 <details>
-<summary><b>🔍 Clique aqui para ver a Solução e Explicação</b></summary>
+<summary><b>💡 Clique aqui para ver a solução</b></summary>
 
 <br>
 
@@ -420,7 +422,7 @@ int main() {
     char* testes[] = {"c", "aca", "bcb", "abcba", "bacab", "aacaa", "acb", "abcca", "ab"};
     int n = sizeof(testes) / sizeof(testes[0]);
 
-    printf("--- Validacao da Linguagem WcM ---\n");
+    printf("Validacao da Linguagem WcM");
     for (int k = 0; k < n; k++) {
         if (validar_WcM(testes[k])) {
             printf("Cadeia \"%s\": VALIDA [V]\n", testes[k]);
