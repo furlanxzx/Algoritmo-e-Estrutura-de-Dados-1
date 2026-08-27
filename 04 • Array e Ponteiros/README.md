@@ -16,26 +16,6 @@
 
 ---
 
-# Ponteiros e Vetores (Array e Ponteiros)
-
-> Material de estudos de Algoritmos e Estruturas de Dados I, baseado nas aulas da Prof. Regina Célia Coelho.
-
-## Índice
-
-- [Vetores como Ponteiro](#vetores-como-ponteiro)
-- [Processamento de Vetores](#processamento-de-vetores)
-- [Exemplo de Aritmética de Ponteiros](#exemplo-de-aritmética-de-ponteiros)
-- [Combinando Operadores `*` e `++`](#combinando-operadores--e-)
-- [Nome do Vetor como Ponteiro](#nome-do-vetor-como-ponteiro)
-- [Mais Exemplos](#mais-exemplos)
-- [Vetor Declarado x Ponteiro: a Diferença Fundamental](#vetor-declarado-x-ponteiro-a-diferença-fundamental)
-- [Operações Inválidas com Vetores](#operações-inválidas-com-vetores)
-- [Ponteiros e Matrizes](#ponteiros-e-matrizes)
-- [Alocação Dinâmica de Vetores](#alocação-dinâmica-de-vetores)
-- [Exercícios](#exercícios)
-
----
-
 ## Vetores como Ponteiro
 
 Ponteiros e vetores estão **fortemente relacionados** na linguagem C.
@@ -896,6 +876,21 @@ int main(void)
     return 0;
 }
 ```
+
+---
+<p align="center">
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/03%20%E2%80%A2%20Struct%20e%20Ponteiros/README.md">
+    <img src="https://img.shields.io/badge/⬅️_Voltar-Struct_e_Ponteiros-8b5cf6?style=plastic" alt="Voltar">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="../README.md">
+    <img src="https://img.shields.io/badge/🏠_Inicio-Menu-06b6d4?style=plastic" alt="Menu">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/05%20%E2%80%A2%20Pilha%20Sequencial/README.md">
+    <img src="https://img.shields.io/badge/Avancar-Pilha_Sequencial_➡️-8b5cf6?style=plastic" alt="Avançar">
+  </a>
+</p>
 
 📌 Repare que usamos `scanf("%d", matriz + (i*col+j))` sem `&` — assim como vimos na seção de exemplos com ponteiros, `matriz + (i*col+j)` **já é** um endereço, então não precisamos do `&` que usaríamos com uma variável comum.
 
