@@ -1133,7 +1133,7 @@ int main(void)
 </details>
 
 <p align="center">
-  <a href="../01%20•%20Definições%20Iniciais%20e%20Notação%20Assintótica/README.md">
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/02%20%E2%80%A2%20Manipula%C3%A7%C3%A3o%20de%20Arquivos/README.md">
     <img src="https://img.shields.io/badge/⬅️_Voltar-Arquivos-8b5cf6?style=plastic" alt="Voltar">
   </a>
   &nbsp;&nbsp;&nbsp;&nbsp;
@@ -1141,7 +1141,7 @@ int main(void)
     <img src="https://img.shields.io/badge/🏠_Inicio-Menu-06b6d4?style=plastic" alt="Menu">
   </a>
   &nbsp;&nbsp;&nbsp;&nbsp;
-  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/03%20%E2%80%A2%20Struct%20e%20Ponteiros/README.md">
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/04%20%E2%80%A2%20Array%20e%20Ponteiros/README.md">
     <img src="https://img.shields.io/badge/Avancar-Array_e_Ponteiros_➡️-8b5cf6?style=plastic" alt="Avançar">
   </a>
 </p>
