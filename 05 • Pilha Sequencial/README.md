@@ -1,4 +1,5 @@
 <h1 align="center">05  • Pilha Sequencial</h1>
+
 <p align="center">
   <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/04%20%E2%80%A2%20Array%20e%20Ponteiros/README.md">
     <img src="https://img.shields.io/badge/⬅️_Voltar-Array_e_Ponteiros-8b5cf6?style=plastic" alt="Voltar">
@@ -433,3 +434,18 @@ int main() {
 ```
 </details>
 
+---
+
+<p align="center">
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/04%20%E2%80%A2%20Array%20e%20Ponteiros/README.md">
+    <img src="https://img.shields.io/badge/⬅️_Voltar-Array_e_Ponteiros-8b5cf6?style=plastic" alt="Voltar">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="../README.md">
+    <img src="https://img.shields.io/badge/🏠_Inicio-Menu-06b6d4?style=plastic" alt="Menu">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/06%20%E2%80%A2%20Pilha%20Din%C3%A2mica/README.md">
+    <img src="https://img.shields.io/badge/Avancar-Pilha_Dinamica_➡️-8b5cf6?style=plastic" alt="Avançar">
+  </a>
+</p>
