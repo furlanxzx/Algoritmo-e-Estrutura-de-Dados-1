@@ -20,7 +20,7 @@
 
 ---
 
-## 📊 Tipos de Dados
+## <mark> 1 - Tipos de Dados</mark>
 
 | Tipo | O que é | Exemplo / Aplicação |
 | :--- | :--- | :--- |
@@ -30,7 +30,7 @@
 
 ---
 
-## 💡 Detalhes sobre o TDA:
+## <mark> 1.1 - Detalhes sobre o TDA:</mark>
 
 A ideia é simples: **o TDA separa o uso da implementação**.
 
@@ -42,7 +42,7 @@ A ideia é simples: **o TDA separa o uso da implementação**.
 > Vocês enxergarão essa ideia com total clareza nos próximos tópicos de **Pilha**, **Fila** e **Listas Encadeadas**. Nesses módulos, quem utiliza a estrutura precisa apenas da lista de comandos oferecidos — a implementação em C fica totalmente escondida por trás dos panos. É exatamente essa separação entre o que é visível ao público e o que está codificado por dentro que chamamos de **Tipo de Dado Abstrato**.
 ---
 
-## ⏱️ Introdução à Análise de Algoritmos
+## <mark> 2 - Introdução à Análise de Algoritmos</mark>
 
 Analisar um algoritmo serve para prever seu consumo de **tempo** e **memória**.
 
@@ -50,7 +50,7 @@ Analisar um algoritmo serve para prever seu consumo de **tempo** e **memória**.
 * **Tempo Real (Segundos):** **Não serve como padrão**, pois muda conforme o hardware, compilador e memória do computador.
 * **Modelo Matemático:** A forma correta de medir. Em vez de segundos, contamos apenas as **operações principais** (ex: quantas comparações um algoritmo de ordenação faz).
 ---
-##  Função de Complexidade $f(n)$
+##  <mark> 2.1 - Função de Complexidade $f(n)$</mark>
 
 A **Função de Complexidade $f(n)$** mede o custo de um algoritmo em função do tamanho da entrada ($n$).
 
@@ -59,7 +59,7 @@ A **Função de Complexidade $f(n)$** mede o custo de um algoritmo em função d
 
 ---
 
-##  Cenários de Execução
+##  <mark> 2.2 - Cenários de Execução</mark>
 
 Um mesmo algoritmo pode ter desempenhos diferentes dependendo da organização dos dados de entrada:
 
@@ -85,7 +85,7 @@ O algoritmo mais simples para isso é a **pesquisa sequencial**: olhar item por 
 
 ---
 
-### 📐 Calculando o Caso Médio
+### <mark> 2.3 - Calculando o Caso Médio</mark>
 
 Se o nome estiver na lista e tiver a **mesma chance** de estar em qualquer posição, qual é a média de nomes que precisaremos checar?
 
@@ -101,6 +101,8 @@ Se o nome estiver na lista e tiver a **mesma chance** de estar em qualquer posi�
 
 > 💡 **O que isso significa na prática?**  
 > Se você tiver $100$ nomes na lista, em média precisará olhar $\frac{100 + 1}{2} = 50,5$ nomes. Ou seja: no caso médio de uma busca simples, você examina **aproximadamente a metade dos dados** ($\approx \frac{n}{2}$).
+
+---
 
 ## 📊 Exemplo 2: Encontrando o Maior e o Menor Elemento (MaxMin1)
 
@@ -138,7 +140,7 @@ Para descobrir a **função de complexidade $f(n)$**, precisamos apenas contar q
 
 ---
 
-### 💡 Por que o Melhor, Pior e Caso Médio são iguais aqui?
+### <mark> 2.4 -  Por que o Melhor, Pior e Caso Médio são iguais aqui?</mark>
 
 Veja que o código **não tem atalhos**: mesmo se a primeira pergunta for verdadeira (*"o número é maior"*), ele ainda é obrigado a executar a segunda pergunta (*"o número é menor"*).
 
@@ -174,7 +176,7 @@ void MaxMin2(int A[], int n, int *Max, int *Min) {
 
 ---
 
-###  Por que a ordem dos dados agora faz diferença?
+### <mark> 2.5 - Por que a ordem dos dados agora faz diferença?</mark>
 
 Diferente do `MaxMin1`, onde fazíamos 2 perguntas para cada número não importando a situação, o uso do `else if` faz com que o comportamento mude de acordo com a organização da lista:
 
@@ -191,11 +193,14 @@ Diferente do `MaxMin1`, onde fazíamos 2 perguntas para cada número não import
 > 💡 **Resumo da melhoria:**  
 > No pior cenário, o `MaxMin2` empata com o `MaxMin1`. Porém, no melhor cenário, ele executa **metade das comparações**, mostrando como um simples atalho no código melhora o desempenho médio!
 
+---
+
 ## 📊 Exemplo 4: Divisão por Pares (MaxMin3)
 
 Para otimizar ainda mais o algoritmo, o `MaxMin3` utiliza uma estratégia matemática esperta: em vez de testar cada número individualmente contra o maior e o menor, ele processa os elementos **aos pares** (de 2 em 2).
 
-### 💡 A Ideia Intuitiva
+### <mark> 2.6 - A Ideia Intuitiva </mark>
+
 Se pegarmos dois números quaisquer, basta **1 comparação** para descobrir qual é o maior e qual é o menor da dupla:
 1. O **maior do par** só precisa disputar o título com o `Max` global.
 2. O **menor do par** só precisa disputar com o `Min` global.
@@ -242,7 +247,7 @@ void MaxMin3(int A[], int *Max, int *Min, int n) {
 
 ---
 
-###  Análise de Complexidade Passo a Passo
+###  <mark> 2.7 - Análise de Complexidade Passo a Passo </mark>
 
 A contagem de comparações da estrutura principal funciona assim:
 
@@ -265,7 +270,7 @@ $$f(n) = \frac{n + (n - 2) + (n - 2)}{2} = \frac{3n - 4}{2} = \frac{3n}{2} - 2$$
 
 ---
 
-### 🚀 Comparando o Ganho de Desempenho 🚀
+### <mark> 2.8 - Comparando o Ganho de Desempenho </mark>
 
 Assim como no `MaxMin1`, este algoritmo executa o mesmo fluxo de instruções independentemente da ordem dos dados. Portanto, a fórmula **$f(n) = \frac{3n}{2} - 2$** vale para o **melhor caso**, **pior caso** e **caso médio**.
 
@@ -390,7 +395,7 @@ $$T(n) = O(\max(n, n^2, n \log n)) = O(n^2)$$
 
 ---
 
-##  Comportamento Assintótico e Constantes
+##  <mark> 3 - Comportamento Assintótico e Constantes </mark>
 
 O **comportamento assintótico** analisa o desempenho e o crescimento de um algoritmo conforme o volume de dados tende ao infinito ($n \to \infty$), desconsiderando constantes de proporcionalidade.
 
