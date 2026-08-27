@@ -1,3 +1,21 @@
+<h1 align="center">Fila Dinâmica</h1>
+
+<p align="center">
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/06%20%E2%80%A2%20Pilha%20Din%C3%A2mica/README.md">
+    <img src="https://img.shields.io/badge/⬅️_Voltar-Pilha_Dinâmica-8b5cf6?style=plastic" alt="Voltar">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="../README.md">
+    <img src="https://img.shields.io/badge/🏠_Inicio-Menu-06b6d4?style=plastic" alt="Menu">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/08%20%E2%80%A2%20Lista%20Encadeada%20Simples/README.md">
+    <img src="https://img.shields.io/badge/Avancar-Lista_Encadeada_Simples_➡️-8b5cf6?style=plastic" alt="Avançar">
+  </a>
+</p>
+
+---
+
 ## 🧠 Conceito: A Política FIFO
 
 Diferente da pilha (que vimos anteriormente usando a lógica LIFO), as filas funcionam baseadas na política **FIFO** (*First-In First-Out*, ou "O Primeiro a Entrar é o Primeiro a Sair"). 
@@ -274,3 +292,19 @@ void insere_prioridade(PFila f, char tipo) {
 }
 ```
 </details>
+
+---
+
+<p align="center">
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/06%20%E2%80%A2%20Pilha%20Din%C3%A2mica/README.md">
+    <img src="https://img.shields.io/badge/⬅️_Voltar-Pilha_Dinâmica-8b5cf6?style=plastic" alt="Voltar">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="../README.md">
+    <img src="https://img.shields.io/badge/🏠_Inicio-Menu-06b6d4?style=plastic" alt="Menu">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/08%20%E2%80%A2%20Lista%20Encadeada%20Simples/README.md">
+    <img src="https://img.shields.io/badge/Avancar-Lista_Encadeada_Simples_➡️-8b5cf6?style=plastic" alt="Avançar">
+  </a>
+</p>
