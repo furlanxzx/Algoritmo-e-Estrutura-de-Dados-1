@@ -16,15 +16,15 @@
 
 ---
 
-## 1. Definição
+## <mark> 1. Definição </mark>
 
 Uma **matriz esparsa** é uma matriz de grande dimensão (centenas ou milhares de linhas e colunas) em que a **maioria dos elementos vale zero**.
 
-> ➤ Este tipo de matriz surge em diversas aplicações, principalmente na física, na matemática e na economia.
+>  Este tipo de matriz surge em diversas aplicações, principalmente na física, na matemática e na economia.
 >
-> ✓ Também tem aplicação em computação: no **armazenamento de dados**.
+>  Também tem aplicação em computação: no **armazenamento de dados**.
 >
-> ➤ Se tentarmos representar uma matriz deste tamanho pelo modo convencional (`array`), é provável que o compilador não permita a sua declaração e, mesmo que o faça, **desperdiçaremos muita memória**.
+>  Se tentarmos representar uma matriz deste tamanho pelo modo convencional (`array`), é provável que o compilador não permita a sua declaração e, mesmo que o faça, **desperdiçaremos muita memória**.
 
 ### Por que isso é um problema?
 
@@ -35,11 +35,11 @@ Imagine uma matriz `1000 x 1000` em que só existem 20 valores diferentes de zer
 ### Exemplo
 
 ```
-        ┌                      ┐
+                               
         │  6   0   3   0   0  0 │
 ME  =   │  0   0   0   2   0  3 │
         │  0   1   0   0   0  0 │
-        └                      ┘
+                               
 ```
 
 Se guardarmos apenas o **valor**, perdemos a informação de **onde** ele estava na matriz. Por isso, para cada elemento não nulo, guardamos uma **tripla**: `(linha, coluna, valor)`.
@@ -48,20 +48,20 @@ Se guardarmos apenas o **valor**, perdemos a informação de **onde** ele estava
 vetme = [(1, 1, 6) (1, 3, 3) (2, 4, 2) (2, 6, 3) (3, 2, 1)]
 ```
 
-> ➤ Note que cada elemento deste vetor é constituído por 3 valores:
-> - ✓ a linha do elemento,
-> - ✓ a coluna e
-> - ✓ o valor armazenado na matriz.
+>  Note que cada elemento deste vetor é constituído por 3 valores:
+> - a linha do elemento,
+> -  a coluna e
+> -  o valor armazenado na matriz.
 >
-> ➤ `vetme` trata-se de um vetor em que cada elemento é uma tupla, e a construção desta tupla pode ser realizada utilizando o tipo `struct`.
+>  `vetme` trata-se de um vetor em que cada elemento é uma tupla, e a construção desta tupla pode ser realizada utilizando o tipo `struct`.
 
 ---
 
-## 2. Implementação
+## <mark> 2. Implementação </mark>
 
 Em vez de um vetor de tuplas, a forma mais comum (e mais flexível) de implementar matrizes esparsas é usando **listas encadeadas**: guardamos um vetor de ponteiros — um ponteiro **por linha** — e cada ponteiro aponta para uma lista encadeada com os elementos não nulos **daquela linha**.
 
-> ➤ Uma forma de implementar matrizes esparsas utilizando listas encadeadas é guardar apenas uma **lista de linhas** e, no registro, **não armazenar o número da linha** (ele já é dado pelo índice do vetor), ou seja, utilizar um **vetor de ponteiros**.
+> * Uma forma de implementar matrizes esparsas utilizando listas encadeadas é guardar apenas uma **lista de linhas** e, no registro, **não armazenar o número da linha** (ele já é dado pelo índice do vetor), ou seja, utilizar um **vetor de ponteiros**.
 
 ```c
 #define MAX_LINHA 100
@@ -79,9 +79,9 @@ Repare que cada nó guarda `col` (coluna) e `val` (valor) — **não** guarda a 
 Visualmente, a matriz `ME` do exemplo acima ficaria assim:
 
 ```
-m[0] ──▶ (col:1, val:6) ──▶ (col:3, val:3) ──▶ NULL
-m[1] ──▶ (col:4, val:2) ──▶ (col:6, val:3) ──▶ NULL
-m[2] ──▶ (col:2, val:1) ──▶ NULL
+m[0] ─> (col:1, val:6) ─> (col:3, val:3) ─> NULL
+m[1] ─> (col:4, val:2) ─> (col:6, val:3) ─> NULL
+m[2] ─> (col:2, val:1) ─> NULL
 ```
 
 > 💡 Note que os índices aqui começam em 0 (como é padrão em C), enquanto no slide a numeração das linhas/colunas começou em 1 — é só uma questão de convenção, o importante é manter a consistência dentro do seu programa.
@@ -112,20 +112,23 @@ int main( ) {
     return(0);  }
 ```
 
-Para esse programa funcionar, faltam justamente as quatro funções (`inicializa`, `insere`, `imprime`, `libera`) — e é exatamente isso que o primeiro exercício pede!
+Para esse programa funcionar, faltam justamente as quatro funções (`inicializa`, `insere`, `imprime`, `libera`) — e é exatamente isso que o primeiro exercício pede.
 
 ---
 
-## 3. Exercícios
+## 📝 Exercícios Práticos
+
+---
 
 <br>
 
-### Exercício 1 🟢 (fácil)
+### 🟢 Exercício 1: Manipulção de Matrizes Esparsas
 
+> **Enunciado:**
 > Faça um programa para manipulação de matrizes esparsas. Inclua as funções `Inicializa`, `Insere` (considere a inserção no final da lista), `Imprime` e `Libera`.
 
 <details>
-<summary>💡 Ver resolução</summary>
+<summary>💡 Clique aqui para ver a solução</summary>
 
 **`inicializa`**: simplesmente zera (coloca `NULL`) todos os ponteiros do vetor de linhas — afinal, no começo, nenhuma linha tem elementos.
 
@@ -156,7 +159,7 @@ void insere(matriz m, int i, int j, int val) {
 }
 ```
 
-> 🧠 Como os valores são inseridos digitando coluna por coluna em ordem crescente (olha o `for(j=0; j<col; j++)` do `main`), inserir sempre no final garante que a lista de cada linha fica **automaticamente ordenada por coluna**. Isso vai ser muito útil nos próximos exercícios!
+>  Como os valores são inseridos digitando coluna por coluna em ordem crescente (olha o `for(j=0; j<col; j++)` do `main`), inserir sempre no final garante que a lista de cada linha fica **automaticamente ordenada por coluna**. Isso vai ser muito útil nos próximos exercícios!
 
 **`imprime`**: para cada linha, percorremos a lista e, para cada coluna de 0 até `col-1`, verificamos se o próximo nó da lista "bate" com aquela coluna. Se sim, imprimimos o valor e avançamos o ponteiro da lista; se não, imprimimos zero.
 
@@ -200,12 +203,13 @@ void libera(matriz m, int lin) {
 
 <br>
 
-### Exercício 2 🟡 (médio)
+### 🟡 Exercício 2: Transposta
 
+> **Enunciado:**
 > Escreva uma função que calcule a **transposta** de uma matriz esparsa.
 
 <details>
-<summary>💡 Ver resolução</summary>
+<summary>💡 Clique aqui para ver a solução</summary>
 
 A transposta troca linha por coluna: o elemento que estava em `(i, j)` vai para `(j, i)`. Como a matriz transposta tem `col` linhas (o número de colunas vira o número de linhas), começamos inicializando o resultado com esse novo tamanho.
 
@@ -225,18 +229,19 @@ void transposta(matriz m, int lin, int col, matriz mt) {
 }
 ```
 
-> 🧠 **Por que a lista resultante continua ordenada por coluna sem esforço extra?** Porque percorremos `m` linha por linha, em ordem crescente de `i` (0, 1, 2...). Cada vez que inserimos em `mt[p->col]`, estamos inserindo com um valor de "nova coluna" (`i`) sempre maior que o anterior para aquela linha — e como `insere` sempre bota no final, a ordem se mantém automaticamente.
+>  **Por que a lista resultante continua ordenada por coluna sem esforço extra?** Porque percorremos `m` linha por linha, em ordem crescente de `i` (0, 1, 2...). Cada vez que inserimos em `mt[p->col]`, estamos inserindo com um valor de "nova coluna" (`i`) sempre maior que o anterior para aquela linha — e como `insere` sempre bota no final, a ordem se mantém automaticamente.
 
 </details>
 
 <br>
 
-### Exercício 3 🟡 (médio)
+### 🟡 Exercício 3: Verificar Simetria
 
+> **Enunciado:**
 > Faça uma função que verifique se uma matriz esparsa é **simétrica**.
 
 <details>
-<summary>💡 Ver resolução</summary>
+<summary>💡 Clique aqui para ver a solução</summary>
 
 Uma matriz é simétrica quando `m[i][j] == m[j][i]` para todos os `i` e `j` (e, claro, ela precisa ser quadrada, ou seja, `lin == col`).
 
@@ -271,18 +276,19 @@ int eh_simetrica(matriz m, int lin, int col) {
 }
 ```
 
-> 🧠 Repare que não precisamos verificar as duas direções manualmente: como o `for` externo passa por **todas** as linhas (inclusive as que fazem o papel de "j" em outra iteração), toda comparação acaba sendo feita nos dois sentidos naturalmente.
+>  Repare que não precisamos verificar as duas direções manualmente: como o `for` externo passa por **todas** as linhas (inclusive as que fazem o papel de "j" em outra iteração), toda comparação acaba sendo feita nos dois sentidos naturalmente.
 
 </details>
 
 <br>
 
-### Exercício 4 🟢 (fácil)
+### 🟢 Exercício 4: Verificar Diagonal
 
+> **Enunciado:**
 > Faça uma função que verifique se uma matriz esparsa é **diagonal** (ou seja, tem apenas elementos não nulos na diagonal principal).
 
 <details>
-<summary>💡 Ver resolução</summary>
+<summary>💡 Clique aqui para ver a solução</summary>
 
 Uma matriz é diagonal quando todo elemento não nulo está na diagonal principal, ou seja: na linha `i`, o **único** valor permitido diferente de zero é o da coluna `i`. Então basta percorrer cada linha e checar se algum nó tem `col` diferente de `i`.
 
@@ -304,12 +310,13 @@ int eh_diagonal(matriz m, int lin) {
 
 <br>
 
-### Exercício 5 🟡 (médio)
+### 🟡 Exercício 5: Verificar Triangular Inferior
 
+> **Enunciado:**
 > Faça uma função que verifique se uma matriz esparsa é **triangular inferior** (se só tem elementos diferentes de zero nas posições em que a linha >= coluna).
 
 <details>
-<summary>💡 Ver resolução</summary>
+<summary>💡 Clique aqui para ver a solução</summary>
 
 Muito parecido com o exercício anterior, mas agora, em vez de exigir `col == i`, exigimos `col <= i` (a coluna precisa estar "abaixo ou sobre" a diagonal principal).
 
@@ -331,16 +338,17 @@ int eh_triangular_inferior(matriz m, int lin) {
 
 <br>
 
-### Exercício 6 🔴 (difícil)
+### 🔴 Exercício 6: Maior valor médio  
 
+> **Enunciado:**
 > Escreva funções que informem a linha e a coluna da matriz esparsa com **maior valor médio**.
 
 <details>
-<summary>💡 Ver resolução</summary>
+<summary>💡 Clique aqui para ver a solução</summary>
 
 Aqui a "média" de uma linha (ou coluna) é a soma de todos os seus valores dividida pelo **número total de colunas** (ou de linhas) da matriz — lembrando que os elementos que não aparecem na lista valem zero e entram na conta normalmente (só não precisamos somar zero, porque não muda o resultado).
 
-**A dificuldade principal:** nossa estrutura é organizada por **linha**, então somar os valores de uma linha é fácil (é só percorrer a lista dela). Mas somar os valores de uma **coluna** exige percorrer **todas as linhas**, já que os elementos de uma mesma coluna estão espalhados em listas diferentes. Por isso, usamos um vetor auxiliar para acumular as somas de cada coluna **enquanto** percorremos as linhas — assim fazemos tudo em uma única varredura.
+**A dificuldade principal é, nossa estrutura é organizada por **linha**, então somar os valores de uma linha é fácil (é só percorrer a lista dela). Mas somar os valores de uma **coluna** exige percorrer **todas as linhas**, já que os elementos de uma mesma coluna estão espalhados em listas diferentes. Por isso, usamos um vetor auxiliar para acumular as somas de cada coluna **enquanto** percorremos as linhas — assim fazemos tudo em uma única varredura.
 
 ```c
 void linha_coluna_maior_media(matriz m, int lin, int col, int *linha_max, int *coluna_max) {
@@ -396,18 +404,19 @@ printf("Linha com maior media: %d\n", lmax);
 printf("Coluna com maior media: %d\n", cmax);
 ```
 
-> 🧠 **Por que usar `calloc` no vetor de somas?** Porque `calloc` já inicializa toda a memória com zero — exatamente o que precisamos, já que vamos **somar** valores nesse vetor a partir de zero.
+>  **Por que usar `calloc` no vetor de somas?** Porque `calloc` já inicializa toda a memória com zero — exatamente o que precisamos, já que vamos **somar** valores nesse vetor a partir de zero.
 
 </details>
 
 <br>
 
-### Exercício 7 🔴 (difícil)
+### 🔴 Exercício 7: Lista de Lista
 
+> **Enunciado:**
 > Tente implementar matrizes esparsas utilizando **lista de lista**.
 
 <details>
-<summary>💡 Ver resolução</summary>
+<summary>💡 Clique aqui para ver a solução</summary>
 
 Até aqui, usamos um **vetor** de ponteiros (`matriz[MAX_LINHA]`) para representar as linhas — o que ainda tem uma limitação: precisamos definir `MAX_LINHA` de antemão, e se a matriz tiver poucas linhas, ainda estamos "desperdiçando" um pouco de espaço com o vetor.
 
@@ -428,15 +437,6 @@ struct nolinha {
     pcol colunas; // lista encadeada com os elementos nao nulos dessa linha
     plinha prox;
 };
-```
-
-Visualmente, a mesma matriz de exemplo ficaria assim (repare que **não existe mais um vetor fixo** — é tudo lista, do começo ao fim):
-
-```
-m ──▶ [linha 0] ──▶ [linha 1] ──▶ [linha 2] ──▶ NULL
-         │               │               │
-         ▼               ▼               ▼
-      (1,6)──(3,3)    (4,2)──(6,3)     (2,1)
 ```
 
 **`insere`**: agora precisa primeiro **encontrar (ou criar) o nó da linha** `i` dentro da lista de linhas, para só depois inserir o elemento na lista de colunas daquela linha. Vamos manter as linhas em ordem crescente para facilitar buscas futuras.
@@ -531,13 +531,13 @@ plinha libera(plinha m) {
 }
 ```
 
-> 🧠 **Vantagem sobre a versão com vetor:** não precisamos mais de `MAX_LINHA`, e linhas totalmente vazias **nem existem** na estrutura — usamos memória só para o que de fato tem conteúdo, em qualquer uma das duas dimensões (linha e coluna). A desvantagem é que buscar uma linha específica deixa de ser O(1) (acesso direto por índice do vetor) e passa a ser O(número de linhas não vazias), pois agora também é uma lista.
+>  **Vantagem sobre a versão com vetor:** não precisamos mais de `MAX_LINHA`, e linhas totalmente vazias **nem existem** na estrutura — usamos memória só para o que de fato tem conteúdo, em qualquer uma das duas dimensões (linha e coluna). A desvantagem é que buscar uma linha específica deixa de ser O(1) (acesso direto por índice do vetor) e passa a ser O(número de linhas não vazias), pois agora também é uma lista.
 
 </details>
 
 ---
 
-## 4. Resumo rápido
+## <mark> 3 - Resumo rápido </mark>
 
 | Conceito | Explicação |
 |---|---|
