@@ -27,7 +27,7 @@ Diferente dos vetores (*arrays*), que armazenam uma sequência de dados do **mes
 
 ---
 
-##  Sintaxe e Formas de Declaração
+## <mark> 1 - Sintaxe e Formas de Declaração </mark>
 
 Existem três formas principais de definir e utilizar estruturas em C:
 
@@ -78,7 +78,7 @@ struct {
 
 ---
 
-##  Acesso aos Campos
+##  <mark> 2 - Acesso aos Campos </mark>
 
 O acesso a cada membro de uma estrutura é feito através do **operador ponto (`.`)**.
 
@@ -90,7 +90,7 @@ v1.a2 = 20; // Atribui valor ao campo 'a2'
 
 ---
 
-## Estruturas Aninhadas (Struct dentro de Struct)
+## <mark> 3 - Estruturas Aninhadas (Struct dentro de Struct) </mark>
 
 Um membro de uma estrutura pode ser outra estrutura, desde que a estrutura interna tenha sido declarada previamente.
 
@@ -132,7 +132,7 @@ int main() {
 > 3. **Compromisso:** composto de uma data, um horário e um texto descritivo.
 
 <details>
-<summary><b>💡 Clique aqui para ver a solução em C</b></summary>
+<summary><b>💡 Clique aqui para ver a solução</b></summary>
 
 <br>
 
@@ -192,7 +192,7 @@ int main() {
 > * Produtora do CD
 
 <details>
-<summary><b>💡 Clique aqui para ver a solução em C</b></summary>
+<summary><b>💡 Clique aqui para ver a solução</b></summary>
 
 <br>
 
@@ -221,10 +221,10 @@ typedef struct {
 int main() {
     CD colecao[QTD_CDS];
 
-    printf("=== CADASTRO DE %d CDs ===\n\n", QTD_CDS);
+    printf("CADASTRO DE %d CDs\n", QTD_CDS);
 
     for (int i = 0; i < QTD_CDS; i++) {
-        printf("--- CD nº %d ---\n", i + 1);
+        printf("CD nº %d\n", i + 1);
 
         printf("Nome da banda: ");
         scanf(" %[^\n]", colecao[i].nome_banda);
@@ -248,7 +248,7 @@ Um **ponteiro** é uma variável especial criada para **armazenar o endereço de
 
 ---
 
-## 📌 Declarando um Ponteiro
+## <mark> 1 - Declarando um Ponteiro </mark>
 
 Para indicar que uma variável é um ponteiro, utilizamos o símbolo asterisco (`*`) na sua declaração.
 
@@ -265,7 +265,7 @@ int i, *p, j, v[10], *q; // 'i' e 'j' são inteiros; 'p' e 'q' são ponteiros pa
 
 ---
 
-##  Os Dois Operadores Fundamentais
+##  <mark> 2 - Os Dois Operadores Fundamentais </mark>
 
 | Operador | Nome | O que faz? | Exemplo |
 | :--- | :--- | :--- | :--- |
@@ -274,7 +274,7 @@ int i, *p, j, v[10], *q; // 'i' e 'j' são inteiros; 'p' e 'q' são ponteiros pa
 
 ---
 
-##  Entendendo Ponteiros na Memória
+## <mark> 3 - Entendendo Ponteiros na Memória </mark>
 
 Ao declarar `int *p;`, o computador reserva um espaço para `p`, mas ele **ainda não aponta para lugar nenhum válido** (guarda lixo de memória).
 
@@ -295,7 +295,7 @@ Ao fazer `p = &i;`, o ponteiro `p` passa a guardar a localização de `i`:
 
 ---
 
-## Manipulando Valores via Ponteiro
+## <mark>  4 - Manipulando Valores via Ponteiro </mark>
 
 Quando `p` aponta para `i`, dizemos que `*p` é um ***alias* (apelido)** para `i`. Qualquer alteração via `*p` modifica diretamente o valor contido em `i`.
 
@@ -338,7 +338,7 @@ Ao executar `printf("%d", i);` ou `printf("%d", *p);`, a saída em ambos será *
 
 ---
 
-## Múltiplos Ponteiros para o Mesmo Endereço
+## <mark> 5 - Múltiplos Ponteiros para o Mesmo Endereço </mark>
 
 Vários ponteiros podem apontar simultaneamente para a mesma variável:
 
@@ -365,7 +365,7 @@ q = p;  // q recebe o endereço guardado em p (também aponta para i)
 
 ---
 
-## ⚠️ Diferença entre `p = q` e `*q = *p`
+## <mark> 6 - Diferença entre `p = q` e `*q = *p` </mark>
 
 Esse é um dos pontos onde as pessoas mais se confundem. Observe a diferença:
 
@@ -407,7 +407,7 @@ int *p = &i, *q = &j;
 
 ---
 
-## ⚠️ Boas Práticas e Cuidados Importantes
+## <mark> 7 - Boas Práticas e Cuidados Importantes </mark>
 
 1. **Nunca desreferencie um ponteiro não inicializado:**
    ```c
@@ -433,7 +433,7 @@ A **alocação dinâmica** permite reservar memória durante a execução do pro
 
 ---
 
-## Funções Principais (`<stdlib.h>`)
+## <mark> 1 - Funções Principais (`<stdlib.h>`) </mark>
 
 | Função | Assinatura | Descrição |
 | :--- | :--- | :--- |
@@ -444,9 +444,9 @@ A **alocação dinâmica** permite reservar memória durante a execução do pro
 
 ---
 
-##  Conceitos Fundamentais
+##  <mark> 2 - Conceitos Fundamentais </mark>
 
-### 1. O Retorno `void *` e o Cast Tipo de Ponteiro
+### <mark> 2.1 O Retorno `void *` e o Cast Tipo de Ponteiro </mark>
 A função `malloc` aloca bytes sem saber o tipo de dado que será gravado neles, retornando um ponteiro genérico (`void *`).
 Em C, fazemos um ***cast*** (conversão forçada de tipo) para o ponteiro correto:
 
@@ -454,7 +454,7 @@ Em C, fazemos um ***cast*** (conversão forçada de tipo) para o ponteiro corret
 char *c = (char *) malloc(1); // Cast (char *) converte a saída de malloc
 ```
 
-### 2. Verificação de Sucesso (`NULL`)
+### <mark> 2.2 Verificação de Sucesso (`NULL`) </mark>
 Se o computador não tiver memória suficiente disponível, o `malloc` retorna o ponteiro nulo (`NULL`). **Sempre verifique esse retorno** antes de usar o ponteiro!
 
 ```c
@@ -464,7 +464,7 @@ if (c == NULL) { // Equivalente a: if (!c)
 }
 ```
 
-### 3. Liberação de Memória (`free`)
+### <mark> 2.3 Liberação de Memória (`free`) </mark>
 Memória alocada dinamicamente **não é liberada automaticamente** ao final da função. O uso da função `free()` é obrigatório para evitar vazamento de memória (*memory leak*).
 
 ```c
@@ -473,7 +473,7 @@ free(c); // Libera o espaço apontado por c
 
 ---
 
-## Exemplo Básico de Uso
+## 📊 Exemplo Básico de Uso
 
 ```c
 #include <stdio.h>
@@ -506,11 +506,11 @@ int main(void)
 
 ---
 
-## 📝 Exercício Resolvido - 3
+## 📝 Exercício Resolvido
 
 > **Proposta:** Escreva uma função que receba um caractere e o transforme em uma string de comprimento 1 contendo esse caractere. Faça a função `main` para testar, imprimindo a string criada e o seu tamanho.
 
-⚠️ **Atenção:** Em C, uma string precisa do caractere nulo `'\0'` no final para indicar seu término. Portanto, uma "string de comprimento 1" precisa de **2 bytes** alocados (1 para o caractere + 1 para o `'\0'`).
+ **Atenção:** Em C, uma string precisa do caractere nulo `'\0'` no final para indicar seu término. Portanto, uma "string de comprimento 1" precisa de **2 bytes** alocados (1 para o caractere + 1 para o `'\0'`).
 
 ```c
 #include <stdio.h>
@@ -563,7 +563,7 @@ Unir ponteiros e registros (`struct`) é o passo definitivo para construir estru
 
 ---
 
-## 📌 Declaração e Sintaxe
+## <mark> 1 - Declaração e Sintaxe </mark>
 
 Podemos declarar um ponteiro que aponta para uma estrutura de duas formas:
 
@@ -581,7 +581,7 @@ Podemos declarar um ponteiro que aponta para uma estrutura de duas formas:
 
 ---
 
-## O Operador Seta (`->`)
+## <mark> 2 - O Operador Seta (`->`) </mark>
 
 Para acessar os campos de uma estrutura através de um ponteiro, utilizamos o operador **`->`** (seta). Ele substitui de forma simplificada a combinação do operador de desreferência `*` com o ponto `.`.
 
@@ -594,7 +594,7 @@ Para acessar os campos de uma estrutura através de um ponteiro, utilizamos o op
 
 ---
 
-##  Passagem de Structs para Funções
+## <mark> 3 - Passagem de Structs para Funções </mark>
 
 | Tipo de Passagem | Como funciona | Vantagens / Desvantagens |
 | :--- | :--- | :--- |
@@ -603,7 +603,7 @@ Para acessar os campos de uma estrutura através de um ponteiro, utilizamos o op
 
 ---
 
-##  Alocação Dinâmica de Structs
+##  <mark> 4 - Alocação Dinâmica de Structs </mark>
 
 Podemos alocar o espaço exato de uma estrutura em tempo de execução usando `malloc(sizeof(struct ...))`.
 
@@ -650,13 +650,13 @@ int main(void)
 > 📌 **Lembrete Importante:** Esta sintaxe de **Ponteiro + Struct + `malloc` + `->`** é a fundação para a criação de **Pilhas, Filas e Listas Encadeadas**. Domine bem o uso da seta (`->`), pois ela será a sua principal ferramenta daqui em diante!
 
 ---
-# Vetores e Vetores de Ponteiros para Estruturas
+<h1 align="center"> Vetores e Vetores de Ponteiros para Estruturas </h1>
 
 Ao manipular conjuntos de dados complexos em C, podemos organizá-los em vetores de estruturas estáticas ou em vetores de ponteiros alocados dinamicamente.
 
 ---
 
-## Vetores de Estruturas
+## <mark> 1 - Vetores de Estruturas </mark>
 
 Quando precisamos armazenar múltiplos registros do mesmo tipo, podemos criar um vetor onde cada posição é uma estrutura completa.
 
@@ -689,7 +689,7 @@ usuarios[1].hora_conexao.hora = 14;
 
 ---
 
-## Vetores de Ponteiros para Estruturas
+## <mark> 2 - Vetores de Ponteiros para Estruturas </mark>
 
 Em vez de alocar um vetor com todas as estruturas prontas, é muito mais eficiente criar um **vetor de ponteiros**.
 
@@ -769,7 +769,7 @@ int main(void)
 ```
 
 ---
-##📝 Exercícios Práticos: Ponteiros, Structs e Alocação Dinâmica
+## 📝 Exercícios Práticos
 
 ---
 
@@ -778,7 +778,7 @@ int main(void)
 > **Enunciado:** Refaça o programa da banda de músicas utilizando ponteiro para estrutura e considerando que há dados de $n$ bandas a serem lidas ($n$ é informado pelo usuário).
 
 <details>
-<summary>🔍 Clique para ver a solução em C</summary>
+<summary>💡 Clique para ver a solução </summary>
 
 ```c
 #include <stdio.h>
@@ -810,7 +810,7 @@ int main(void)
 
     // Leitura dos dados das n bandas
     for (int i = 0; i < n; i++) {
-        printf("\n--- Banda %d ---\n", i + 1);
+        printf("\nBanda %d\n", i + 1);
         
         printf("Nome: ");
         fgets((bandas + i)->nome, 50, stdin);
@@ -829,9 +829,7 @@ int main(void)
     }
 
     // Exibição dos dados
-    printf("\n========================================\n");
-    printf("         BANDAS CADASTRADAS             \n");
-    printf("========================================\n");
+    printf("BANDAS CADASTRADAS\n");
     for (int i = 0; i < n; i++) {
         printf("Banda %d: %s | Gênero: %s | Integrantes: %d | Rank: #%d\n",
                i + 1,
@@ -861,7 +859,7 @@ int main(void)
 > 4. Programa principal (`main`) para testar.
 
 <details>
-<summary>🔍 Clique para ver a solução em C</summary>
+<summary>💡 Clique para ver a solução</summary>
 
 ```c
 #include <stdio.h>
@@ -972,7 +970,7 @@ int main(void)
 > * Excluir um aluno buscando pelo nome.
 
 <details>
-<summary>🔍 Clique para ver a solução em C</summary>
+<summary>💡  Clique para ver a solução </summary>
 
 ```c
 #include <stdio.h>
@@ -1066,7 +1064,7 @@ int main(void)
 > **Enunciado:** Dados dois vetores ordenados (um de estudantes e outro de funcionários), conceda um aumento de 10% no salário de todo funcionário que também conste no vetor de estudantes com um índice de graduação (CR) maior que 3.0.
 
 <details>
-<summary>🔍 Clique para ver a solução em C</summary>
+<summary>💡 Clique para ver a solução</summary>
 
 ```c
 #include <stdio.h>
