@@ -16,7 +16,7 @@
 
 ---
 
-## 📁 Tipos de Arquivos
+## <mark> 1 - Tipos de Arquivos 📁</mark>
 
 Os arquivos no sistema operacional são organizados de duas formas principais de acordo com a estrutura dos seus dados:
 
@@ -27,7 +27,7 @@ Os arquivos no sistema operacional são organizados de duas formas principais de
 
 ---
 
-## 🗂️ Descritor de Arquivos (`FILE *`)
+## <mark> 2 - Descritor de Arquivos (`FILE *`) </mark>
 
 Para que o programa consiga interagir com um arquivo salvo no armazenamento secundário (HD/SSD), a linguagem C utiliza a estrutura de dados **`FILE`** (disponível na biblioteca `<stdio.h>`).
 
@@ -42,7 +42,7 @@ FILE *parq; // Ponteiro para a estrutura que gerencia o arquivo
 
 ---
 
-## 🔓 Abertura de Arquivos (`fopen`)
+## <mark> 3 - Abertura de Arquivos (`fopen`) </mark>
 
 A função `fopen()` conecta o **descritor de arquivo** (`FILE*`) ao arquivo físico no disco.
 
@@ -66,7 +66,7 @@ parq = fopen("caminho_do_arquivo", "modo");
 
 ---
 
-## ⚠️ Validação e Tratamento de Erros
+## <mark> 4 - Validação e Tratamento de Erros </mark>
 
 Quando o sistema operacional não consegue abrir um arquivo (por exemplo, ao tentar ler um arquivo inexistente ou sem permissão de acesso), a função `fopen()` retorna o ponteiro nulo (`NULL`).
 
@@ -99,7 +99,7 @@ int main() {
 
 ---
 
-## 🔒 Fechamento de Arquivos (`fclose`)
+## <mark> 5 - Fechamento de Arquivos (`fclose`) </mark>
 
 Quando o programa conclui o uso do arquivo, ele deve ser fechado explicitamente através da função `fclose()`.
 
@@ -114,13 +114,11 @@ fclose(parq);
 3. **Gerenciamento de Recursos:** Libera o arquivo e a memória no sistema operacional para que outros processos ou programas possam acessá-lo.
 
 ---
-## 📁 Leitura de Dados em Arquivos Texto
+## <mark> 6 - Leitura de Dados em Arquivos Texto </mark>
 
 Ao abrir um arquivo para leitura, o sistema operacional cria e mantém um **indicador de posição interna** (cursor). Compreender como esse cursor se comporta é fundamental para ler os dados de maneira correta.
 
----
-
-## 📌 O Cursor Interno e a Função `rewind()`
+### <mark> 6.1 - O Cursor Interno e a Função `rewind()` </mark>
 
 * **Posição Inicial:** Quando um arquivo é aberto no modo de leitura (`"r"`), o cursor é automaticamente posicionado no início do arquivo (byte 0).
 * **Avanço Automático:** A cada operação de leitura realizada (`fgetc`, `fgets` ou `fscanf`), o cursor avança para o próximo caractere ou bloco de dados a ser lido.
@@ -132,7 +130,7 @@ rewind(parq); // Reposiciona o cursor diretamente no início do arquivo
 
 ---
 
-## 📊 Principais Funções de Leitura
+## <mark> 7 - Principais Funções de Leitura </mark>
 
 | Função | Sintaxe | O que faz | Uso Recomendado |
 | :---: | :--- | :--- | :--- |
@@ -142,7 +140,7 @@ rewind(parq); // Reposiciona o cursor diretamente no início do arquivo
 
 ---
 
-##  🚀  Detalhamento das Funções 🚀 
+##   Detalhamento das Funções  
 
 ### 1. `fgetc()` — Leitura de Caractere Único
 Lê apenas o caractere atual apontado pelo cursor e retorna seu valor.
@@ -180,30 +178,30 @@ while (fscanf(f, "%c", &c) != EOF) {
 
 ---
 
-##  Exemplo Prático Integrado
+##  📊 Exemplo Prático Integrado
 
 ```c
 #include <stdio.h>
 #include <stdlib.h>
 
 int main() {
-    FILE *f = fopen("teste.txt", "r");
+    FILE *f = fopen("teste.txt", "r"); // fazemos a abertura do arquivo
 
     if (f == NULL) {
-        printf("Erro ao abrir o arquivo!\n");
+        printf("Erro ao abrir o arquivo!\n"); // verificando se o arquivo foi aberto corretamente
         return 1;
     }
 
     char c;
-    printf("--- Lendo caractere por caractere ---\n");
+    printf("Lendo caractere por caractere\n");
     while (fscanf(f, "%c", &c) != EOF) {
         printf("%c", c);
     }
 
-    // Volta o cursor para o início para reler de outra forma
+    // volta o cursor para o início para reler de outra forma
     rewind(f);
 
-    printf("\n--- Lendo o primeiro caractere com fgetc ---\n");
+    printf("\n Lendo o primeiro caractere com fgetc\n");
     char primeiro = fgetc(f);
     printf("Primeiro caractere: %c\n", primeiro);
 
@@ -211,8 +209,9 @@ int main() {
     return 0;
 }
 ```
+---
 
-## 📁 Escrevendo Dados em Arquivo Texto
+## <mark> 8 - Escrevendo Dados em Arquivo Texto </mark>
 
 | Função | Sintaxe / Assinatura | O que faz | Uso Recomendado |
 | :---: | :--- | :--- | :--- |
@@ -226,21 +225,21 @@ int main() {
 #include <stdlib.h>
 
 int main() {
-    FILE *fr = fopen("teste.txt", "r");
+    FILE *fr = fopen("teste.txt", "r"); //fazendo abertura dos arquivos
     FILE *fw = fopen("saida.txt", "w");
 
     if (fr == NULL || fw == NULL) {
-        printf("Erro ao abrir os arquivos.\n");
+        printf("Erro ao abrir os arquivos.\n"); //verificando se houve algum erro na abertura
         return 1;
     }
 
     char c;
-    while (fscanf(fr, "%c", &c) != EOF) {
+    while (fscanf(fr, "%c", &c) != EOF) { //fazendo a cópia do conteúdo de um arquivo para o outro
         fprintf(fw, "%c", c);
     }
 
     fclose(fr);
-    fclose(fw);
+    fclose(fw); //lembre-se de fechar o arquivo sempre! (professor(a) desconta nota por isso)
     return 0;
 }
 ```
@@ -249,7 +248,6 @@ int main() {
 
 ## 📝 Exercícios Práticos
 
----
 
 ### 🟢 Exercício 1: Contador de Linhas
 
@@ -335,14 +333,14 @@ int main() {
 #include <string.h>
 
 int main() {
-    FILE *entrada = fopen("entrada.txt", "r");
+    FILE *entrada = fopen("entrada.txt", "r"); //note que estamos abrindo o arquivo com "r" pois vamos somente fazer a leitura dele (e não alterá-lo)
 
     if (entrada == NULL) {
         printf("Erro: Não foi possível abrir o arquivo entrada.txt!\n");
         return 1;
     }
 
-    FILE *saida = fopen("saida.txt", "w");
+    FILE *saida = fopen("saida.txt", "w"); //já aqui, estamos abrindo o arquivo com "w" pois vamos escrever nele.
     if (saida == NULL) {
         printf("Erro: Não foi possível criar o arquivo saida.txt!\n");
         fclose(entrada);
@@ -351,7 +349,7 @@ int main() {
 
     char operacao[30];
     
-    // Lê o nome da operação na primeira linha
+    // lê o nome da operação na primeira linha
     if (fscanf(entrada, "%s", operacao) == EOF) {
         fprintf(saida, "Erro: Arquivo de entrada vazio\n");
         fclose(entrada);
@@ -365,7 +363,7 @@ int main() {
     int max;
     int primeiro = 1;
 
-    // Processa a sequência numérica
+    // processa a sequência numérica
     while (fscanf(entrada, "%d", &val) != EOF) {
         soma += val;
         
@@ -376,7 +374,7 @@ int main() {
         qtd++;
     }
 
-    // Escreve o resultado no arquivo de saída
+    // escreve o resultado no arquivo de saída
     if (strcmp(operacao, "soma") == 0) {
         fprintf(saida, "Resultado: %ld\n", soma);
     } 
