@@ -16,14 +16,14 @@
 
 ---
 
-### Introdução e Motivação
+### <mark> 1 - Introdução </mark> 
 *   **A limitação da lista simples:** A estrutura vista anteriormente forma um encadeamento simples. Como cada elemento armazena apenas um ponteiro para o próximo, não conseguimos percorrer a lista eficientemente de trás para frente (do final para o início).
 *   **Dificuldade na remoção:** O encadeamento simples dificulta a retirada de elementos. Mesmo se tivermos o ponteiro do elemento a ser retirado, precisamos percorrer a lista desde o início para encontrar o seu elemento anterior e ajustar os ponteiros.
 *   **A solução:** Para resolver isso, criamos a **lista duplamente encadeada**, onde cada elemento possui dois ponteiros: um apontando para o próximo elemento e outro apontando para o elemento anterior. Isso permite acesso rápido a ambos os nós adjacentes e facilita a inserção ou remoção no meio da lista sem precisar guardar ponteiros auxiliares durante a busca.
 
 ---
 
-### Estrutura e Definição
+### <mark> 2 - Estrutura e Definição </mark>
 *   O primeiro elemento da lista não possui um elemento anterior (seu ponteiro `ant` vale `NULL`).
 *   A estrutura em C (usando `int` como informação) fica assim:
 
@@ -39,7 +39,7 @@ typedef TLista2 *PLista2;
 
 ---
 
-### 🛠️ Operações Básicas (dos slides)
+### <mark> 3 - Operações Básicas (dos slides) </mark>
 
 **Inserção no Início:**
 ```c
@@ -71,15 +71,16 @@ PLista2 busca (PLista2 l, int v) {
 
 ---
 
-## 📝 Lista de Exercícios de Fixação
+## 📝 Exercícios Práticos
 
 Com o encadeamento duplo, a remoção exige que atualizemos os ponteiros `prox` do nó anterior e `ant` do nó posterior, caso eles existam. A vantagem é que podemos fazer isso conhecendo apenas o ponteiro do elemento a ser removido.
 
-### Exercício 1
+### 🟢 Exercício 1
+> **Enunciado:**
 > Faça a função de remoção de um nó em uma lista duplamente encadeada.
 
 <details>
-<summary><b>👀 Ver resposta</b></summary>
+<summary><b>💡 Clique aqui para ver a solução</b></summary>
 
 ```c
 PLista2 remove_no(PLista2 l, int v) {
@@ -111,11 +112,12 @@ PLista2 remove_no(PLista2 l, int v) {
 ```
 </details>
 
-### Exercício 2
+### 🟡 Exercício 2
+> **Enunciado:**
 > Escreva uma função que remova de uma lista duplamente encadeada todos os elementos que contêm o valor de *y*.
 
 <details>
-<summary><b>👀 Ver resposta</b></summary>
+<summary><b>💡 Clique aqui para ver a solução</b></summary>
 
 ```c
 PLista2 remove_todos_y(PLista2 l, int y) {
