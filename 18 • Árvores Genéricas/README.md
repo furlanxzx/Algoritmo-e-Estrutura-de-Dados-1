@@ -16,13 +16,13 @@
 
 ---
 
-## Introdução
+## <mark> 1 - Introdução </mark>
 
 Como vimos, numa **árvore binária** o número de filhos de um nó é limitado em no máximo dois.
 
 No caso da **árvore genérica**, essa restrição não existe:
 
-> ✅ Cada nó pode ter um número arbitrário de filhos.
+>  Cada nó pode ter um número arbitrário de filhos.
 
 Essa estrutura pode ser usada, por exemplo, para representar uma **árvore de diretórios**.
 
@@ -38,7 +38,7 @@ Em qualquer definição recursiva deve haver uma "condição de contorno", que p
 
 ---
 
-## Estrutura para Árvore Genérica
+## <mark> 2 - Estrutura para Árvore Genérica </mark>
 
 A árvore genérica utiliza uma **"lista de filhos"**: um nó aponta apenas para seu primeiro filho (`prim`), e cada um de seus filhos, exceto o último, aponta para o próximo irmão (`prox`).
 
@@ -56,7 +56,7 @@ typedef TArvGen *PArvGen;
 
 ---
 
-## Função Cria
+## <mark> 3 - Função Cria </mark>
 
 A função para criar uma folha deve alocar o nó e inicializar seus campos, atribuindo `NULL` para os campos `prim` e `prox`, pois trata-se de um nó folha.
 
@@ -73,7 +73,7 @@ PArvGen cria (char c)
 
 ---
 
-## Função Insere
+## <mark> 4 - Função Insere </mark>
 
 Como não vamos atribuir nenhum significado especial para a posição de um nó filho, a operação de inserção pode inserir a sub-árvore em qualquer posição.
 
@@ -90,7 +90,7 @@ void insere (PArvGen a, PArvGen sa) {
 
 ---
 
-## Função Imprime
+## <mark> 5 - Função Imprime </mark>
 
 Para imprimir as informações associadas aos nós da árvore, temos duas opções para percorrer a árvore:
 
@@ -111,7 +111,7 @@ void imprime (PArvGen a)
 
 ---
 
-## Função Libera
+## <mark> 6 - Função Libera </mark>
 
 O único cuidado que precisamos tomar na programação dessa função é a de liberar as sub-árvores antes de liberar o espaço associado a um nó (isto é, usar **pós-ordem**).
 
@@ -128,14 +128,14 @@ void libera (PArvGen a)
 
 ---
 
-## Exercícios
+## 📝 Exercícios Práticos
 
-### Exercício 1 🟢
+### 🟢 Exercício 1 
 
 Faça uma função que verifica a ocorrência de uma dada informação na árvore (se existe uma dada informação na árvore).
 
 <details>
-<summary>Ver resposta</summary>
+<summary>💡 Clique aqui para ver a solução</summary>
 
 A ideia é a mesma da função `imprime`, mas ao invés de imprimir, comparamos o `info` do nó atual com o valor buscado. Se não achar no nó atual, buscamos recursivamente na lista de filhos (`prim`) e na lista de irmãos (`prox`).
 
@@ -159,7 +159,7 @@ int existe (PArvGen a, char c)
 
 ---
 
-### Exercício 2 🔴
+### 🔴 Exercício 2 
 
 Faça uma função com o protótipo a seguir para testar se duas árvores são iguais.
 
@@ -168,7 +168,7 @@ int igual(PArvGen a, PArvGen b);
 ```
 
 <details>
-<summary>Ver resposta</summary>
+<summary>💡 Clique aqui para ver a solução</summary>
 
 Duas árvores são iguais se:
 1. Ambas forem `NULL` (caso base, ok); ou
@@ -199,7 +199,7 @@ Porque a estrutura de "lista de filhos" transforma a comparação de duas árvor
 
 ---
 
-### Exercício 3 🟡
+### 🟡 Exercício 3 
 
 Faça uma função com o protótipo a seguir para criar dinamicamente uma cópia da árvore.
 
@@ -208,7 +208,7 @@ PArvGen copia(PArvGen a);
 ```
 
 <details>
-<summary>Ver resposta</summary>
+<summary>💡 Clique aqui para ver a solução</summary>
 
 Usamos a própria função `cria` para alocar cada nó novo, copiando o `info`, e chamamos `copia` recursivamente para `prim` e `prox`.
 
@@ -230,12 +230,12 @@ PArvGen copia (PArvGen a)
 
 ---
 
-### Exercício 4 🔴
+### 🔴 Exercício 4 
 
 Faça uma função que insira um valor em uma árvore genérica. Este valor deverá ser passado como parâmetro da função, assim como o valor de seu pai.
 
 <details>
-<summary>Ver resposta</summary>
+<summary>💡 Clique aqui para ver a solução</summary>
 
 Como recebemos apenas o **valor** do pai (e não um ponteiro para ele), primeiro precisamos **buscar** o nó cujo `info` é igual ao valor do pai — uma função auxiliar parecida com o `existe` do Exercício 1, mas que retorna o **ponteiro** para o nó em vez de `0`/`1`. Encontrado o nó pai, usamos a função `insere` já pronta para colocar o novo valor como filho dele.
 
@@ -278,10 +278,10 @@ Escreva as funções pedidas em cada item (obedeça os protótipos):
 
 > ℹ️ **Nota:** para os itens `soma` e `retornaConteudo` fazerem sentido, vamos considerar que o campo `info` da struct é do tipo `int` neste exercício (em vez de `char`), mantendo a mesma estrutura com `prim`/`prox`.
 
-#### a) calcule a soma do conteúdo de todos os nós — `int soma(PArvGen a)` 🟢
+#### 🟢 a) calcule a soma do conteúdo de todos os nós — `int soma(PArvGen a)` 
 
 <details>
-<summary>Ver resposta</summary>
+<summary>💡 Clique aqui para ver a solução</summary>
 
 ```c
 int soma (PArvGen a)
@@ -295,10 +295,10 @@ int soma (PArvGen a)
 
 </details>
 
-#### b) calcule a quantidade total de nós na árvore — `int num_nos(PArvGen a)` 🟢
+#### 🟢 b) calcule a quantidade total de nós na árvore — `int num_nos(PArvGen a)` 
 
 <details>
-<summary>Ver resposta</summary>
+<summary>💡 Clique aqui para ver a solução</summary>
 
 ```c
 int num_nos (PArvGen a)
@@ -312,10 +312,10 @@ int num_nos (PArvGen a)
 
 </details>
 
-#### c) retorna o primeiro filho de a — `PArvGen retornaPrim(PArvGen a)` 🟢
+#### 🟢 c) retorna o primeiro filho de a — `PArvGen retornaPrim(PArvGen a)` 
 
 <details>
-<summary>Ver resposta</summary>
+<summary>💡 Clique aqui para ver a solução</summary>
 
 ```c
 PArvGen retornaPrim (PArvGen a)
@@ -326,10 +326,10 @@ PArvGen retornaPrim (PArvGen a)
 
 </details>
 
-#### d) retorna o irmão de a — `PArvGen retornaProx(PArvGen a)` 🟢
+#### 🟢 d) retorna o irmão de a — `PArvGen retornaProx(PArvGen a)` 
 
 <details>
-<summary>Ver resposta</summary>
+<summary>💡 Clique aqui para ver a solução</summary>
 
 ```c
 PArvGen retornaProx (PArvGen a)
@@ -340,10 +340,10 @@ PArvGen retornaProx (PArvGen a)
 
 </details>
 
-#### e) retorna o conteúdo de a — `int retornaConteudo(PArvGen a)` 🟢
+#### 🟢 e) retorna o conteúdo de a — `int retornaConteudo(PArvGen a)` 
 
 <details>
-<summary>Ver resposta</summary>
+<summary>💡 Clique aqui para ver a solução</summary>
 
 ```c
 int retornaConteudo (PArvGen a)
@@ -354,12 +354,12 @@ int retornaConteudo (PArvGen a)
 
 </details>
 
-#### f) insere sa como filho de a — `void insere(PArvGen a, PArvGen sa)` 🟢
+#### 🟢 f) insere sa como filho de a — `void insere(PArvGen a, PArvGen sa)` 
 
 <details>
-<summary>Ver resposta</summary>
+<summary>💡 Clique aqui para ver a solução</summary>
 
-Já vimos essa função em detalhes na seção [Função Insere](#função-insere) — é a mesma implementação:
+Já vimos essa função em detalhes na seção função insere — é a mesma implementação:
 
 ```c
 void insere (PArvGen a, PArvGen sa)
@@ -373,7 +373,7 @@ void insere (PArvGen a, PArvGen sa)
 
 ---
 
-### Exercício 6 🔴
+### 🔴 Exercício 6 
 
 Faça um programa para a manipulação de árvores genéricas que leia um arquivo texto contendo uma sequência de nomes e coloque os nomes em diferentes níveis da árvore de acordo com a inicial do nome. Exibir na tela a lista de nomes, agrupados de acordo com a letra inicial do nome.
 
@@ -391,7 +391,7 @@ P
 ```
 
 <details>
-<summary>Ver resposta (lógica da árvore — leitura de arquivo simplificada)</summary>
+<summary>💡 Clique aqui para ver a solução</summary>
 
 **Ideia geral:** a raiz é um nó "fictício" (ou vazio) cujos filhos diretos (`prim`/`prox`) são as **letras** (A, C, M, P...). Cada nó-letra, por sua vez, tem como filhos os **nomes** que começam com aquela letra. Ou seja, temos uma árvore de **3 níveis**: raiz → letras → nomes.
 
@@ -446,7 +446,7 @@ A leitura do arquivo (`fopen`, `fscanf`/`fgets` em loop até o fim do arquivo, c
 
 ---
 
-### Exercício 7 🔴
+### 🔴 Exercício 7 
 
 Faça um programa para a manipulação de árvores genéricas que leia um arquivo texto com uma sequência de linhas compostas de um identificador e um dado, e gere uma árvore genérica em que o identificador de cada linha indica onde essa linha será inserida na hierarquia da árvore. A seguir, gere um arquivo texto, percorrendo a árvore em modo prefixo.
 
@@ -469,7 +469,7 @@ Exemplo:
 ```
 
 <details>
-<summary>Ver resposta (lógica da árvore — leitura de arquivo simplificada)</summary>
+<summary>💡 Clique aqui para ver a solução</summary>
 
 **Ideia geral:** o identificador (`1`, `1.1`, `1.3.2`...) representa o **caminho** do nó dentro da árvore, onde cada "nível" separado por `.` indica uma descida na hierarquia. Por exemplo, `1.3.2` é: filho de `1.3`, que é filho de `1`.
 
