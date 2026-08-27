@@ -1,15 +1,18 @@
-# Árvore Binária de Busca (ABB) — Inserção
+<h1 align="center">ABB - Inserção</h1>
 
-> Material de estudos de Algoritmos e Estruturas de Dados I, baseado nas aulas da Prof. Regina Célia Coelho.
-
-## Índice
-
-- [Definição](#definição)
-- [Estrutura para ABB](#estrutura-para-abb)
-- [Inserção](#inserção)
-- [Exemplo](#exemplo)
-- [Pesquisa](#pesquisa)
-- [Exercícios](#exercícios)
+<p align="center">
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/18%20%E2%80%A2%20%C3%81rvores%20Gen%C3%A9ricas/README.md">
+    <img src="https://img.shields.io/badge/⬅️_Voltar-Árvores_Genéricas-8b5cf6?style=plastic" alt="Voltar">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="../README.md">
+    <img src="https://img.shields.io/badge/🏠_Inicio-Menu-06b6d4?style=plastic" alt="Menu">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/20%20%E2%80%A2%20ABB%20-%20Remo%C3%A7%C3%A3o/README.md">
+    <img src="https://img.shields.io/badge/Avancar-ABB_Remoção_➡️-8b5cf6?style=plastic" alt="Avançar">
+  </a>
+</p>
 
 ---
 
@@ -308,3 +311,19 @@ O nó `299` viola o limite inferior `347` estabelecido ao visitar `347` — depo
 **Resumo:** válidas → i, ii, iv &nbsp;|&nbsp; inválidas → iii, v
 
 </details>
+
+---
+
+<p align="center">
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/18%20%E2%80%A2%20%C3%81rvores%20Gen%C3%A9ricas/README.md">
+    <img src="https://img.shields.io/badge/⬅️_Voltar-Árvores_Genéricas-8b5cf6?style=plastic" alt="Voltar">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="../README.md">
+    <img src="https://img.shields.io/badge/🏠_Inicio-Menu-06b6d4?style=plastic" alt="Menu">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/20%20%E2%80%A2%20ABB%20-%20Remo%C3%A7%C3%A3o/README.md">
+    <img src="https://img.shields.io/badge/Avancar-ABB_Remoção_➡️-8b5cf6?style=plastic" alt="Avançar">
+  </a>
+</p>
