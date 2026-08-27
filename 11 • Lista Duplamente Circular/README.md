@@ -16,7 +16,7 @@
 
 ---
 
-## 1. Introdução
+## <mark> 1 - Introdução </mark>
 
 Até agora você provavelmente já viu dois tipos de lista:
 
@@ -25,11 +25,11 @@ Até agora você provavelmente já viu dois tipos de lista:
 
 Agora vamos juntar duas ideias:
 
-> ➤ Uma **lista circular** também pode ser construída com **encadeamento duplo**.
+>  Uma **lista circular** também pode ser construída com **encadeamento duplo**.
 >
-> ➤ Neste caso, o **último elemento** da lista passa a ter como **próximo o primeiro**, que, por sua vez, passa a ter o **último como anterior**.
+>  Neste caso, o **último elemento** da lista passa a ter como **próximo o primeiro**, que, por sua vez, passa a ter o **último como anterior**.
 >
-> ➤ Com essa construção podemos **percorrer a lista nos dois sentidos**, a partir de um ponteiro para um elemento qualquer.
+>  Com essa construção podemos **percorrer a lista nos dois sentidos**, a partir de um ponteiro para um elemento qualquer.
 
 Ou seja: uma **lista duplamente encadeada e circular** é uma lista em que cada nó tem **dois ponteiros** (um para o anterior, um para o próximo) e, além disso, **não existe começo nem fim de fato** — a lista "se fecha" em um círculo.
 
@@ -41,7 +41,7 @@ Ou seja: uma **lista duplamente encadeada e circular** é uma lista em que cada 
 
 ---
 
-## 2. Representação em memória
+## <mark> 2 - Representação em memória </mark>
 
 Cada nó (ou "elo") da lista guarda três informações:
 
@@ -59,7 +59,7 @@ typedef struct no {
 typedef No *PLista2;
 ```
 
-> 💡 **Atenção com o detalhe da convenção usada pela Regina:**
+> 💡 **Atenção com o detalhe da convenção usada pela professora:**
 > O ponteiro que representa "a lista" (`PLista2 l`) **não aponta para o primeiro elemento**, e sim para o **último**. Isso significa que:
 >
 > - `l` → último nó da lista
@@ -68,25 +68,9 @@ typedef No *PLista2;
 >
 > Essa escolha é proposital: guardar o ponteiro para o **último** nó permite acessar tanto o último (`l`) quanto o primeiro (`l->prox`) em **tempo constante O(1)**, o que facilita muito operações de inserção no início e no fim da lista.
 
-Visualmente, uma lista circular duplamente encadeada com os valores `10, 20, 30` fica assim:
-
-```
-        ┌────────────────────────────────────────┐
-        │                                          │
-        ▼                                          │
-      ┌────┐  prox   ┌────┐  prox   ┌────┐  prox   │
-      │ 10 │ ──────▶ │ 20 │ ──────▶ │ 30 │ ─────────┘
-      └────┘ ◀────── └────┘ ◀────── └────┘
-              ant              ant
-
-      ▲ l->prox (primeiro)              ▲ l (último)
-```
-
-Repare que **não existe `NULL`** em nenhum ponteiro — todo mundo aponta para alguém.
-
 ---
 
-## 3. Percorrendo a lista circular duplamente encadeada
+## <mark> 3 - Percorrendo a lista circular duplamente encadeada </mark>
 
 Como não existe um `NULL` marcando o fim, **não podemos usar aquele `while (p != NULL)`** que usávamos nas listas simples. Se fizéssemos isso aqui, o laço nunca pararia (loop infinito), porque a lista é um círculo!
 
@@ -112,20 +96,21 @@ void imprime_circular_rev (PLista2 l){
 3. `do { ... } while (p != l);` → o `do-while` garante que o **primeiro nó visitado sempre entra no laço** (mesmo que ele seja igual a `l`), e só paramos quando `p` **voltar** a ser `l` — ou seja, quando o círculo se fechar.
 4. `p = p->ant;` → aqui estamos percorrendo de trás para frente (por isso a função se chama `imprime_circular_rev`, de "reversa"). Se trocarmos para `p = p->prox;`, percorremos na ordem normal, do primeiro para o último.
 
-> ⚠️ **Erro clássico de iniciante:** usar `while (p != NULL)` em lista circular. Como nenhum ponteiro é `NULL`, o programa entra em loop infinito. Sempre use `do-while` comparando com o ponteiro de partida.
+>  Um erro comum é usar `while (p != NULL)` em lista circular. Como nenhum ponteiro é `NULL`, o programa entra em loop infinito. Sempre use `do-while` comparando com o ponteiro de partida.
 
 ---
 
-## 4. Exercícios
+## 📝 Exercícios Práticos
 
 <br>
 
-### Exercício 1 🟡 (médio)
+### 🟡 Exercício 1 
 
+> **Enunciado:**
 > Escreva funções de **inserção** e **remoção** em uma lista duplamente encadeada circular. Na inserção, considere deixar a lista em **ordem crescente**. Na remoção, considere tirar **todas as ocorrências** de um dado valor em lista ordenada.
 
 <details>
-<summary>💡 Ver resolução</summary>
+<summary>💡 Clique aqui para ver a solução</summary>
 
 **Ideia da inserção:** como a lista é ordenada, precisamos percorrer até achar o primeiro elemento **maior ou igual** ao valor que queremos inserir, e colocar o novo nó **antes** dele. Precisamos tratar 3 casos especiais: lista vazia, inserção no início e inserção no fim (que muda quem é `l`, já que `l` aponta pro último).
 
@@ -213,12 +198,13 @@ PLista2 remove_todas_ocorrencias(PLista2 l, int valor) {
 
 <br>
 
-### Exercício 2 🟢 (fácil)
+### 🟢 Exercício 2  
 
+> **Enunciado:**
 > Escreva uma função (`locate(l,p)`) que retorna o apontador para o item na p-ésima posição de L. Retorne `NULL` se a lista tiver menos que P elementos.
 
 <details>
-<summary>💡 Ver resolução</summary>
+<summary>💡 Clique aqui para ver a solução</summary>
 
 Aqui é só percorrer a partir do primeiro (`l->prox`), contando as posições, até chegar na posição `p` ou dar a volta completa (o que significa que a lista tem menos de `p` elementos).
 
@@ -239,18 +225,18 @@ PLista2 locate(PLista2 l, int p) {
 }
 ```
 
-> 🧠 **Dica:** essa função vai ser muito útil no próximo exercício — sempre que puder reaproveitar uma função já pronta, faça isso! É mais fácil de entender e de manter o código.
+>  **Dica:** essa função vai ser muito útil no próximo exercício — sempre que puder reaproveitar uma função já pronta, faça isso! É mais fácil de entender e de manter o código.
 
 </details>
 
 <br>
 
-### Exercício 3 🟡 (médio)
+### 🟡 Exercício 3 
 
 > Escreva uma função que insere o item E na posição P da lista L. Use a função `locate(l,p)` neste procedimento. Retorne erro se a lista tiver menos que P itens.
 
 <details>
-<summary>💡 Ver resolução</summary>
+<summary>💡 Clique aqui para ver a solução</summary></summary>
 
 ```c
 PLista2 insere_posicao(PLista2 l, int e, int p) {
@@ -287,18 +273,19 @@ PLista2 insere_posicao(PLista2 l, int e, int p) {
 }
 ```
 
-> 🧠 Repare que, como sempre inserimos **antes** do nó retornado por `locate`, nunca precisamos atualizar quem é o "último" (`l`) — a única forma de `l` mudar seria inserir depois dele, o que essa função não faz.
+>  Repare que, como sempre inserimos **antes** do nó retornado por `locate`, nunca precisamos atualizar quem é o "último" (`l`) — a única forma de `l` mudar seria inserir depois dele, o que essa função não faz.
 
 </details>
 
 <br>
 
-### Exercício 4 🔴 (difícil)
+### 🔴 Exercício 4 
 
+> **Enunciado:**
 > Faça um programa completo utilizando lista duplamente encadeada e circular que permita a inserção de nomes de alunos juntamente com três notas relacionadas a ele. O programa deve também permitir a remoção e busca de um aluno, assim como a impressão dos registros cadastrados. Também deve permitir a alteração de notas de algum aluno já cadastrado.
 
 <details>
-<summary>💡 Ver resolução</summary>
+<summary>💡 Clique aqui para ver a solução</summary>
 
 Esse é o exercício mais completo: precisamos adaptar a estrutura do nó para guardar um **aluno** (nome + 3 notas) em vez de um `int`, e criar um pequeno menu para testar todas as operações.
 
@@ -320,7 +307,7 @@ typedef struct no {
 
 typedef No *PLista2;
 
-// ---------- INSERÇÃO (sempre no final, antes do primeiro) ----------
+// INSERÇÃO (sempre no final, antes do primeiro) 
 PLista2 insere_aluno(PLista2 l, char nome[], float n1, float n2, float n3) {
     PLista2 novo = (PLista2) malloc(sizeof(No));
     strcpy(novo->info.nome, nome);
@@ -343,7 +330,7 @@ PLista2 insere_aluno(PLista2 l, char nome[], float n1, float n2, float n3) {
     return novo; // o novo aluno passa a ser o "ultimo"
 }
 
-// ---------- BUSCA por nome ----------
+//  BUSCA por nome
 PLista2 busca_aluno(PLista2 l, char nome[]) {
     if (l == NULL) return NULL;
 
@@ -356,7 +343,7 @@ PLista2 busca_aluno(PLista2 l, char nome[]) {
     return NULL; // nao encontrado
 }
 
-// ---------- REMOÇÃO por nome ----------
+// REMOÇÃO por nome
 PLista2 remove_aluno(PLista2 l, char nome[]) {
     PLista2 p = busca_aluno(l, nome);
     if (p == NULL) {
@@ -379,7 +366,7 @@ PLista2 remove_aluno(PLista2 l, char nome[]) {
     return l;
 }
 
-// ---------- ALTERAÇÃO de notas ----------
+//ALTERAÇÃO de notas
 void altera_notas(PLista2 l, char nome[], float n1, float n2, float n3) {
     PLista2 p = busca_aluno(l, nome);
     if (p == NULL) {
@@ -392,7 +379,7 @@ void altera_notas(PLista2 l, char nome[], float n1, float n2, float n3) {
     printf("Notas de '%s' atualizadas.\n", nome);
 }
 
-// ---------- IMPRESSÃO de todos os registros ----------
+// IMPRESSÃO de todos os registros
 void imprime_alunos(PLista2 l) {
     if (l == NULL) {
         printf("Nenhum aluno cadastrado.\n");
@@ -408,7 +395,7 @@ void imprime_alunos(PLista2 l) {
     } while (p != l->prox);
 }
 
-// ---------- MENU PRINCIPAL ----------
+// MENU PRINCIPAL 
 int main() {
     PLista2 lista = NULL;
     int opcao;
@@ -416,7 +403,7 @@ int main() {
     float n1, n2, n3;
 
     do {
-        printf("\n===== CADASTRO DE ALUNOS =====\n");
+        printf("\nCADASTRO DE ALUNOS\n");
         printf("1 - Inserir aluno\n");
         printf("2 - Remover aluno\n");
         printf("3 - Buscar aluno\n");
@@ -484,13 +471,13 @@ int main() {
 | `altera_notas` | Busca o aluno e sobrescreve as notas | O(n) |
 | `imprime_alunos` | Percorre a lista do primeiro ao último, imprimindo cada aluno | O(n) |
 
-> 🧠 **Por que inserir sempre no final é O(1)?** Porque, como `l` aponta direto para o último nó, não precisamos percorrer a lista para achar onde inserir — já sabemos onde é o "fim" e onde é o "começo" (`l->prox`) em tempo constante.
+>  **Por que inserir sempre no final é O(1)?** Porque, como `l` aponta direto para o último nó, não precisamos percorrer a lista para achar onde inserir — já sabemos onde é o "fim" e onde é o "começo" (`l->prox`) em tempo constante.
 
 </details>
 
 ---
 
-## 5. Resumo rápido
+## <mark> 4 - Resumo rápido </mark>
 
 | Operação | Lista simples | Lista dupl. encadeada circular |
 |---|---|---|
