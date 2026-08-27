@@ -1,6 +1,18 @@
-# Matrizes Esparsas
+<h1 align="center">Matrizes Esparsas</h1>
 
-> 📚 Material baseado nas aulas da Prof.ª Regina — Algoritmos e Estrutura de Dados
+<p align="center">
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/11%20%E2%80%A2%20Lista%20Duplamente%20Circular/README.md">
+    <img src="https://img.shields.io/badge/⬅️_Voltar-Lista_Duplamente_Circular-8b5cf6?style=plastic" alt="Voltar">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="../README.md">
+    <img src="https://img.shields.io/badge/🏠_Inicio-Menu-06b6d4?style=plastic" alt="Menu">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/13%20%E2%80%A2%20Grafos/README.md">
+    <img src="https://img.shields.io/badge/Avancar-Grafos_➡️-8b5cf6?style=plastic" alt="Avançar">
+  </a>
+</p>
 
 ---
 
@@ -535,3 +547,19 @@ plinha libera(plinha m) {
 | Representação com lista de listas | Uma lista de "linhas", cada uma apontando para uma lista de "colunas" — sem limite fixo de tamanho |
 | Vantagem | Economia enorme de memória quando há muitos zeros |
 | Desvantagem | Acesso a um elemento específico deixa de ser O(1) (como seria num array 2D) e passa a depender do tamanho das listas |
+
+---
+
+<p align="center">
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/11%20%E2%80%A2%20Lista%20Duplamente%20Circular/README.md">
+    <img src="https://img.shields.io/badge/⬅️_Voltar-Lista_Duplamente_Circular-8b5cf6?style=plastic" alt="Voltar">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="../README.md">
+    <img src="https://img.shields.io/badge/🏠_Inicio-Menu-06b6d4?style=plastic" alt="Menu">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/13%20%E2%80%A2%20Grafos/README.md">
+    <img src="https://img.shields.io/badge/Avancar-Grafos_➡️-8b5cf6?style=plastic" alt="Avançar">
+  </a>
+</p>
