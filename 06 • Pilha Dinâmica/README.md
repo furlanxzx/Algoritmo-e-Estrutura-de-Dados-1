@@ -1,5 +1,18 @@
-<h1 align="center">🧱 Estrutura de Dados: Pilhas Dinâmicas (Encadeadas)</h1>
-<p align="center"><sub>Introdução e Conceitos Base</sub></p>
+<h1 align="center">Pilha Dinâmica</h1>
+
+<p align="center">
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/05%20%E2%80%A2%20Pilha%20Sequencial/README.md">
+    <img src="https://img.shields.io/badge/⬅️_Voltar-Pilha_Sequencial-8b5cf6?style=plastic" alt="Voltar">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="../README.md">
+    <img src="https://img.shields.io/badge/🏠_Inicio-Menu-06b6d4?style=plastic" alt="Menu">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/07%20%E2%80%A2%20Fila%20Din%C3%A2mica/README.md">
+    <img src="https://img.shields.io/badge/Avancar-Fila_Dinamica_➡️-8b5cf6?style=plastic" alt="Avançar">
+  </a>
+</p>
 
 ---
 
@@ -225,3 +238,18 @@ PPilha remove_item(PPilha pilha, int v) {
 ```
 </details>
 
+---
+
+<p align="center">
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/05%20%E2%80%A2%20Pilha%20Sequencial/README.md">
+    <img src="https://img.shields.io/badge/⬅️_Voltar-Pilha_Sequencial-8b5cf6?style=plastic" alt="Voltar">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="../README.md">
+    <img src="https://img.shields.io/badge/🏠_Inicio-Menu-06b6d4?style=plastic" alt="Menu">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/07%20%E2%80%A2%20Fila%20Din%C3%A2mica/README.md">
+    <img src="https://img.shields.io/badge/Avancar-Fila_Dinamica_➡️-8b5cf6?style=plastic" alt="Avançar">
+  </a>
+</p>
