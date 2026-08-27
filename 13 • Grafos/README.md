@@ -1,24 +1,18 @@
-# Grafos
+<h1 align="center">Grafos</h1>
 
-> Material de estudos de Algoritmos e Estruturas de Dados I.
->
-
-## Índice
-
-- [Definição de Grafo](#definição-de-grafo)
-- [Grafo Não Direcionado](#grafo-não-direcionado)
-- [Grafo Direcionado (Dígrafo)](#grafo-direcionado-dígrafo)
-- [Vértices Adjacentes](#vértices-adjacentes)
-- [Grau de um Vértice](#grau-de-um-vértice)
-- [Ordem de um Grafo](#ordem-de-um-grafo)
-- [Passeio](#passeio)
-- [Comprimento de um Passeio](#comprimento-de-um-passeio)
-- [Caminho](#caminho)
-- [Ciclo](#ciclo)
-- [Árvore](#árvore)
-- [Floresta](#floresta)
-- [Matriz de Adjacência](#matriz-de-adjacência)
-- [Lista de Adjacência](#lista-de-adjacência)
+<p align="center">
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/12%20%E2%80%A2%20Matrizes%20Esparsas/README.md">
+    <img src="https://img.shields.io/badge/⬅️_Voltar-Matrizes_Esparsas-8b5cf6?style=plastic" alt="Voltar">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="../README.md">
+    <img src="https://img.shields.io/badge/🏠_Inicio-Menu-06b6d4?style=plastic" alt="Menu">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/14%20%E2%80%A2%20%C3%81rvores/README.md">
+    <img src="https://img.shields.io/badge/Avancar-Árvores_➡️-8b5cf6?style=plastic" alt="Avançar">
+  </a>
+</p>
 
 ---
 
@@ -291,3 +285,19 @@ listaAdj[D] → B → C
 | Melhor para... | grafos **densos** (muitas arestas) | grafos **esparsos** (poucas arestas) |
 
 Na prática, a **lista de adjacência** costuma ser a escolha mais comum, já que a maioria dos grafos do mundo real (redes sociais, mapas de estradas, etc.) é esparsa.
+
+---
+
+<p align="center">
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/12%20%E2%80%A2%20Matrizes%20Esparsas/README.md">
+    <img src="https://img.shields.io/badge/⬅️_Voltar-Matrizes_Esparsas-8b5cf6?style=plastic" alt="Voltar">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="../README.md">
+    <img src="https://img.shields.io/badge/🏠_Inicio-Menu-06b6d4?style=plastic" alt="Menu">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/14%20%E2%80%A2%20%C3%81rvores/README.md">
+    <img src="https://img.shields.io/badge/Avancar-Árvores_➡️-8b5cf6?style=plastic" alt="Avançar">
+  </a>
+</p>
