@@ -1,6 +1,19 @@
-# Árvore Genérica
+<h1 align="center">Árvores Genéricas</h1>
 
-> Material de estudos de Algoritmos e Estruturas de Dados I, baseado nas aulas da Prof. Regina Célia Coelho.
+<p align="center">
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/17%20%E2%80%A2%20%C3%81rvore%20de%20Express%C3%A3o/README.md">
+    <img src="https://img.shields.io/badge/⬅️_Voltar-Árvore_de_Expressão-8b5cf6?style=plastic" alt="Voltar">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="../README.md">
+    <img src="https://img.shields.io/badge/🏠_Inicio-Menu-06b6d4?style=plastic" alt="Menu">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/19%20%E2%80%A2%20ABB%20-%20Inser%C3%A7%C3%A3o/README.md">
+    <img src="https://img.shields.io/badge/Avancar-ABB_Inserção_➡️-8b5cf6?style=plastic" alt="Avançar">
+  </a>
+</p>
+
 ---
 
 ## Introdução
@@ -547,5 +560,21 @@ PArvGen insereLinha (PArvGen raiz, char *id, char *dado)
 Por fim, para gerar o arquivo de saída em **modo prefixo**, basta adaptar a função `imprime` para escrever no arquivo em vez de imprimir na tela (primeiro o nó atual, depois `prim`, depois `prox`), respeitando a ordem pré-fixa pedida.
 
 A leitura do arquivo de entrada (separar cada linha em `id` e `dado`, chamando `insereLinha` para cada uma) segue o padrão básico de leitura de arquivo texto em C.
+
+---
+
+<p align="center">
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/17%20%E2%80%A2%20%C3%81rvore%20de%20Express%C3%A3o/README.md">
+    <img src="https://img.shields.io/badge/⬅️_Voltar-Árvore_de_Expressão-8b5cf6?style=plastic" alt="Voltar">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="../README.md">
+    <img src="https://img.shields.io/badge/🏠_Inicio-Menu-06b6d4?style=plastic" alt="Menu">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/19%20%E2%80%A2%20ABB%20-%20Inser%C3%A7%C3%A3o/README.md">
+    <img src="https://img.shields.io/badge/Avancar-ABB_Inserção_➡️-8b5cf6?style=plastic" alt="Avançar">
+  </a>
+</p>
 
 </details>
