@@ -1,6 +1,18 @@
-# Percurso em Árvore Binária
+<h1 align="center">Percurso em Árvores Binárias</h1>
 
-> 📚 Material baseado nas aulas da Prof.ª Regina — Algoritmos e Estrutura de Dados
+<p align="center">
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/15%20%E2%80%A2%20%C3%81rvores%20Bin%C3%A1rias/README.md">
+    <img src="https://img.shields.io/badge/⬅️_Voltar-Árvores_Binárias-8b5cf6?style=plastic" alt="Voltar">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="../README.md">
+    <img src="https://img.shields.io/badge/🏠_Inicio-Menu-06b6d4?style=plastic" alt="Menu">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/17%20%E2%80%A2%20%C3%81rvore%20de%20Express%C3%A3o/README.md">
+    <img src="https://img.shields.io/badge/Avancar-Percurso_em_Árvore_de_Expressão_➡️-8b5cf6?style=plastic" alt="Avançar">
+  </a>
+</p>
 
 ---
 
@@ -294,3 +306,20 @@ Esgota H, I → trata D → trata E → trata C → dentro de B: esgota toda a s
 | Pós-ordem (posfixa) | esquerda → direita → raiz | Liberar memória da árvore (como fizemos na função `libera`); avaliar expressões matemáticas |
 
 > 🧭 **Dica de prova:** para não errar a ordem na hora de resolver um exercício desses, sempre desenhe a árvore primeiro (se ainda não estiver desenhada) e vá "contornando" o desenho com o dedo, seguindo a regrinha da ordem escolhida — é exatamente assim que a Regina desenha aquelas linhas pontilhadas vermelhas contornando a árvore nos slides. Isso evita esquecer algum nó ou trocar a ordem por engano.
+
+---
+
+<p align="center">
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/15%20%E2%80%A2%20%C3%81rvores%20Bin%C3%A1rias/README.md">
+    <img src="https://img.shields.io/badge/⬅️_Voltar-Árvores_Binárias-8b5cf6?style=plastic" alt="Voltar">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="../README.md">
+    <img src="https://img.shields.io/badge/🏠_Inicio-Menu-06b6d4?style=plastic" alt="Menu">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/17%20%E2%80%A2%20%C3%81rvore%20de%20Express%C3%A3o/README.md">
+    <img src="https://img.shields.io/badge/Avancar-Percurso_em_Árvore_de_Expressão_➡️-8b5cf6?style=plastic" alt="Avançar">
+  </a>
+</p>
+
