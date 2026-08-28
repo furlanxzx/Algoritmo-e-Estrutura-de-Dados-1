@@ -564,15 +564,11 @@ void insert (float v[], int n, float valor, int pos)
 ### Exercício 4 🟢
 
 > **Enunciado:** 
-> Faça uma função `ordem(int v, int n)` que ordene crescentemente os elementos de um vetor `v` de `n` elementos inteiros.
+> Faça uma função `ordem(int v[], int n)` que ordene crescentemente os elementos de um vetor `v` de `n` elementos inteiros.
 
 <details>
 <summary>💡 Clique aqui para ver a solução</summary>
-
-⚠️ O protótipo do slide tem uma pequena imprecisão de digitação (`int v` ao invés de `int v[]`) — o correto, para receber um vetor, é `void ordem(int v[], int n)`.
-
-Vamos usar o algoritmo clássico de **bubble sort** (ordenação por flutuação):
-
+  
 ```c
 void ordem (int v[], int n)
 {
