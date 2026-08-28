@@ -38,14 +38,17 @@ int *v;
 
 ```c
 int a[10], *p;
-p = &a[0];   // ou   p = a;
+p = &a[0];  // ou   p = a;
 ```
 
-```
-p ──┐
-    ▼
-a: [ ][ ][ ][ ][ ][ ][ ][ ][ ][ ]
-    0  1  2  3  4  5  6  7  8  9
+```mermaid
+flowchart LR
+    p["p"] --> a0
+
+    subgraph VETOR[" "]
+        direction LR
+        a0["a[0]<br/>&nbsp;"] --- a1["a[1]<br/>&nbsp;"] --- a2["a[2]<br/>&nbsp;"] --- a3["a[3]<br/>&nbsp;"] --- a4["a[4]<br/>&nbsp;"] --- a5["a[5]<br/>&nbsp;"] --- a6["a[6]<br/>&nbsp;"] --- a7["a[7]<br/>&nbsp;"] --- a8["a[8]<br/>&nbsp;"] --- a9["a[9]<br/>&nbsp;"]
+    end
 ```
 
 Assim, podemos acessar `a[0]` por `*p`; por exemplo, podemos armazenar o valor `5` em `a[0]` com:
@@ -54,11 +57,14 @@ Assim, podemos acessar `a[0]` por `*p`; por exemplo, podemos armazenar o valor `
 *p = 5;
 ```
 
-```
-p ──┐
-    ▼
-a: [5][ ][ ][ ][ ][ ][ ][ ][ ][ ]
-    0  1  2  3  4  5  6  7  8  9
+```mermaid
+flowchart LR
+    p["p"] --> a0
+
+    subgraph VETOR[" "]
+        direction LR
+        a0["a[0]<br/>5"] --- a1["a[1]<br/>&nbsp;"] --- a2["a[2]<br/>&nbsp;"] --- a3["a[3]<br/>&nbsp;"] --- a4["a[4]<br/>&nbsp;"] --- a5["a[5]<br/>&nbsp;"] --- a6["a[6]<br/>&nbsp;"] --- a7["a[7]<br/>&nbsp;"] --- a8["a[8]<br/>&nbsp;"] --- a9["a[9]<br/>&nbsp;"]
+    end
 ```
 
 ## <mark> 2 - Aritmética de Ponteiros </mark>
