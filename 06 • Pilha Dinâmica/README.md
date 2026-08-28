@@ -25,11 +25,32 @@ Uma pilha dinâmica é formada por uma sequência de estruturas (comumente chama
 * **Tamanho flexível:** O espaço total de memória gasto pela estrutura é proporcional ao número de elementos armazenados nela no momento.
 * ⚠️ **Atenção:** Não podemos garantir que os elementos armazenados ocuparão um espaço de memória sequencial. Portanto, **não temos acesso direto** aos elementos da pilha como tínhamos nos índices de um vetor.
 
+> O ponteiro da última estrutura da pilha aponta para `NULL`, indicando que chegou ao final da pilha.
+
+```mermaid
+flowchart LR
+    P["P"] --> nodeA["x | A"]
+    nodeA --> nodeB["x | B"]
+    nodeB -.-> nodeF["x | N"]
+```
+
+- **P**: elemento que aponta para o topo da pilha
+- **x**: valor armazenado no nó
+- **N**: `NULL`
+
 ### <mark> 1.2 - Entendendo o Encadeamento
 * Para que seja possível percorrer todos os elementos da pilha, devemos explicitamente guardar o encadeamento dos elementos.
 * Cada nó contém a informação e um ponteiro para a estrutura que é a sua sucessora na pilha.
 * Toda a sequência é acessada por um único ponteiro que aponta para o primeiro nó (o topo da pilha).
 * O ponteiro da última estrutura da pilha aponta para `NULL`, sinalizando que não existe um próximo elemento e a pilha chegou ao fim.
+
+```mermaid
+flowchart LR
+    prim["prim"] --> info1["Info1"]
+    info1 --> info2["Info2"]
+    info2 --> info3["Info3"]
+    info3 --> nulo(("×"))
+```
 
 ---
 
