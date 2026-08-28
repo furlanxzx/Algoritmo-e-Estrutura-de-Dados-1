@@ -43,21 +43,23 @@ Essa regra de funcionamento é chamada de **LIFO** (*Last In, First Out*).
 
 ## <mark> 3 - Representação Gráfica na Memória</mark>
 
-```text
-               +-----------------------+  <-- MAX_PILHA (Capacidade Máxima)
-               |       [ VAZIO ]       |
-               +-----------------------+
-  TOPO  -----> |     Elemento a(n-1)   |  <-- Último inserido (Sai primeiro)
-               +-----------------------+
-               |          ...          |
-               +-----------------------+
-               |      Elemento a(1)    |
-               +-----------------------+
-  BASE  -----> |      Elemento a(0)    |  <-- Primeiro inserido (Fundo)
-               +-----------------------+
-
+```mermaid
+flowchart TD
+    subgraph PILHA[" "]
+        direction TB
+        VAZIO["[ VAZIO ]"]
+        AN["Elemento a(n-1)"]
+        DOTS["..."]
+        A1["Elemento a(1)"]
+        A0["Elemento a(0)"]
+        VAZIO --> AN --> DOTS --> A1 --> A0
+    end
+    MAXP["MAX_PILHA<br/>(Capacidade Máxima)"] -.-> VAZIO
+    TOPO["TOPO"] --> AN
+    ULT["Último inserido<br/>(Sai primeiro)"] -.-> AN
+    BASE["BASE"] --> A0
+    PRIM["Primeiro inserido<br/>(Fundo)"] -.-> A0
 ```
-
 ---
 
 ## <mark> 4 - Aplicações no Mundo Real e na Computação</mark>
@@ -227,45 +229,66 @@ Como a pilha possui a propriedade **LIFO** (*Last In, First Out*), se empilharmo
 ```c
 #include <stdio.h>
 #include <string.h>
-#include <stdlib.h>
 
 #define MAX 100
 
 typedef struct {
     char vet[MAX];
     int topo;
-} TPilhaChar;
+} TPilha;
 
-void push_char(TPilhaChar* p, char c) {
-    if (p->topo < MAX - 1) {
-        p->vet[++(p->topo)] = c;
+void inicializaPilha (TPilha *p)
+{
+    p->topo = -1;
+}
+
+int pilhaVazia (TPilha p)
+{
+    return (p.topo == -1);
+}
+
+int pilhaCheia (TPilha p)
+{
+    return (p.topo == MAX - 1);
+}
+
+void push (TPilha *p, char x)
+{
+    if (!pilhaCheia(*p)) {
+        p->topo++;
+        p->vet[p->topo] = x;
     }
 }
 
-char pop_char(TPilhaChar* p) {
-    if (p->topo >= 0) {
-        return p->vet[(p->topo)--];
+char pop (TPilha *p)
+{
+    char x = '\0';
+    if (!pilhaVazia(*p)) {
+        x = p->vet[p->topo];
+        p->topo--;
     }
-    return '\0';
+    return x;
 }
 
-int main() {
-    char frase[] = "ESTE EXERCICIO E MUITO FACIL";
-    TPilhaChar p;
-    p.topo = -1;
+int main ()
+{
+    char texto[MAX];
+    TPilha pilha;
+    inicializaPilha(&pilha);
 
-    // 1. Empilha todos os caracteres da frase
-    for (int i = 0; frase[i] != '\0'; i++) {
-        push_char(&p, frase[i]);
-    }
+    printf("Digite a frase: ");
+    fgets(texto, MAX, stdin);
+    texto[strcspn(texto, "\n")] = '\0'; // remove o \n deixado pelo fgets
 
-    // 2. Desempilha e imprime até esvaziar
-    printf("Frase Invertida: ");
-    while (p.topo >= 0) {
-        printf("%c", pop_char(&p));
-    }
+    // empilha a frase inteira, caractere por caractere (inclusive espaços)
+    for (int i = 0; texto[i] != '\0'; i++)
+        push(&pilha, texto[i]);
+
+    // desempilhar já devolve tudo invertido, palavras e letras
+    while (!pilhaVazia(pilha))
+        printf("%c", pop(&pilha));
+
     printf("\n");
-
     return 0;
 }
 ```
@@ -281,60 +304,46 @@ int main() {
 <summary><b>💡 Clique aqui para ver a solução</b></summary>
 
 <br>
-#### **Lógica da Solução:**
-Percorremos a string caractere por caractere:
-1. Empilhamos cada letra da palavra corrente.
-2. Ao encontrar um espaço `' '` ou o final da string `'\0'`, desempilhamos todas as letras acumuladas na pilha (o que inverte apenas a palavra recém-lida) e depois imprimimos o espaço para separar a próxima palavra.
+
 
 ```c
-#include <stdio.h>
-#include <stdlib.h>
+void inverteCadaPalavra (char *texto, TPilha *pilha)
+{
+    int i = 0;
 
-#define MAX 100
-
-typedef struct {
-    char vet[MAX];
-    int topo;
-} TPilhaChar;
-
-void push_char(TPilhaChar* p, char c) {
-    if (p->topo < MAX - 1) {
-        p->vet[++(p->topo)] = c;
-    }
-}
-
-char pop_char(TPilhaChar* p) {
-    if (p->topo >= 0) {
-        return p->vet[(p->topo)--];
-    }
-    return '\0';
-}
-
-int main() {
-    char frase[] = "ESTE EXERCICIO E MUITO FACIL";
-    TPilhaChar p;
-    p.topo = -1;
-
-    printf("Palavras Invertidas: ");
-    for (int i = 0; ; i++) {
-        // Se for letra, empilha
-        if (frase[i] != ' ' && frase[i] != '\0') {
-            push_char(&p, frase[i]);
-        } 
-        // Se for espaço ou fim de frase, esvazia a pilha
+    while (texto[i] != '\0') {
+        if (texto[i] != ' ') {
+            push(pilha, texto[i]);
+            i++;
+        }
         else {
-            while (p.topo >= 0) {
-                printf("%c", pop_char(&p));
-            }
-            if (frase[i] == ' ') {
-                printf(" ");
-            } else {
-                break; // Fim da string
-            }
+            // achou um espaço: desempilha só a palavra atual (sai invertida)
+            while (!pilhaVazia(*pilha))
+                printf("%c", pop(pilha));
+
+            printf(" "); // preserva o espaço original entre as palavras
+            i++;
         }
     }
-    printf("\n");
 
+    // imprime a última palavra, que não é seguida de espaço
+    while (!pilhaVazia(*pilha))
+        printf("%c", pop(pilha));
+}
+
+int main ()
+{
+    char texto[MAX];
+    TPilha pilha;
+    inicializaPilha(&pilha);
+
+    printf("Digite a frase: ");
+    fgets(texto, MAX, stdin);
+    texto[strcspn(texto, "\n")] = '\0';
+
+    inverteCadaPalavra(texto, &pilha);
+
+    printf("\n");
     return 0;
 }
 ```
