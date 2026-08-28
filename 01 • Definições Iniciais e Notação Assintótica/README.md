@@ -49,6 +49,11 @@ Analisar um algoritmo serve para prever seu consumo de **tempo** e **memória**.
 * **Objetivo:** Encontrar o algoritmo **ótimo** (o menor custo teórico possível para resolver um problema).
 * **Tempo Real (Segundos):** **Não serve como padrão**, pois muda conforme o hardware, compilador e memória do computador.
 * **Modelo Matemático:** A forma correta de medir. Em vez de segundos, contamos apenas as **operações principais** (ex: quantas comparações um algoritmo de ordenação faz).
+
+> [!IMPORTANT]
+> **Comentário:**
+> Esse módulo é o mais extenso, aos alunos que fazem com a professora Regina, ela informou em sala no início de 2026 que não cobraria nenhuma análise de notação assintótica complexa (eu pessoalmente nunca vi cair, mas isso está sujeito a mudança dependendo do humor dela) e que se ela fosse cobrar algo seria em um algoritmo simples, onde a complexidade seria **$O(n)$** ou **$O(n^2)$** (explicação do que é isso mais pra baixo), aconselho focar mais o tempo em Manipulação de Arquivos, Ponteiros, Pilha e Fila, em todo caso, se alguém quiser o conteúdo completo vai estar aqui explicado.
+
 ---
 ##  <mark> 2.1 - Função de Complexidade $f(n)$</mark>
 
