@@ -886,8 +886,10 @@ int main(void)
     return 0;
 }
 ```
+</details>
 
 ---
+
 <p align="center">
   <a href="https://github.com/furlanxzx/Algoritmo-e-Estrutura-de-Dados-1/blob/main/03%20%E2%80%A2%20Struct%20e%20Ponteiros/README.md">
     <img src="https://img.shields.io/badge/⬅️_Voltar-Struct_e_Ponteiros-8b5cf6?style=plastic" alt="Voltar">
@@ -902,6 +904,3 @@ int main(void)
   </a>
 </p>
 
-📌 Repare que usamos `scanf("%d", matriz + (i*col+j))` sem `&` — assim como vimos na seção de exemplos com ponteiros, `matriz + (i*col+j)` **já é** um endereço, então não precisamos do `&` que usaríamos com uma variável comum.
-
-</details>
