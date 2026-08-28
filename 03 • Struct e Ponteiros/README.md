@@ -242,191 +242,247 @@ int main() {
 </details>
 
 ---
+
 <h1 align="center">Ponteiros</h1>
 
-Um **ponteiro** é uma variável especial criada para **armazenar o endereço de memória** de outra variável, em vez de guardar um valor comum (como um número ou caractere).
+## <mark> 1 - Definição </mark>
 
----
+**Ponteiro** é uma variável que armazena um **endereço de memória**.
 
-## <mark> 1 - Declarando um Ponteiro </mark>
-
-Para indicar que uma variável é um ponteiro, utilizamos o símbolo asterisco (`*`) na sua declaração.
+Deve ser declarado usando o símbolo `*`:
 
 ```c
-int *p; // 'p' é um ponteiro que guardará o endereço de uma variável do tipo int
-```
-
-> **Dica de Leitura:** Leia `int *p;` como: *"A partir do endereço `p`, existe um inteiro"*.
-
-É possível declarar ponteiros junto com variáveis comuns na mesma linha:
-```c
-int i, *p, j, v[10], *q; // 'i' e 'j' são inteiros; 'p' e 'q' são ponteiros para inteiro
-```
-
----
-
-##  <mark> 2 - Os Dois Operadores Fundamentais </mark>
-
-| Operador | Nome | O que faz? | Exemplo |
-| :--- | :--- | :--- | :--- |
-| **`&`** | **Endereço de** | Retorna a posição de memória de uma variável. | `&x` (endereço onde `x` está guardado) |
-| **`*`** | **Indireção / Desreferenciação** | Acessa o **conteúdo** do endereço guardado pelo ponteiro. | `*p` (conteúdo presente no endereço `p`) |
-
----
-
-## <mark> 3 - Entendendo Ponteiros na Memória </mark>
-
-Ao declarar `int *p;`, o computador reserva um espaço para `p`, mas ele **ainda não aponta para lugar nenhum válido** (guarda lixo de memória).
-
-```text
-+-------+
-|   ?   |   p (ponteiro não inicializado)
-+-------+
-```
-
-Ao fazer `p = &i;`, o ponteiro `p` passa a guardar a localização de `i`:
-
-```text
-+-------+          +-------+
-|   •---|--------> |   ?   |
-+-------+          +-------+
-    p                  i
-```
-
----
-
-## <mark>  4 - Manipulando Valores via Ponteiro </mark>
-
-Quando `p` aponta para `i`, dizemos que `*p` é um ***alias* (apelido)** para `i`. Qualquer alteração via `*p` modifica diretamente o valor contido em `i`.
-
-### Exemplo Passo a Passo:
-
-```c
-int i;
 int *p;
-
-p = &i; // p aponta para i
-```
-```text
-+-------+          +-------+
-|   •---|--------> |   ?   |
-+-------+          +-------+
-    p                  i
 ```
 
-```c
-i = 1; // Atribui 1 à variável i diretamente
-```
-```text
-+-------+          +-------+
-|   •---|--------> |   1   |
-+-------+          +-------+
-    p                  i
-```
-
-```c
-*p = 2; // Altera o valor no endereço apontado por p (altera 'i')
-```
-```text
-+-------+          +-------+
-|   •---|--------> |   2   |
-+-------+          +-------+
-    p                  i
-```
-
-Ao executar `printf("%d", i);` ou `printf("%d", *p);`, a saída em ambos será **`2`**.
+- `p` é o nome da variável que armazenará um endereço de memória;
+- `int *` informa ao compilador que `p` armazenará um endereço de memória em que será guardado um número inteiro.
 
 ---
 
-## <mark> 5 - Múltiplos Ponteiros para o Mesmo Endereço </mark>
+## <mark> 2 - Declaração </mark>
 
-Vários ponteiros podem apontar simultaneamente para a mesma variável:
+É possível declarar ponteiro junto com outras variáveis:
 
 ```c
-int i, *p, *q;
-
-p = &i; // p recebe o endereço de i
-q = p;  // q recebe o endereço guardado em p (também aponta para i)
+int i, *p, j, v[10], *q;
 ```
 
-```text
-+-------+
-|   •---|---+
-+-------+   |      +-------+
-    p       +----> |   ?   |
-            |      +-------+
-+-------+   |          i
-|   •---|---+
-+-------+
-    q
-```
-
-* Tanto `*p = 1;` quanto `*q = 2;` mudarão o valor dentro da única variável **`i`**.
+📌 Repare que o `*` é ligado à **variável**, não ao tipo: em `int i, *p, j, v[10], *q;`, só `p` e `q` são ponteiros — `i`, `j` e `v` são variáveis comuns.
 
 ---
 
-## <mark> 6 - Diferença entre `p = q` e `*q = *p` </mark>
+## <mark> 3 - Operadores </mark>
 
-Esse é um dos pontos onde as pessoas mais se confundem. Observe a diferença:
+Há dois operadores usados com ponteiros:
 
-### 1. `p = q` (Cópia de Endereço)
-Faz com que o ponteiro `p` passe a apontar para o **mesmo lugar** que o ponteiro `q`.
+- **Operador de endereço `&`**
+  - Se `x` é variável, então `&x` é o endereço de memória de `x`.
+- **Operador indireto `*`**
+  - Se `p` é um ponteiro, então `*p` é o conteúdo armazenado no endereço que `p` guarda.
 
-```text
-p = &i;  q = &j;
-p = q;   // p agora aponta para j
+---
 
-  p ----+
-        |---> [   ] j
-  q ----+     [   ] i
+## <mark> 4 - Ponteiro não inicializado </mark>
+
+Declarar uma variável ponteiro reserva espaço na memória para o apontador, mas **não faz referência a nenhum objeto**:
+
+```c
+int *p; // não guarda nada ainda
+```
+
+```mermaid
+flowchart LR
+    p["p = ???"]
+```
+
+Para usar `p`, primeiro é necessário **inicializá-lo** ou **alocar** um espaço de memória para que ele receba o endereço desse espaço alocado:
+
+```c
+int *p, i;
+...
+p = &i;
+```
+
+ou
+
+```c
+int i, *p = &i;
+```
+
+```mermaid
+flowchart LR
+    p["p"] --> i["i"]
 ```
 
 ---
 
-### 2. `*q = *p` (Cópia de Valor)
-Não muda os ponteiros! Copia o **conteúdo** da memória apontada por `p` para dentro do endereço apontado por `q`.
+## <mark> 5 - Ponteiro nulo </mark>
+
+É possível inicializar um ponteiro vazio fazendo:
 
 ```c
-int i = 1, j;
-int *p = &i, *q = &j;
-
-*q = *p; // Copia o valor de 'i' (1) para o espaço de 'j'
+int *p;
+p = NULL;  // NULL é definida em stdlib.h
 ```
 
-```text
-+-------+        +-------+
-|   •---|------> |   1   |  (i)
-+-------+        +-------+
-    p
+Uma vez que o ponteiro aponta para um objeto, é possível usar o operador `*` para acessar seu conteúdo:
 
-+-------+        +-------+
-|   •---|------> |   1   |  (j recebeu o valor 1)
-+-------+        +-------+
-    q
+```c
+printf("%d\n", *p); // imprime o conteúdo armazenado no endereço que p guarda
+```
+
+Se `p` aponta para `i`, `*p` é dito ser um ***alias*** de `i`:
+
+- `*p` tem o mesmo valor que `i`;
+- alterar `*p` também altera o valor de `i`.
+
+---
+
+## <mark> 6 - Exemplo passo a passo </mark>
+
+Acompanhe como o conteúdo de `i` e `*p` evoluem:
+
+```c
+p = &i;
+```
+
+```mermaid
+flowchart LR
+    p["p"] --> i["i = ?"]
+```
+
+```c
+i = 1;
+```
+
+```mermaid
+flowchart LR
+    p["p"] --> i["i = 1"]
+```
+
+```c
+printf("%d\n", i);  /* imprime 1 */
+printf("%d\n", *p); /* imprime 1 */
+```
+
+Como `p` aponta para `i`, alterar `*p` altera `i` diretamente:
+
+```c
+*p = 2;
+```
+
+```mermaid
+flowchart LR
+    p["p"] --> i["i = 2"]
+```
+
+```c
+printf("%d\n", i);  /* imprime 2 */
+printf("%d\n", *p); /* imprime 2 */
 ```
 
 ---
 
-## <mark> 7 - Boas Práticas e Cuidados Importantes </mark>
+## <mark> 7 - Cuidados </mark>
 
-1. **Nunca desreferencie um ponteiro não inicializado:**
-   ```c
-   int *p;
-   printf("%d\n", *p); // ❌ ERRO! Tenta ler uma memória aleatória. Pode travar o programa.
-   ```
+⚠️ **Nunca aplique um operador indireto (`*`) em um apontador não inicializado.**
 
-2. **Nunca atribua um número inteiro diretamente a um ponteiro:**
-   ```c
-   int *p;
-   p = 1000; // ❌ ERRO! Você está mandando o ponteiro apontar para o endereço 1000 da memória.
-   ```
+```c
+int *p;
+printf("%d\n", *p);
+```
 
-3. **Inicialize com `NULL` se não for usá-lo imediatamente:**
-   Se um ponteiro não tem para onde apontar no momento da criação, defina-o como `NULL` (requer `<stdlib.h>`).
-   ```c
-   int *p = NULL; // Indica que o ponteiro é explicitamente "vazio" no momento
-   ```
-   ---
+Pode causar um comportamento indefinido.
+
+⚠️ **Nunca atribua um valor que não seja um endereço a uma variável do tipo ponteiro**, pois poderá travar o sistema.
+
+```c
+int *p;
+p = 1; // NUNCA FAÇA ISSO!!
+```
+
+---
+
+## <mark> 8 - Copiando endereços </mark>
+
+C permite que o operador de atribuição copie endereços:
+
+```c
+int i, j, *p, *q;
+p = &i; // endereço de i é copiado para p
+q = p;  // endereço que p guarda é copiado para q
+```
+
+Tanto `p` quanto `q` agora apontam para `i` (guardam o endereço de memória de `i`):
+
+```mermaid
+flowchart LR
+    p["p"] --> i["i = ?"]
+    q["q"] --> i
+```
+
+Agora é possível alterar o valor de `i` atribuindo novos valores para `*p` e `*q`:
+
+```c
+*p = 1;
+```
+
+```mermaid
+flowchart LR
+    p["p"] --> i["i = 1"]
+    q["q"] --> i
+```
+
+```c
+*q = 2;
+```
+
+```mermaid
+flowchart LR
+    p["p"] --> i["i = 2"]
+    q["q"] --> i
+```
+
+📌 Qualquer número de ponteiros pode apontar para o mesmo objeto.
+
+---
+
+## <mark> 9 - `p = q` vs `*q = *p` </mark>
+
+⚠️ **Cuidado!!! Não confunda:**
+
+```c
+p = q;
+```
+
+com
+
+```c
+*q = *p;
+```
+
+O primeiro é uma **atribuição de ponteiro** (faz `q` passar a apontar para o mesmo lugar que `p`), enquanto o segundo **não é uma atribuição direta de ponteiro** — é uma atribuição do *valor apontado*.
+
+**Exemplo com `*q = *p`:**
+
+```c
+p = &i;
+q = &j;
+i = 1;
+*q = *p;
+```
+
+```mermaid
+flowchart LR
+    p["p"] --> i["i = 1"]
+    q["q"] --> j["j = 1"]
+```
+
+`*q = *p` **copia o valor** da variável apontada por `p` (o valor de `i`) para dentro do objeto apontado por `q` (a variável `j`) — `p` e `q` continuam apontando para endereços **diferentes**, só o conteúdo de `j` mudou.
+
+---
+
 <h1 align="center">Alocação Dinâmica</h1>
 
 A **alocação dinâmica** permite reservar memória durante a execução do programa (*runtime*), ao contrário da alocação estática (como vetores com tamanho fixo). Todas as funções de alocação dinâmica pertencem à biblioteca `<stdlib.h>`.
@@ -554,7 +610,7 @@ int main(void)
 ---
 > [!IMPORTANT]
 > **Atenção aos próximos tópicos!**
-> A alocação dinâmica (com foco no `malloc`) é a ferramenta fundamental para a construção de **Listas**, **Pilhas** e **Filas**. Certifique-se de praticar bastante este módulo antes de avançar!
+> A alocação dinâmica (com foco no `malloc`) é a ferramenta fundamental para a construção de **Listas**, **Pilhas** e **Filas**. Certifique-se de praticar bastante este módulo antes de avançar! Uma dica que me ajudou bastante a entender a alocação dinâmica foi fazer exercícios de pilha e fila dinâmica de inserção, já que para inserir um elemento nessas estruturas que vocês vão ver mais pra frente obrigatoriamente vocês devem fazer uma alocação dinâmica (por isso são estruturas dinâmicas). Ficou com dúvida do que é uma alocação ? Veja o código de inserção nessas estruturas.
 
 ---
 <h1 align="center">Ponteiro para Estruturas</h1>
@@ -1122,7 +1178,7 @@ int main(void)
     int n_est = sizeof(lista_estudantes) / sizeof(Estudante);
     int n_func = sizeof(lista_funcionarios) / sizeof(Funcionario);
 
-    printf("--- Processando Aumentos Salariais ---\n\n");
+    printf("Processando Aumentos Salariais \n");
     aplicar_aumento(lista_estudantes, n_est, lista_funcionarios, n_func);
 
     return 0;
