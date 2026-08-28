@@ -922,42 +922,29 @@ int main(void)
 #include <stdlib.h>
 #include <string.h>
 
-#define MAX 10
-
-typedef struct {
+struct aluno {
     char nome[81];
     int mat;
     char end[121];
     char tel[21];
-} Aluno;
+};
 
-typedef Aluno *PAluno;
+typedef struct aluno Aluno;
 
-// 1. Inicializa todas as posições do vetor com NULL
-void inicializar_tabela(PAluno tab[], int tam) 
+// 1. Inicializa a tabela: todas as posições começam sem aluno (NULL)
+void inicializaTabela (Aluno *tab[], int n)
 {
-    for (int i = 0; i < tam; i++) {
+    for (int i = 0; i < n; i++)
         tab[i] = NULL;
-    }
 }
 
-// 2. Aloca e armazena um novo aluno em uma posição específica
-void inserir_aluno(PAluno tab[], int pos, char *nome, int mat, char *end, char *tel) 
+// 2. Armazena os dados de um novo aluno em uma dada posição
+void armazenaAluno (Aluno *tab[], int pos, char *nome, int mat, char *end, char *tel)
 {
-    if (pos < 0 || pos >= MAX) {
-        printf("Erro: Posição inválida!\n");
-        return;
-    }
-
-    // Se já existia um aluno na posição, libera primeiro
-    if (tab[pos] != NULL) {
-        free(tab[pos]);
-    }
-
-    tab[pos] = (PAluno) malloc(sizeof(Aluno));
+    tab[pos] = (Aluno *) malloc(sizeof(Aluno));
 
     if (tab[pos] == NULL) {
-        printf("Erro ao alocar memória!\n");
+        printf("Erro ao alocar memoria!\n");
         return;
     }
 
@@ -965,51 +952,36 @@ void inserir_aluno(PAluno tab[], int pos, char *nome, int mat, char *end, char *
     tab[pos]->mat = mat;
     strcpy(tab[pos]->end, end);
     strcpy(tab[pos]->tel, tel);
-
-    printf("Aluno inserido com sucesso na posição %d!\n", pos);
 }
 
-// 3. Exibe as informações prevendo posições sem dados
-void mostrar_aluno(PAluno tab[], int pos) 
+// 3. Mostra as informações de um aluno em uma dada posição
+void mostraAluno (Aluno *tab[], int pos)
 {
-    if (pos < 0 || pos >= MAX) {
-        printf("Erro: Posição inválida!\n");
+    if (tab[pos] == NULL) {
+        printf("Posicao %d: [ vazia ]\n", pos);
         return;
     }
 
-    if (tab[pos] == NULL) {
-        printf(" AVISO: A posição %d está vazia (sem dados).\n", pos);
-    } else {
-        printf("\n--- Dados do Aluno na posição %d ---\n", pos);
-        printf("Nome: %s\n", tab[pos]->nome);
-        printf("Matrícula: %d\n", tab[pos]->mat);
-        printf("Endereço: %s\n", tab[pos]->end);
-        printf("Telefone: %s\n", tab[pos]->tel);
-    }
+    printf("Posicao %d:\n", pos);
+    printf("  Nome:      %s\n", tab[pos]->nome);
+    printf("  Matricula: %d\n", tab[pos]->mat);
+    printf("  Endereco:  %s\n", tab[pos]->end);
+    printf("  Telefone:  %s\n", tab[pos]->tel);
 }
 
-int main(void) 
+// 4. main para testar
+int main ()
 {
-    PAluno tabela[MAX];
+    Aluno *tab[100];
 
-    inicializar_tabela(tabela, MAX);
+    inicializaTabela(tab, 100);
 
-    // Teste de inserção
-    inserir_aluno(tabela, 0, "Maria Silva", 1001, "Rua A, 123", "9999-8888");
-    inserir_aluno(tabela, 3, "João Souza", 1002, "Av. B, 456", "8888-7777");
+    armazenaAluno(tab, 0, "Maria Silva", 12345, "Rua A, 100", "11999990000");
+    armazenaAluno(tab, 3, "Joao Souza", 67890, "Rua B, 200", "11988887777");
 
-    // Teste de exibição (posição com dados)
-    mostrar_aluno(tabela, 0);
-
-    // Teste de exibição (posição sem dados)
-    mostrar_aluno(tabela, 1);
-
-    // Liberação de memória ao encerrar
-    for (int i = 0; i < MAX; i++) {
-        if (tabela[i] != NULL) {
-            free(tabela[i]);
-        }
-    }
+    mostraAluno(tab, 0); // ocupada
+    mostraAluno(tab, 1); // vazia
+    mostraAluno(tab, 3); // ocupada
 
     return 0;
 }
@@ -1030,82 +1002,116 @@ int main(void)
 
 ```c
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 
-#define TURMAS 3
-#define ALUNOS 5
+#define NUM_TURMAS 3
+#define NUM_ALUNOS 5
+#define NUM_NOTAS 4
 
-typedef struct {
-    char nome[50];
-    float notas[4];
+struct aluno {
+    char nome[81];
+    float notas[NUM_NOTAS];
     float media;
-    int ativo; // 1 = Cadastrado, 0 = Excluído/Vazio
-} Aluno;
+};
 
-void calcular_media(Aluno *a) 
+typedef struct aluno Aluno;
+
+// Inicializa todas as posições das turmas como vazias
+void inicializaTurmas (Aluno turmas[NUM_TURMAS][NUM_ALUNOS])
+{
+    for (int t = 0; t < NUM_TURMAS; t++)
+        for (int a = 0; a < NUM_ALUNOS; a++)
+            turmas[t][a].nome[0] = '\0'; // posição vazia
+}
+
+// Calcula a média das 4 notas bimestrais de um aluno
+float calculaMedia (float notas[NUM_NOTAS])
 {
     float soma = 0;
-    for (int i = 0; i < 4; i++) {
-        soma += a->notas[i];
-    }
-    a->media = soma / 4.0;
+
+    for (int i = 0; i < NUM_NOTAS; i++)
+        soma += notas[i];
+
+    return soma / NUM_NOTAS;
 }
 
-void buscar_aluno(Aluno escola[TURMAS][ALUNOS], char *nome) 
+// Cadastra um aluno em uma turma/posição, já calculando a média
+void cadastraAluno (Aluno turmas[NUM_TURMAS][NUM_ALUNOS], int turma, int pos,
+                     char *nome, float n1, float n2, float n3, float n4)
 {
-    for (int t = 0; t < TURMAS; t++) {
-        for (int a = 0; a < ALUNOS; a++) {
-            if (escola[t][a].ativo && strcmp(escola[t][a].nome, nome) == 0) {
-                printf("\n Aluno encontrado!");
-                printf("\nTurma: %d | Posição: %d", t + 1, a + 1);
-                printf("\nNome: %s | Média: %.2f\n", escola[t][a].nome, escola[t][a].media);
-                return;
+    strcpy(turmas[turma][pos].nome, nome);
+    turmas[turma][pos].notas[0] = n1;
+    turmas[turma][pos].notas[1] = n2;
+    turmas[turma][pos].notas[2] = n3;
+    turmas[turma][pos].notas[3] = n4;
+    turmas[turma][pos].media = calculaMedia(turmas[turma][pos].notas);
+}
+
+// Exibe os dados de um aluno
+void exibeAluno (Aluno a)
+{
+    printf("Nome:   %s\n", a.nome);
+    printf("Notas:  %.1f  %.1f  %.1f  %.1f\n",
+           a.notas[0], a.notas[1], a.notas[2], a.notas[3]);
+    printf("Media:  %.2f\n", a.media);
+}
+
+// Busca um aluno pelo nome em todas as turmas.
+// Se encontrar, guarda a turma e a posição em *turma e *pos e retorna 1.
+// Se não encontrar, retorna 0.
+int buscaAluno (Aluno turmas[NUM_TURMAS][NUM_ALUNOS], char *nome, int *turma, int *pos)
+{
+    for (int t = 0; t < NUM_TURMAS; t++) {
+        for (int a = 0; a < NUM_ALUNOS; a++) {
+            if (turmas[t][a].nome[0] != '\0' &&
+                strcmp(turmas[t][a].nome, nome) == 0) {
+                *turma = t;
+                *pos = a;
+                return 1;
             }
         }
     }
-    printf("\n Aluno \"%s\" não foi encontrado.\n", nome);
+
+    return 0; // não encontrado
 }
 
-void excluir_aluno(Aluno escola[TURMAS][ALUNOS], char *nome) 
+// Exclui um aluno buscando pelo nome
+int excluiAluno (Aluno turmas[NUM_TURMAS][NUM_ALUNOS], char *nome)
 {
-    for (int t = 0; t < TURMAS; t++) {
-        for (int a = 0; a < ALUNOS; a++) {
-            if (escola[t][a].ativo && strcmp(escola[t][a].nome, nome) == 0) {
-                escola[t][a].ativo = 0; // Desativa o registro
-                printf("\n Registro de \"%s\" excluído com sucesso!\n", nome);
-                return;
-            }
-        }
+    int turma, pos;
+
+    if (!buscaAluno(turmas, nome, &turma, &pos)) {
+        printf("Aluno \"%s\" nao encontrado!\n", nome);
+        return 0;
     }
-    printf("\n Impossível excluir: Aluno \"%s\" não encontrado.\n", nome);
+
+    turmas[turma][pos].nome[0] = '\0'; // marca a posição como vazia
+    return 1;
 }
 
-int main(void) 
+int main ()
 {
-    Aluno escola[TURMAS][ALUNOS];
+    Aluno turmas[NUM_TURMAS][NUM_ALUNOS];
+    inicializaTurmas(turmas);
 
-    // Inicialização genérica dos dados para teste
-    for (int t = 0; t < TURMAS; t++) {
-        for (int a = 0; a < ALUNOS; a++) {
-            sprintf(escola[t][a].nome, "Aluno_%d_%d", t + 1, a + 1);
-            escola[t][a].notas[0] = 7.0;
-            escola[t][a].notas[1] = 8.0;
-            escola[t][a].notas[2] = 6.5;
-            escola[t][a].notas[3] = 9.0;
-            escola[t][a].ativo = 1;
-            calcular_media(&escola[t][a]);
-        }
+    cadastraAluno(turmas, 0, 0, "Maria Silva", 8.0, 7.5, 9.0, 6.5);
+    cadastraAluno(turmas, 0, 1, "Joao Souza", 5.0, 6.0, 7.0, 8.0);
+    cadastraAluno(turmas, 2, 3, "Ana Costa", 10.0, 9.0, 8.5, 9.5);
+
+    // Busca e exibe um aluno pelo nome
+    int turma, pos;
+    if (buscaAluno(turmas, "Ana Costa", &turma, &pos)) {
+        printf("Aluno encontrado (turma %d, posicao %d) \n", turma, pos);
+        exibeAluno(turmas[turma][pos]);
     }
 
-    // Teste de Busca
-    buscar_aluno(escola, "Aluno_2_3");
+    printf("\n");
 
-    // Teste de Exclusão
-    excluir_aluno(escola, "Aluno_2_3");
+    // Exclui um aluno e tenta buscar de novo, pra provar que sumiu
+    excluiAluno(turmas, "Joao Souza");
 
-    // Tentativa de buscar o aluno excluído
-    buscar_aluno(escola, "Aluno_2_3");
+    if (!buscaAluno(turmas, "Joao Souza", &turma, &pos))
+        printf("Joao Souza excluido com sucesso, busca nao encontra mais.\n");
 
     return 0;
 }
@@ -1126,60 +1132,85 @@ int main(void)
 #include <stdio.h>
 #include <string.h>
 
-typedef struct {
-    char ultimo_nome[30];
-    char primeiro_nome[30];
-    float cr; // Índice de pontos de graduação
-} Estudante;
+#define NUM_ESTUDANTES 5
+#define NUM_FUNCIONARIOS 5
 
-typedef struct {
-    char ultimo_nome[30];
-    char primeiro_nome[30];
+struct estudante {
+    char nome[81];
+    float cr; // coeficiente de rendimento
+};
+
+struct funcionario {
+    char nome[81];
     float salario;
-} Funcionario;
+};
 
-void aplicar_aumento(Estudante estudantes[], int n_est, Funcionario funcionarios[], int n_func) 
+typedef struct estudante Estudante;
+typedef struct funcionario Funcionario;
+
+// Concede 10% de aumento a todo funcionário que também conste
+// no vetor de estudantes com CR > 3.0.
+// Pré-condição: os dois vetores estão ordenados por nome.
+void concedeAumento (Estudante est[], int nEst, Funcionario func[], int nFunc)
 {
-    for (int i = 0; i < n_func; i++) {
-        for (int j = 0; j < n_est; j++) {
-            // Verifica se o primeiro e último nome coincidem
-            if (strcmp(funcionarios[i].ultimo_nome, estudantes[j].ultimo_nome) == 0 &&
-                strcmp(funcionarios[i].primeiro_nome, estudantes[j].primeiro_nome) == 0) {
-                
-                // Regra de negócio: CR maior que 3.0
-                if (estudantes[j].cr > 3.0) {
-                    float salario_antigo = funcionarios[i].salario;
-                    funcionarios[i].salario *= 1.10; // Aumento de 10%
-                    
-                    printf(" Aumento concedido a %s %s!\n", 
-                           funcionarios[i].primeiro_nome, funcionarios[i].ultimo_nome);
-                    printf("   Salário antigo: R$ %.2f | Novo Salário: R$ %.2f\n\n", 
-                           salario_antigo, funcionarios[i].salario);
-                }
-            }
+    int i = 0, j = 0;
+
+    while (i < nEst && j < nFunc) {
+        int cmp = strcmp(est[i].nome, func[j].nome);
+
+        if (cmp == 0) {
+            // mesmo nome nos dois vetores: verifica o CR
+            if (est[i].cr > 3.0)
+                func[j].salario *= 1.10;
+
+            i++;
+            j++;
+        }
+        else if (cmp < 0) {
+            i++; // estudante "atrasado" em relação ao funcionário, avança nele
+        }
+        else {
+            j++; // funcionário "atrasado" em relação ao estudante, avança nele
         }
     }
 }
 
-int main(void) 
+void mostraFuncionarios (Funcionario func[], int n)
 {
-    Estudante lista_estudantes[] = {
-        {"Almeida", "Carlos", 3.5},
-        {"Lima", "Beatriz", 2.8},
-        {"Silva", "Ana", 3.8}
+    for (int i = 0; i < n; i++)
+        printf("%-15s R$ %.2f\n", func[i].nome, func[i].salario);
+}
+
+int main ()
+{
+    // vetores já ordenados por nome
+    Estudante estudantes[NUM_ESTUDANTES] = {
+        {"Ana", 3.5},
+        {"Bruno", 2.8},
+        {"Carla", 4.0},
+        {"Diego", 3.9},
+        {"Elisa", 2.0}
     };
 
-    Funcionario lista_funcionarios[] = {
-        {"Almeida", "Carlos", 3000.00},
-        {"Lima", "Beatriz", 2500.00},
-        {"Silva", "Ana", 4000.00}
+    Funcionario funcionarios[NUM_FUNCIONARIOS] = {
+        {"Ana", 3000.00},
+        {"Bruno", 2500.00},
+        {"Carla", 4200.00},
+        {"Fabio", 3800.00},
+        {"Diego", 5000.00}
     };
+    // ⚠️ Esse enunciado tem um problema (não é culpa minhakkk) nesse exemplo o vetor de funcionários acima NÃO está ordenado por
+    // nome (Fabio vem antes de Diego) — deixei assim só pra vocês comparararem;
+    // pra função funcionar corretamente, ordene antes de chamar
+    // concedeAumento (ex.: com um qsort usando strcmp em nome).
 
-    int n_est = sizeof(lista_estudantes) / sizeof(Estudante);
-    int n_func = sizeof(lista_funcionarios) / sizeof(Funcionario);
+    printf("Antes do aumento\n");
+    mostraFuncionarios(funcionarios, NUM_FUNCIONARIOS);
 
-    printf("Processando Aumentos Salariais \n");
-    aplicar_aumento(lista_estudantes, n_est, lista_funcionarios, n_func);
+    concedeAumento(estudantes, NUM_ESTUDANTES, funcionarios, NUM_FUNCIONARIOS);
+
+    printf("Depois do aumento\n");
+    mostraFuncionarios(funcionarios, NUM_FUNCIONARIOS);
 
     return 0;
 }
