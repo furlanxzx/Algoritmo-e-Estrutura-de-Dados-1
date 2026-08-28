@@ -43,7 +43,7 @@ Bem-vindo(a)! Este repositório foi criado com o objetivo de **descomplicar a ma
 
 ### 💻 Como utilizar este material?
 
-Sinta-se à vontade para navegar pelas pastas, consultar os códigos-fonte desenvolvidos em C, resolver as listas práticas e utilizar os materiais de revisão para se preparar para as avaliações.
+Sinta-se à vontade para navegar pelas pastas, consultar os códigos-fonte desenvolvidos em C, resolver os exercícios práticos e utilizar o material para se preparar para as avaliações.
 
 ---
 Para facilitar sua navegação e aprendizado, todos os exercícios práticos estão catalogados por nível de dificuldade, identificados pelas cores ao lado do título:
@@ -55,3 +55,13 @@ Para facilitar sua navegação e aprendizado, todos os exercícios práticos est
 Você pode expandir a caixa de cada exercício para consultar o enunciado e a resolução completa.
 
 ---
+
+### 📚 Referências
+
+Este material foi desenvolvido com base em:
+
+- **Slides da disciplina** — Profa. Regina (AED I, UNIFESP, 2026)
+- **Livro:** *Algoritmos em Linguagem C* — Paulo Feofiloff
+
+---
+
