@@ -221,8 +221,6 @@ PLista retira_rec (PLista l, int v)
 
 ---
 
-**Nível de Dificuldade:** 🟡 Médio a 🔴 Difícil
-
 ### 🟢 Exercício 1
 > **Enunciado:**
 > Faça uma função recursiva que libera a lista e uma que busca um elemento na lista.
