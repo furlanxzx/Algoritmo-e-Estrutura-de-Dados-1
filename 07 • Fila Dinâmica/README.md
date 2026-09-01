@@ -90,7 +90,6 @@ PFila cria() {
 <details>
 <summary><b>💡 Clique aqui para ver a solução</b></summary>
 
-Este código consolida os algoritmos apresentados nos slides da aula para manipular a fila perfeitamente:
 
 ```c
 /* Insere no fim da fila */
