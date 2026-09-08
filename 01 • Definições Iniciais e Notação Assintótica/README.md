@@ -52,7 +52,7 @@ Analisar um algoritmo serve para prever seu consumo de **tempo** e **memória**.
 
 > [!IMPORTANT]
 > **Comentário:**
-> Esse módulo é o mais extenso, aos alunos que fazem com a professora Regina, ela informou em sala no início de 2026 que não cobraria nenhuma análise de notação assintótica complexa (eu pessoalmente nunca vi cair, mas isso está sujeito a mudança dependendo do humor dela) e que se ela fosse cobrar algo seria em um algoritmo simples, onde a complexidade seria **$O(n)$** ou **$O(n^2)$** (explicação do que é isso mais pra baixo), aconselho focar mais o tempo em Manipulação de Arquivos, Ponteiros, Pilha e Fila, em todo caso, se alguém quiser o conteúdo completo vai estar aqui explicado.
+> Esse módulo é o mais extenso, aos alunos que fazem com a professora Regina, ela informou em sala no início de 2026 que não cobraria nenhuma análise de notação assintótica complexa (eu pessoalmente nunca vi cair, mas isso está sujeito a mudança (dependendo do humor dela) e que se ela fosse cobrar algo seria em um algoritmo simples, onde a complexidade seria **$O(n)$** ou **$O(n^2)$** (explicação do que é isso mais pra baixo), aconselho focar mais o tempo em Manipulação de Arquivos, Ponteiros, Pilha e Fila, em todo caso, se alguém quiser o conteúdo completo vai estar aqui explicado.
 
 ---
 ##  <mark> 2.1 - Função de Complexidade $f(n)$</mark>
@@ -417,6 +417,15 @@ Nem sempre o algoritmo de menor Big-O é o mais rápido para **qualquer** cenár
 
 * **Para $n < 50$:** O algoritmo quadrático $2n^2$ executa **mais rápido** que o linear $100n$ (ex: para $n = 10$, temos $200$ operações contra $1.000$).
 * **Para $n \ge 50$:** O crescimento quadrático domina, e o algoritmo $O(n)$ passa a ser infinitamente superior.
+
+```mermaid
+xychart-beta
+    title "100n vs 2n² — Ponto de Virada em n = 50"
+    x-axis [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+    y-axis "Número de Operações" 0 --> 20000
+    line [1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000]
+    line [200, 800, 1800, 3200, 5000, 7200, 9800, 12800, 16200, 20000]
+```
 
 ---
 
