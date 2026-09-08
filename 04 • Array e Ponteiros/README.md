@@ -79,7 +79,13 @@ A linguagem C suporta **3 formas** de aritmética de ponteiros:
 
 ```c
 int a[10], *p, *q, i;
+
+p = &a[2];   // 1. somar um inteiro a um ponteiro: p passa a apontar para a[2]
+q = p - 2;   // 2. subtrair um inteiro de um ponteiro: q passa a apontar para a[0]
+i = p - q;   // 3. subtrair um ponteiro de outro: i = distância (em elementos) entre eles
 ```
+
+📌 `p - q` não devolve um endereço, e sim um **inteiro** — o número de elementos entre as duas posições (nesse caso, `i = 2`, já que `p` está 2 posições à frente de `q`). É essa terceira forma que fecha as 3 operações de aritmética de ponteiros citadas acima.
 
 
 
@@ -184,7 +190,7 @@ int main (void){
 
 📌 Note que no `scanf`, `p` já **é** um endereço (é um ponteiro), então não precisamos do `&` que normalmente usamos com variáveis comuns (`scanf("%d", &x)`).
 
-### Quatro formas equivalentes de percorrer um vetor
+### Cinco formas equivalentes de percorrer um vetor
 
 ```c
 int main(void) {
@@ -652,7 +658,7 @@ int merge (float r[], float s[], float v[], int n, int m)
 ### Exercício 6 🔴
 
 > **Enunciado:** 
-> A função do exercício 6 pode ser entendida como uma função que retorna a **união** entre dois conjuntos. Escreva uma função `int intersec(float r[], float s[], float v[], int n, int m)` que construa um vetor `v` com a **interseção** entre `r` e `s`, ordenados. A função deve retornar o tamanho do vetor `v` construído.
+> A função do exercício 5 pode ser entendida como uma função que retorna a **união** entre dois conjuntos. Escreva uma função `int intersec(float r[], float s[], float v[], int n, int m)` que construa um vetor `v` com a **interseção** entre `r` e `s`, ordenados. A função deve retornar o tamanho do vetor `v` construído.
 
 <details>
 <summary>💡 Clique aqui para ver a solução</summary>
@@ -747,7 +753,7 @@ void desordem (int v[], int n)
 ### Exercício 8 🟡
 
 > **Enunciado:** 
-> Escreva uma função `int find(char v[], char t[], int m, int n)` que receba um vetor `v` de `m` elementos e um vetor `t` de `n` elementos (`n < m`). Esta função deve verificar a ocorrência do padrão `t` em `v` ou não. Se houver, deve retornar a posição inicial da primeira ocorrência. Por exemplo: se `v = {As bananas do Panamá são bacanas}` e `p = {anas}` deve retornar `6`. Caso não haja ocorrência, retorne `-1`.
+> Escreva uma função `int find(char v[], char t[], int m, int n)` que receba um vetor `v` de `m` elementos e um vetor `t` de `n` elementos (`n < m`). Esta função deve verificar a ocorrência do padrão `t` em `v` ou não. Se houver, deve retornar a posição inicial da primeira ocorrência. Por exemplo: se `v = {As bananas do Panamá são bacanas}` e `t = {anas}` deve retornar `6`. Caso não haja ocorrência, retorne `-1`.
 
 > Observação: Algoritmos como esses são usados em editores de texto.
 
