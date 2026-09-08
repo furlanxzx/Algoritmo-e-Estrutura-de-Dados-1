@@ -243,7 +243,30 @@ int main() {
     return 0;
 }
 ```
+---
+###  Exemplo: Escrevendo Caractere por Caractere com `fputc`
 
+```c
+#include <stdio.h>
+
+int main() {
+    FILE *f = fopen("saida.txt", "w");
+
+    if (f == NULL) {
+        printf("Erro ao criar o arquivo.\n");
+        return 1;
+    }
+
+    char palavra[] = "Ola mundo";
+
+    for (int i = 0; palavra[i] != '\0'; i++) {
+        fputc(palavra[i], f); // escreve um caractere por vez
+    }
+
+    fclose(f);
+    return 0;
+}
+```
 ---
 
 ## 📝 Exercícios Práticos
@@ -274,18 +297,18 @@ int main() {
     }
 
     int linhas = 0;
-    char c;
+    int c;
+    int ultimo = '\n';   // se o arquivo estiver vazio, não soma nada extra
+    int vazio = 1;
 
     while ((c = fgetc(fp)) != EOF) {
-        if (c == '\n') {
-            linhas++;
-        }
+        vazio = 0;
+        if (c == '\n') linhas++;
+        ultimo = c;
     }
 
-    rewind(fp);
-    if (fgetc(fp) != EOF && linhas == 0) {
-        linhas = 1;
-    }
+    // se o arquivo não terminou com \n, a última linha ainda não foi contada
+    if (!vazio && ultimo != '\n') linhas++;
 
     printf("Total de linhas: %d\n", linhas);
 
