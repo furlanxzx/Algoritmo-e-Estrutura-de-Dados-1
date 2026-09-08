@@ -29,14 +29,45 @@ Uma pilha dinâmica é formada por uma sequência de estruturas (comumente chama
 
 ```mermaid
 flowchart LR
-    P["P"] --> nodeA["x | A"]
-    nodeA --> nodeB["x | B"]
-    nodeB -.-> nodeF["x | N"]
+    P(["P<br/>(topo)"])
+
+    subgraph NoA[" "]
+        direction LR
+        infoA["info x"]
+        proxA(("●"))
+    end
+
+    subgraph NoB[" "]
+        direction LR
+        infoB["info x"]
+        proxB(("●"))
+    end
+
+    subgraph NoC[" "]
+        direction LR
+        infoC["info x"]
+        proxC(("●"))
+    end
+
+    NULO(("NULL"))
+
+    P --> infoA
+    proxA --> infoB
+    proxB --> infoC
+    proxC -.-> NULO
+
+    classDef info fill:#0e7490,stroke:#06b6d4,color:#fff,stroke-width:2px;
+    classDef prox fill:#5b21b6,stroke:#8b5cf6,color:#fff,stroke-width:2px;
+    class infoA,infoB,infoC info;
+    class proxA,proxB,proxC prox;
 ```
 
-- **P**: elemento que aponta para o topo da pilha
-- **x**: valor armazenado no nó
-- **N**: `NULL`
+- **P**: ponteiro que aponta para o topo da pilha
+- **Célula azul (info x):** valor armazenado no nó, int, float, char, etc...
+- **Círculo roxo (●):** campo `prox`, aponta para o próximo nó
+- **NULL:** fim da pilha
+
+---
 
 ### <mark> 1.2 - Entendendo o Encadeamento
 * Para que seja possível percorrer todos os elementos da pilha, devemos explicitamente guardar o encadeamento dos elementos.
@@ -46,10 +77,37 @@ flowchart LR
 
 ```mermaid
 flowchart LR
-    prim["prim"] --> info1["Info1"]
-    info1 --> info2["Info2"]
-    info2 --> info3["Info3"]
-    info3 --> nulo(("×"))
+    prim(["prim"])
+
+    subgraph N1[" "]
+        direction LR
+        d1["10"]
+        p1(("●"))
+    end
+
+    subgraph N2[" "]
+        direction LR
+        d2["15"]
+        p2(("●"))
+    end
+
+    subgraph N3[" "]
+        direction LR
+        d3["5"]
+        p3(("●"))
+    end
+
+    nulo(("NULL"))
+
+    prim --> d1
+    p1 --> d2
+    p2 --> d3
+    p3 -.-> nulo
+
+    classDef info fill:#0e7490,stroke:#06b6d4,color:#fff,stroke-width:2px;
+    classDef prox fill:#5b21b6,stroke:#8b5cf6,color:#fff,stroke-width:2px;
+    class d1,d2,d3 info;
+    class p1,p2,p3 prox;
 ```
 
 ---
