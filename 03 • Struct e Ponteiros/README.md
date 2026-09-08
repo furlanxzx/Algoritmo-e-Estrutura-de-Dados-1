@@ -227,17 +227,42 @@ int main() {
         printf("CD nº %d\n", i + 1);
 
         printf("Nome da banda: ");
-        scanf(" %[^\n]", colecao[i].nome_banda);
+        scanf(" %49[^\n]", colecao[i].nome_banda);
 
         printf("Data de lancamento (dia mes ano): ");
-        scanf("%d %d %d", &colecao[i].data_lancamento.dia, 
-                          &colecao[i].data_lancamento.mes, 
+        scanf("%d %d %d", &colecao[i].data_lancamento.dia,
+                          &colecao[i].data_lancamento.mes,
                           &colecao[i].data_lancamento.ano);
 
         printf("Data de contratacao (dia mes ano): ");
-        scanf("%d %d %d", &colecao[i].data_contratacao.dia, 
-                          &colecao[i].data_contratacao.mes, 
+        scanf("%d %d %d", &colecao[i].data_contratacao.dia,
+                          &colecao[i].data_contratacao.mes,
                           &colecao[i].data_contratacao.ano);
+
+        printf("Valor do CD: ");
+        scanf("%f", &colecao[i].valor);
+
+        printf("Numero de membros da banda: ");
+        scanf("%d", &colecao[i].num_membros);
+
+        printf("Produtora do CD: ");
+        scanf(" %49[^\n]", colecao[i].produtora);
+    }
+
+    // Exibição resumida do cadastro
+    printf("\nCDs CADASTRADOS\n");
+    for (int i = 0; i < QTD_CDS; i++) {
+        printf("CD %d: %s | Lancamento: %02d/%02d/%d | Valor: %.2f | Membros: %d | Produtora: %s\n",
+               i + 1,
+               colecao[i].nome_banda,
+               colecao[i].data_lancamento.dia, colecao[i].data_lancamento.mes, colecao[i].data_lancamento.ano,
+               colecao[i].valor,
+               colecao[i].num_membros,
+               colecao[i].produtora);
+    }
+
+    return 0;
+}
 ```
 </details>
 
