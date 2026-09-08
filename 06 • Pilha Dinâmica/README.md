@@ -109,17 +109,50 @@ A função de inserção recebe o ponteiro do topo atual da pilha e o valor (nes
 **Código:**
 
 ```c
+```c
 PPilha push(PPilha pilha, int i)
 {
     PPilha novo = (PPilha) malloc(sizeof(TPilha));
+
+    if (novo == NULL) {
+        printf("Erro: nao foi possivel alocar memoria!\n");
+        exit(1);
+    }
+
     novo->info = i;
     novo->prox = pilha;
     return novo;
 }
 ```
+```mermaid
+flowchart TD
+    subgraph ANTES["Antes: pilha aponta pro nó 19 (topo atual)"]
+        direction LR
+        pilhaA(["pilha"]) --> n19a["19"] --> n10a["10"] --> n9a["9"] --> nullA(("NULL"))
+    end
+
+    subgraph PASSO1["1 e 2. malloc(novo) + novo->info = 15 (nó ainda solto)"]
+        direction LR
+        novo1["novo<br/>info: 15<br/>prox: ?"]
+    end
+
+    subgraph PASSO2["3. novo->prox = pilha (aponta pro antigo topo)"]
+        direction LR
+        novo2["novo<br/>info: 15"] --> n19b["19"] --> n10b["10"] --> n9b["9"] --> nullB(("NULL"))
+    end
+
+    subgraph DEPOIS["4. return novo — agora ele É o topo da pilha"]
+        direction LR
+        pilhaC(["pilha"]) --> n15["15"] --> n19c["19"] --> n10c["10"] --> n9c["9"] --> nullC(("NULL"))
+    end
+
+    ANTES --> PASSO1 --> PASSO2 --> DEPOIS
+```
+
+
 
 > **Exemplo Prático (Teste de Mesa):**
-> Ao utilizar a função acima para armazenar sequencialmente o conjunto de dados `{9, 10, 19, 15}`, a estrutura resultante na memória terá o número `15` no topo. O encadeamento seguirá a ordem: `15 -> 19 -> 10 -> 9 -> NULL` (aterramento).
+> Ao utilizar a função acima para armazenar sequencialmente o conjunto de dados `{9, 10, 19, 15}`, a estrutura resultante na memória terá o número `15` no topo. O encadeamento seguirá a ordem: `15 -> 19 -> 10 -> 9 -> NULL` (fim da pilha).
 
 ---
 ## <mark> 3 - Retirando da Pilha Encadeada (Função `pop`) </mark>
@@ -148,6 +181,28 @@ PPilha pop (PPilha pilha, int *v){
     // Retorna o novo topo da pilha
     return pilha;
 }
+```
+
+```mermaid
+flowchart TD
+    subgraph ANTES["Antes do pop(pilha, &v)"]
+        direction LR
+        pilhaA(["pilha"]) --> n15a["15<br/>(topo)"] --> n19a["19"] --> n10a["10"] --> n9a["9"] --> nullA(("NULL"))
+    end
+
+    subgraph PASSO["p = pilha;  *v = p->info (v vira 15);  pilha = p->prox"]
+        direction LR
+        pA["p"] --> n15b["15"]
+        pilhaB(["pilha"]) --> n19b["19"] --> n10b["10"] --> n9b["9"] --> nullB(("NULL"))
+    end
+
+    subgraph DEPOIS["free(p) — nó antigo liberado da memória"]
+        direction LR
+        freed["15<br/>💥 liberado"]
+        pilhaC(["pilha"]) --> n19c["19"] --> n10c["10"] --> n9c["9"] --> nullC(("NULL"))
+    end
+
+    ANTES --> PASSO --> DEPOIS
 ```
 
 ---
@@ -261,6 +316,8 @@ PPilha remove_item(PPilha pilha, int v) {
 
     return pilha;
 }
+
+
 ```
 </details>
 
