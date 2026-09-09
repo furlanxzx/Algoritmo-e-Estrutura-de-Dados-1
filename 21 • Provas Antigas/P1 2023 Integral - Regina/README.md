@@ -244,7 +244,7 @@ void insereFinalLCD(PLISTA2 *res, int x) {
 }
 ```
 
-**Função principal** — mescla como no *merge* do MergeSort, mas precisa controlar manualmente quando "deu a volta" em cada lista circular (já que não há `NULL` marcando o fim):
+**Função principal** :
 
 ```c
 PLISTA2 mesclaLCD(PLISTA2 la, PLISTA2 lb) {
@@ -287,7 +287,7 @@ PLISTA2 mesclaLCD(PLISTA2 la, PLISTA2 lb) {
 }
 ```
 
-📌 O truque das flags `voltaA`/`voltaB` é necessário porque, numa lista **circular**, a condição de parada `p != la` sozinha falharia logo de cara (`pa` começa igual a `la`) — a flag distingue "ainda não comecei a percorrer" de "já dei a volta completa".
+📌 Essa é a questão mais chatinha dessa prova, recomendo sempre que possível dividir o problema em partes, em boa parte dos exercícios criar uma função auxiliar ajuda demais e facilita a lógica.
 
 </details>
 
@@ -322,6 +322,8 @@ PLISTA2 mesclaLCD(PLISTA2 la, PLISTA2 lb) {
 - **1ª estrutura → Pilha ou Fila** (não é possível determinar, pois a ordem de inserção original não foi informada)
 - **2ª estrutura → Pilha**
 - **3ª estrutura → Fila**
+
+Essa é a questão mais tranquila da prova, basta analisar a ordem.
 
 </details>
 
