@@ -68,10 +68,15 @@ A primeira função prática é a de criação. A função `cria()` serve para a
 PFila cria() {
     // Aloca espaço para a estrutura controladora da fila
     PFila f = (PFila) malloc(sizeof(TFila));
-    
+
+    if (f == NULL) {
+        printf("Erro: nao foi possivel alocar a fila!\n");
+        return NULL;
+    }
+
     // Como a fila está vazia, o início e o fim são nulos
     f->ini = f->fim = NULL;
-    
+
     // Retorna o ponteiro de controle para a função principal
     return (f);
 }
@@ -94,58 +99,61 @@ PFila cria() {
 ```c
 /* Insere no fim da fila */
 PFila insere (PFila f, int v) {
-    PNo novo = (PNo) malloc(sizeof(TNo)); //
-    novo->info = v;                       //
-    novo->prox = NULL;                    //
-    
-    if (f->fim != NULL) /* verifica se lista não estava vazia */ //
-        f->fim->prox = novo;              //
-    else 
-        f->ini = novo; /* fila vazia */   //
-        
-    f->fim = novo;                        //
-    return (f);                           //
+    PNo novo = (PNo) malloc(sizeof(TNo));
+    novo->info = v;
+    novo->prox = NULL;
+
+    if (f->fim != NULL) /* verifica se lista não estava vazia */
+        f->fim->prox = novo;
+    else
+        f->ini = novo; /* fila vazia */
+
+    f->fim = novo;
+    return (f);
 }
 
 /* Retira do início da fila */
 PFila retira (PFila f, int *v) {
-    PNo p;                                //
-    if (f->ini==NULL) /* fila vazia */    //
-        printf("\nFila vazia!!\n");       //
+    PNo p;
+    if (f->ini==NULL) /* fila vazia */
+        printf("\nFila vazia!!\n");
     else {
-        *v = f->ini->info;                //
-        p = f->ini;                       //
-        if (f->ini == f->fim) { /* só tem um nó na fila */ //
-            f->ini = f->fim = NULL;       //
+        *v = f->ini->info;
+        p = f->ini;
+        if (f->ini == f->fim) { /* só tem um nó na fila */
+            f->ini = f->fim = NULL;
         }
         else
-            f->ini = p->prox; /* ou f->ini = f->ini->prox; */ //
-        free(p);                          //
+            f->ini = p->prox; /* ou f->ini = f->ini->prox; */
+        free(p);
     }
-    return f;                             //
+    return f;
 }
 
 /* Imprime fila (sempre do início para o fim) */
 void imprime(PFila f) {
-    PNo p;                                //
-    if (f->ini==NULL)  /* fila vazia */   //
-        printf("\nFila vazia!!\n");       //
+    PNo p;
+    if (f->ini==NULL)  /* fila vazia */
+        printf("\nFila vazia!!\n");
     else {
-        for (p = f->ini; p!=NULL; p = p->prox) //
-            printf("%d ",p->info);        //
+        for (p = f->ini; p!=NULL; p = p->prox)
+            printf("%d ",p->info);
     }
 }
 
 /* Libera: quase igual à que libera lista */
-void libera (PFila f) {
-    PNo p;                                //
-    for (p = f->ini; p!=NULL; p = f->ini) { //
-        f->ini = p->prox;  // ou f->ini = f->ini->prox; //
-        free(p);                          //
+PFila libera (PFila f) {
+    PNo p;
+    for (p = f->ini; p!=NULL; p = f->ini) {
+        f->ini = p->prox;
+        free(p);
     }
-    free(f);                              //
+    free(f);
+    return NULL; // devolve NULL para o chamador atualizar o ponteiro (evita ponteiro pendurado)
 }
 ```
+
+📌 Como `libera` agora devolve `NULL`, o uso correto no `main()` é `fila = libera(fila);` — assim a variável do programa fica de fato zerada, e não continua "apontando" pra memória já desalocada.
 </details>
 
 ---
@@ -198,43 +206,118 @@ void separa_filas(PFila f, PFila *f_pares, PFila *f_impares) {
 <details>
 <summary><b>💡 Clique aqui para ver a solução</b></summary>
 
-Para resolver este problema, a estrutura do nó precisará ser adaptada para guardar duas informações: o ID do paciente e o tempo de espera.
-
 ```c
 typedef struct noPaciente {
     int id;
     int tempo_espera;
     struct noPaciente* prox;
 } TNoPaciente;
+typedef TNoPaciente *PNoPaciente;
 
-// Função auxiliar para incrementar o tempo a cada iteração
-void incrementa_tempo(PFila f) {
-    TNoPaciente* atual = f->ini;
+typedef struct filaPaciente {
+    PNoPaciente ini;
+    PNoPaciente fim;
+} TFilaPaciente;
+typedef TFilaPaciente *PFilaPaciente;
+
+PFilaPaciente cria_fila_paciente() {
+    PFilaPaciente f = (PFilaPaciente) malloc(sizeof(TFilaPaciente));
+    if (f == NULL) { printf("Erro ao alocar a fila!\n"); return NULL; }
+    f->ini = f->fim = NULL;
+    return f;
+}
+
+void insere_paciente(PFilaPaciente f, int id) {
+    PNoPaciente novo = (PNoPaciente) malloc(sizeof(TNoPaciente));
+    if (novo == NULL) { printf("Erro ao alocar paciente!\n"); exit(1); }
+    novo->id = id;
+    novo->tempo_espera = 0;
+    novo->prox = NULL;
+
+    if (f->fim != NULL)
+        f->fim->prox = novo;
+    else
+        f->ini = novo;
+
+    f->fim = novo;
+}
+
+void atende_paciente(PFilaPaciente f) {
+    if (f->ini == NULL) {
+        printf("Fila vazia, ninguem para atender!\n");
+        return;
+    }
+
+    PNoPaciente p = f->ini;
+    printf("Atendendo paciente %d (esperou %d iteracoes)\n", p->id, p->tempo_espera);
+
+    if (f->ini == f->fim)
+        f->ini = f->fim = NULL;
+    else
+        f->ini = p->prox;
+
+    free(p);
+}
+
+void incrementa_tempo(PFilaPaciente f) {
+    PNoPaciente atual = f->ini;
     while (atual != NULL) {
         atual->tempo_espera++;
         atual = atual->prox;
     }
 }
 
-// A lógica principal no main() seria um loop iterativo:
-/*
-   int opcao;
-   do {
-       printf("1 - Inserir paciente\n2 - Atender paciente\n3 - Exibir fila\n0 - Sair\n");
-       scanf("%d", &opcao);
-       
-       if (opcao == 1) {
-           // ler id, inserir na fila com tempo 0
-           incrementa_tempo(fila); // incrementa quem já estava lá
-       } else if (opcao == 2) {
-           // retirar do início, imprimir ID e tempo_espera
-           incrementa_tempo(fila); 
-       } else if (opcao == 3) {
-           // imprimir ID e tempo de todos
-       }
-   } while (opcao != 0);
-*/
+void exibe_fila(PFilaPaciente f) {
+    if (f->ini == NULL) {
+        printf("Fila vazia!\n");
+        return;
+    }
+    printf("Fila atual (ID | tempo de espera):\n");
+    for (PNoPaciente p = f->ini; p != NULL; p = p->prox)
+        printf("  Paciente %d | %d\n", p->id, p->tempo_espera);
+}
+
+void libera_fila_paciente(PFilaPaciente f) {
+    PNoPaciente p = f->ini;
+    while (p != NULL) {
+        PNoPaciente temp = p->prox;
+        free(p);
+        p = temp;
+    }
+    free(f);
+}
+
+int main() {
+    PFilaPaciente fila = cria_fila_paciente();
+    int opcao, id;
+
+    do {
+        printf("\n1 - Inserir paciente\n2 - Atender paciente\n3 - Exibir fila\n0 - Sair\n");
+        scanf("%d", &opcao);
+
+        switch (opcao) {
+            case 1:
+                incrementa_tempo(fila); // incrementa quem JÁ estava esperando, antes de inserir o novo
+                printf("ID do paciente: ");
+                scanf("%d", &id);
+                insere_paciente(fila, id); // o novo entra com tempo_espera = 0
+                break;
+            case 2:
+                atende_paciente(fila);
+                incrementa_tempo(fila); // quem ficou na fila espera mais uma iteracao
+                break;
+            case 3:
+                exibe_fila(fila);
+                break;
+        }
+    } while (opcao != 0);
+
+    libera_fila_paciente(fila);
+    return 0;
+}
 ```
+
+📌 A correção principal está na ordem do `case 1`: chamamos `incrementa_tempo()` **antes** de `insere_paciente()`, garantindo que só quem já estava na fila avance o tempo — o paciente recém-chegado começa exatamente em `0`, como o enunciado pede.
 </details>
 
 ---
