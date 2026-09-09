@@ -4,7 +4,7 @@
 
 ## <mark> Sobre esta seção </mark>
 
-Aqui você encontra provas antigas da disciplina, resolvidas e comentadas questão por questão — com teste de mesa, explicação do raciocínio e, quando cabível, o motivo de cada escolha de estrutura de dados. 
+Aqui você encontra provas antigas da disciplina, resolvidas e comentadas questão por questão — com teste de mesa, explicação do raciocínio e, quando cabível, o motivo de cada escolha de estrutura de dados. Dentro das pastas você encontra um pdf da prova assim como sua resolução no README, bons estudos!
 
 ---
 
