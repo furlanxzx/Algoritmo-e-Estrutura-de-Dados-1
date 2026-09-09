@@ -174,7 +174,7 @@ PPilha push(PPilha pilha, int i)
 
     if (novo == NULL) {
         printf("Erro: nao foi possivel alocar memoria!\n");
-        exit(1);
+        return NULL;
     }
 
     novo->info = i;
