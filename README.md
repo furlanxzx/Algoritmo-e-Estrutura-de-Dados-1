@@ -38,7 +38,7 @@ Bem-vindo(a)! Este repositório foi criado com o objetivo de **descomplicar a ma
 | 18 | Árvores Genéricas | Nós com Múltiplos Filhos | Aberto | [README](<./18 • Árvores Genéricas/README.md>) |
 | 19 | ABB - Inserção | Propriedade de Busca Binária | Aberto | [README](<./19 • ABB - Inserção/README.md>) |
 | 20 | ABB - Remoção | Manutenção da Árvore de Busca | Aberto | [README](<./20 • ABB - Remoção/README.md>) |
-| 21 | Provas Antigas | Provas Resolvidas e Comentadas | Aberto | [README](<.21 • Provas Antigas/README.md>) |
+| 21 | Provas Antigas | Provas Resolvidas e Comentadas | Aberto | [README](<./21 • Provas Antigas/README.md>) |
 
 ---
 
